@@ -117,19 +117,20 @@ you choose to share them. See [PRIVACY.md](PRIVACY.md).
 ## What it covers
 
 <!-- release-facts:start -->
-Dataset 0.8.0 contains 337 reviewed car records.
+Dataset 0.8.5 contains 339 reviewed car records.
 
 | Simulator | Records | Also curated for AMS2 |
 | --- | --- | --- |
-| Automobilista 2 | 263 | not applicable |
+| Automobilista 2 | 264 | not applicable |
+| Project Motor Racing | 49 | 18 |
 | Assetto Corsa | 46 | 14 |
-| Project Motor Racing | 46 | 16 |
 | Assetto Corsa Competizione | 18 | 18 |
 | RaceRoom Racing Experience | 10 | 3 |
 | Assetto Corsa EVO | 7 | 3 |
 | rFactor 2 | 5 | 0 |
 | GTR 2 | 2 | 2 |
 | Automobilista | 1 | 1 |
+| Le Mans Ultimate | 1 | 1 |
 <!-- release-facts:end -->
 
 Coverage is deepest in Automobilista 2, which is where the work started. The

@@ -14333,6 +14333,298 @@
       "retrieved_at": "2026-09-15",
       "reuse_status": "facts-only-review",
       "notes": "On 2026-09-15 Jason Kinslow corrected his description of both PMR AUS V8 Evo wheels to a conventional closed rim with flat top and bottom. Under docs/data-model.md this is d-shaped with open_top no. This is a correction of the original cockpit classification, not a new drive or a change to the observed PMR 2.2.1.0 build. The inspected YTG Gen3 Mustang cockpit photo illustrates this rim topology but does not establish PMR rendering or the authentic baseline for either entry. Original observation: pmr.mustang-au.20260915t152203276z-61f82a2a. Original SHA-256: 4648bf70e92bf4526820e721c48417b27f148eb4b8db317e1174ce75df948dfa. Corrected observation: pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71. Only /cockpit/wheel_rim/shape and /cockpit/wheel_rim/open_top changed, apart from the amendment identifier."
+    },
+    {
+      "source_id": "bmw.m8-gte.launch-release",
+      "title": "Innovative technology for a new legend: the new BMW M8 GTE.",
+      "publisher": "BMW Group PressClub",
+      "url": "https://www.press.bmwgroup.com/global/article/detail/T0274451EN/innovative-technology-for-a-new-legend:-the-new-bmw-m8-gte?language=en",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-18",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: BMW's own official launch article introducing the BMW M8 GTE ahead of the 2018 FIA WEC and IMSA seasons, naming the car, its purpose, and its transmission specification. Power Transmission section: “Six-speed sequential motorsport gearbox ... Electric paddle shift system ... Sachs carbon-fibre clutch.” Reviewed for /identity/display_name, /identity/manufacturer, /identity/model, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. Electronics section: “Steering wheel with 16 buttons and seven dials” Reviewed for /authentic_controls/steering/wheel_rim/shape. Primary manufacturer source for the car's name, purpose (WEC/IMSA GTE racing from 2018, ahead of the road 8 Series), and headline transmission specification. It does not describe clutch pedal presence, throttle-lift technique, or automatic cut/blip behavior."
+    },
+    {
+      "source_id": "wikipedia.bmw-m8-gte",
+      "title": "BMW M8 GTE",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/BMW_M8_GTE",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-18",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Wikipedia's infobox and article body for the BMW M8 GTE, covering competition years, dual-series class naming, engine, and transmission. Infobox, transmission field: “Xtrac 6-speed sequential semi-automatic paddle-shift” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. Infobox, class field: “LM GTE (FIA WEC) / GTLM (IMSA SportsCar Championship)” Reviewed for /identity/class, /identity/real_world_identity_notes. Infobox, production/competition years: “2018-2021 (competitive debut 2018, last event 2021 Petit Le Mans)” Reviewed for /identity/year. Secondary tertiary reference corroborating the manufacturer source's transmission specification and supplying the exact competition date range and dual-series class names. It provides no clutch-pedal, throttle-lift, or cockpit-lighting detail."
+    },
+    {
+      "source_id": "motor1.bmw-m8-gte-homestead-drive",
+      "title": "I Drove The Big M8 Race Car",
+      "publisher": "Motor1.com",
+      "url": "https://www.motor1.com/features/711371/bmw-m8-gte-race-car-review/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-18",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: First-person track test of an exact, chassis-identified ex-works BMW M8 GTE (chassis 1810, formerly the #25 Daytona-winning car) at Homestead-Miami Speedway, describing clutch use, paddle-shift operation, cockpit lighting, class-win history, and retirement. Setting-off paragraph: “the M8 GTE sends its power to the rear wheels via a six-speed sequential, controlled via paddles on the steering wheel. The only time you need to use the clutch is from a stop. Going from gear to gear requires nothing more than a pull of the up or down paddles.” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift. Clutch bite-point paragraph: “The clutch's bite point is razor thin and impossible to smoothly engage; you have to ride the throttle hard to get going.” Reviewed for /authentic_controls/transmission/standing_start_clutch, /driver_summary. Cockpit-lighting paragraph: “two vertically mounted light bars, similar to a set of horizontally mounted shift lights, mounted on either side of the digital gauge cluster pod. As the traction control works, the arrays will light up in white” Reviewed for /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/integrated_display. History paragraph: “Early on it earned the nickname “big M8” ... taking five wins in IMSA's GTLM class over four years in competition, including two marquee victories at the 24 Hours of Daytona. BMW retired the M8 GTE from competition at the end of the 2021 season.” Reviewed for /identity/year, /driver_summary. The live motor1.com page returns a bot-blocking access wall to automated fetch tools; this session independently read the full article text via its Wayback Machine capture (archive_url) in a browser, and cross-checked the byline, chassis number, and publish date against the live page's indexed search snippet, which matched. The traction-control light bars are explicitly described as mounted beside a dash-fixed gauge-cluster pod rather than on the wheel itself, and this photographed unit's lights are compared to shift lights in appearance only, not function.",
+      "author": "Brian Silvestro",
+      "archive_url": "https://web.archive.org/web/2024/https://www.motor1.com/features/711371/bmw-m8-gte-race-car-review/",
+      "published_or_updated_at": "2024-03-06"
+    },
+    {
+      "source_id": "jalopnik.bmw-m8-gte-daytona-details",
+      "title": "All Of The Cool Little Details On The New BMW M8 GTE That Debuted At Daytona",
+      "publisher": "Jalopnik",
+      "url": "https://www.jalopnik.com/all-of-the-cool-little-details-on-the-new-bmw-m8-gte-th-1822487603/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-18",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Detail piece covering the BMW M8 GTE's Daytona debut, describing the Xtrac rear transaxle, its clutch-usage pattern, adjustable pedals, and cockpit displays. Transmission paragraph: “Like a Porsche 944, the M8 GTE uses a transaxle that's located in the rear. The M8's is a sequential transmission made by Xtrac” Reviewed for /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. Clutch-usage sentence: “usually only uses the clutch to engage first gear, or occasionally to downshift more smoothly in the rain.” Reviewed for /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch. Independent secondary account corroborating the Motor1 standing-start clutch finding and adding a situational, weather-dependent optional clutch use on downshifts that is not mentioned in any other reviewed source."
+    },
+    {
+      "source_id": "bmw.m8-gte.steering-wheel-photo-p90309230",
+      "title": "Le Mans (FRA) 13th June 2018. BMW Motorsport, 24H Le Mans, steering wheel, BMW M8 GTE No. 81.",
+      "publisher": "BMW M Motorsport / BMW Group PressClub",
+      "url": "https://www.press.bmwgroup.com/global/photo/detail/P90309230/Le-Mans-FRA-13th-June-2018-BMW-Motorsport-24H-Le-Mans-steering-wheel-BMW-M8-GTE-No-81",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-18",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Official BMW press photo P90309230: a full-resolution, well-lit cockpit photograph of the exact BMW M8 GTE (car No. 81) steering wheel and surrounding dash, taken at the 2018 24 Hours of Le Mans. Cockpit photograph, viewed at 600x900 and enlarged in-browser: “(photograph; no text)” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top. Direct visual inspection shows two fixed, molded hand-grip pods at roughly the 9-and-3 position, joined by a flat control face carrying individually illuminated pushbuttons and a rotary dial cluster, with the BMW roundel at the hub center: the defining gt-formula construction, with no continuous round or D-shaped band. A separate small digital screen (showing tyre-pressure/lap-time style fields) and a second data/GPS display are mounted on the dash above and beside the wheel, not on the wheel body itself, and stay level while the photographed wheel is turned off-center, indicating they are dash-fixed rather than wheel-mounted. No dedicated shift-light LED bar is visible on the wheel's own face; only individually illuminated switch caps are present, and the car's engine and electronics are off in this shot, so no lights are seen actually illuminated. This photograph shows only the parked wheel and describes what is visible, not what it suggests.",
+      "published_or_updated_at": "2018-06-13"
+    },
+    {
+      "source_id": "as-driven.repository.bmw-m8-gte-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/tree/main/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-09-18",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Local repository directory scan for an existing curated BMW M8 GTE record. data/v1/cars filename and identity scan: “No file named bmw-m8-gte.json or other BMW M8 GTE record is present.” Reviewed for /identity/record_action, /identity/record_id. Repository context supports only the create-new decision and is not real-world evidence."
+    },
+    {
+      "source_id": "ams2.local-live-bmw-m8-gte-controls.1.6.9.95",
+      "title": "Live AMS2 BMW M8 GTE guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://github.com/Milky28/as-driven/issues/139",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-18",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.bmw-m8-gte.20260918t045316125z-0787ba7b by Jason Kinslow; AMS2 1.6.9.95. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "wikipedia.lamborghini-sc63",
+      "title": "Lamborghini SC63",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Lamborghini_SC63",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-18",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Wikipedia's infobox and article body for the Lamborghini SC63, covering competition years, dual-series class naming, and transmission. Infobox, transmission field: “Xtrac P1359 7-speed sequential semi-automatic” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. Infobox, class field: “LMDh sports prototype (FIA World Endurance Championship Hypercar / IMSA GTP)” Reviewed for /identity/class, /identity/real_world_identity_notes. Secondary tertiary reference corroborating the manufacturer and supplier sources without adding new clutch or cockpit-lighting detail."
+    },
+    {
+      "source_id": "jalopnik.gtp-lmdh-clutch-bump-start",
+      "title": "The New Hybrid GTP Hypercars Bump-Start Their Engines By Dumping The Clutch At Speed",
+      "publisher": "Jalopnik",
+      "url": "https://www.jalopnik.com/gtp-hybrid-hypercars-lmdh-clutch-dump-bump-start-1850059619/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-18",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Explains the LMDh/GTP class's mandated hybrid powertrain and clutch-control scheme, quoting a Cadillac Racing program manager on how the spec system is operated. Clutch-control paragraph: “The clutch, in this case, is a button on the dashboard; when the driver presses the button, the computer engages the clutch.” Reviewed for /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch. Spec-powertrain paragraph: “Every car in the new-for-2023 Grand Touring Prototype class is required to utilize the same hybrid powertrain, including the Xtrac gearbox.” Reviewed for /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch. This article discusses Cadillac's GTP entry by name and does not mention Lamborghini directly, but its finding is about the mandated spec hybrid powertrain and gearbox that every LMDh/GTP manufacturer uses identically; combined with Lamborghini's own statement that its gearbox 'is standard across all LMDh cars' (lamborghini.sc63.unveiling), this is treated as applicable to the SC63's control scheme specifically, not merely as evidence about a different manufacturer's car."
+    },
+    {
+      "source_id": "motorsport-it.sc63-steering-wheel-feature",
+      "title": "WEC | Alla scoperta del volante della Lamborghini SC63 LMDh",
+      "publisher": "Motorsport.com Italia",
+      "url": "https://it.motorsport.com/lst/news/wec-alla-scoperta-del-volante-della-lamborghini-sc63-lmdh/10674142/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-18",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Motorsport.com Italia's editorial coverage of an official Lamborghini video (from the Lamborghini World Finals 2024 event at Jerez de la Frontera) revealing the exact SC63 racing steering wheel, illustrated with a still photograph of the wheel bearing the Lamborghini script logo and shield badge. Article thumbnail photograph (il-volante-della-lamborghini-s.jpg), viewed enlarged in-browser: “(photograph; no text)” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top. Direct visual inspection (enlarged 3x and 6x in-browser) shows a wheel branded 'Lamborghini' with two fixed, molded leather-wrapped hand-grip pods at the 9-and-3 position, joined by a flat carbon control face carrying a large rectangular LCD display, colored rotary dials (labelled RED, MODE, FAULT and others) and pushbuttons (FCY, PIT, KILL, EB+/EB-), and the Automobili Lamborghini shield badge at the hub between the grips: the defining gt-formula construction. Along the very top edge of the wheel body, above the display, a curved red LED segment sits on the left and a green LED segment sits on the right, consistent with a rev/shift-light array built into the wheel itself. The display is unlit in this photograph (wheel off the car), so no illuminated content is visible, and this describes only what is visible in the photograph.",
+      "author": "Giacomo Rauli",
+      "published_or_updated_at": "2024-11-19"
+    },
+    {
+      "source_id": "as-driven.repository.lamborghini-sc63-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/blob/main/data/v1/cars/lamborghini-sc63.json",
+      "source_type": "other",
+      "retrieved_at": "2026-09-18",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Local repository file for the existing curated Lamborghini SC63 record, showing its display_name, manufacturer, model, class, an AMS2 simulator identity, and its own authentic_controls and provenance. data/v1/cars/lamborghini-sc63.json, identity and simulators blocks: “\"display_name\": \"Lamborghini SC63\", \"manufacturer\": \"Lamborghini\", \"model\": \"SC63\" ... \"simulator\": \"ams2\"” Reviewed for /identity/record_action, /identity/record_id. Repository context confirms the use-existing decision and record_id. It is not independent real-world evidence; the record's own authentic_controls upshift/downshift technique claims (automatic_cut, automatic_blip) are themselves sourced only to a guided AMS2 live drive per that file's provenance block, so this research treats them as simulator-layer evidence rather than corroborated real-car fact (see open_questions)."
+    },
+    {
+      "source_id": "lmu.local-live-lamborghini-iron-lynx-2024-controls.1.4150",
+      "title": "Live LMU Lamborghini Iron Lynx 2024 guided-verification drive",
+      "publisher": "Local LMU observation",
+      "url": "https://github.com/Milky28/as-driven/issues/140",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-18",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation other.lamborghini-iron-lynx-2024.20260918t055917684z-132eb8d7 by Jason Kinslow; LMU 1.4150. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "pmr.gt4.car-page-carindex-54",
+      "title": "Mercedes-AMG GT4 | Project Motor Racing",
+      "publisher": "Straight4 Studios",
+      "url": "https://projectmotorracing.com/car.php?carIndex=54",
+      "source_type": "official-simulator",
+      "retrieved_at": "2026-09-16",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Project Motor Racing's own per-car detail page for in-game car index 54, giving its name, manufacturer, class, and headline stats, and listing the other cars sharing the GT4 class. Page heading and manufacturer label: “MERCEDES GT4 MERCEDES-AMG GT4” Reviewed for /identity/display_name, /identity/manufacturer, /identity/model, /identity/record_action, /identity/record_id. Statistics panel: “TRANSMISSION 6-SPEED SEQUENTIAL” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_pattern. \"OTHER CARS IN CLASS\" list: “AUDI R8 LMS GT4 / ASTON MARTIN AMR VANTAGE GT4 / FORD MUSTANG GT4 / PORSCHE 718 CAYMAN GT4 CLUBSPORT / TOYOTA GR SUPRA GT4 EVO / ALPINE A110 GT4 / BMW M4 GT4 EVO (G82) / CHEVROLET CAMARO ZL-1 GT4.R / NISSAN Z GT4” Reviewed for /identity/real_world_identity_notes. The maintainer supplied this URL during the research session, identifying it as the specific car driven for this case's guided-verification observation. This is simulator-side evidence of which real car the game's generic \"GT4\" identity fields correspond to; it is not itself real-world authentic-controls evidence."
+    },
+    {
+      "source_id": "drive-com-au.mercedes-amg-gt4-review-2019",
+      "title": "Mercedes-AMG GT4 review",
+      "publisher": "Drive.com.au",
+      "url": "https://www.drive.com.au/reviews/mercedes-amg-gt4-review/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-16",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Alborz Fallah's first-person track test of the exact Mercedes-AMG GT4 racecar at The Bend (Adelaide), describing the gearbox, clutch use, and pedal layout. Driving-impressions paragraph: “Turning the GT4 on is pretty simple, and despite being a sequential race gearbox with a clutch, the only time you will need to use the left pedal is to get it going in first gear, and yes, I did stall it the first time. But once you get the hang of the clutch pressure, it’s pretty straightforward. From there, you just pull the paddles at full throttle and get a joyous jolt as the gears hammer into place.” Reviewed for /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift. Category-context paragraph: “To really understand the purpose of this car is to grasp the concept of GT4, which is a global FIA-certified category of racing that is perhaps meant to bridge the gap between single-seaters to GT3.” Reviewed for /identity/class. Independent, second first-person account corroborating the Top Gear article's clutch-use and clutchless-upshift findings without shared authorship.",
+      "published_or_updated_at": "2019-07-26"
+    },
+    {
+      "source_id": "95octane.mercedes-amg-gt4-launch-2017",
+      "title": "Mercedes-AMG GT4 Racer Has a Knight Rider Steering Wheel",
+      "publisher": "95octane.com",
+      "url": "https://95octane.com/2017/07/26/mercedes-amg-gt4-race-car/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-16",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Launch-coverage article for the GT4's 2017 debut ahead of the Spa 24 Hours, with the manufacturer's own launch spec figures and two of Mercedes-AMG's own press photographs, including one cockpit interior shot. Second paragraph: “It’s got a six-speed sequential AMG competition gearbox, along with competition-grade brakes. The car tips the scales at a svelte 3,064 pounds” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation. Third paragraph: “Other features include track aero, racing seats, and a fancy light-up racing steering wheel that looks like it was stolen from K.I.T.T.” Reviewed for /authentic_controls/steering/wheel_rim/shift_lights. The 3,064 lb launch weight matches Project Motor Racing's own listed 1,390 kg figure exactly, even though the launch power/torque figures (510 hp / 442 lb-ft) do not match PMR's listed 470 hp / 580 Nm; see identity/real_world_identity_notes. Corrected on review: \"a fancy light-up racing steering wheel\" is consistent with the wheel's individually illuminated coloured pushbuttons, clearly visible in cockpit photographs, rather than a dedicated shift-light LED strip; this source does not independently establish shift_lights.",
+      "published_or_updated_at": "2017-07-26"
+    },
+    {
+      "source_id": "imbranded.mercedes-amg-gt4-steering-wheel-photo",
+      "title": "Mercedes-Benz Motorsports - AMG GT4 Steering Wheel",
+      "publisher": "iMBranded",
+      "url": "https://imbranded.net/graphics/mercedes-benz/heritage-archive/motorsports/mercedes-benz-motorsports-amg-gt4-steering-wheel",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-16",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: A vinyl-wrap graphics vendor's product page for the exact Mercedes-AMG GT4 steering wheel, showing a full-resolution, well-lit photograph of the wheel removed from the car. Product photograph (file 2017_AMG_PICTURE00288_CTP845002.jpg, viewed at 900×675): “(photograph; no text)” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top. The photograph shows a wheel with two fixed, molded hand-grip pods at roughly the 9-and-3/10-and-2 position, joined by a flat carbon control face carrying rotary switches and pushbuttons, with a display visible above the control face and a coiled data/power cable exiting toward the wheel hub. This establishes the gt-formula shape clearly. Corrected on review: in this tightly-cropped, straight-on photograph the display's exact mounting point (wheel versus dash immediately behind it) is genuinely ambiguous, since a dash-mounted unit positioned directly behind the wheel's top edge can appear to sit on the wheel from this camera angle. Wider-angle real-world cockpit photographs of this wheel family resolve the ambiguity: they show the display and any indicator lights mounted separately on the dash/steering column, with clear depth separation from the wheel, and the wheel's own control face carrying only buttons and dials. This photograph is therefore treated as establishing shape and open_top only; it does not independently establish integrated_display or shift_lights in either direction."
+    },
+    {
+      "source_id": "pmr.local-live-gt4-controls.2.2.1.0",
+      "title": "Live PMR GT4 guided-verification drive",
+      "publisher": "Local PMR observation",
+      "url": "https://github.com/Milky28/as-driven/issues/138",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-15",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation pmr.gt4.20260915t203325518z-8f15b632 by Jason Kinslow; PMR 2.2.1.0. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "stellantis.srt-viper-gts-r-unveiled-2012",
+      "title": "SRT® Viper GTS-R Unveiled; Set for Return to American Le Mans Series",
+      "publisher": "Stellantis North America Media (Chrysler Group LLC)",
+      "url": "https://media.stellantisnorthamerica.com/newsrelease.do?id=12191",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-18",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Chrysler Group's 2012 manufacturer press release announcing the SRT Viper GTS-R and SRT Motorsports' factory-backed return to the American Le Mans Series. Opening paragraph: “The purpose-built, non-street legal and competition-ready SRT Viper GTS-R also was revealed as part of the Chrysler Group's announcement that a factory-backed SRT Viper Racing team will return to the American Le Mans Series (ALMS) in 2012.” Reviewed for /identity/display_name, /identity/manufacturer, /identity/model, /identity/year. Series/class paragraph: “Two identical SRT Viper GTS-Rs will compete in the production-based GT class in the series.” Reviewed for /identity/class, /identity/real_world_identity_notes. Primary manufacturer source for the car's exact name, manufacturer brand, and 2012 competition debut. It contains no transmission, clutch, or cockpit detail."
+    },
+    {
+      "source_id": "motorauthority.srt-viper-gts-r-first-track-session",
+      "title": "2013 SRT Viper GTS-R Completes First Track Session: Video",
+      "publisher": "Motor Authority",
+      "url": "https://www.motorauthority.com/news/1076841_2013-srt-viper-gts-r-completes-first-track-session-video",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-18",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Secondary coverage of the SRT Viper GTS-R's development, engine displacement reduction, weight, and the Riley Technologies build partnership. Engine paragraph: “the engine, which in the GTS-R race car is an 8.0-liter V-10 as opposed to an 8.4-liter unit” Reviewed for /identity/real_world_identity_notes. Development paragraph: “a collaboration between SRT Motorsports and Riley Technologies and shares much in common with its road-going twin” Reviewed for /identity/real_world_identity_notes. Confirms the Riley Technologies build partnership and the race engine's reduced displacement. It does not address transmission, clutch, or cockpit equipment."
+    },
+    {
+      "source_id": "torquenews.srt-viper-gts-r-closer-look-2013",
+      "title": "A closer look at the 2013 SRT Viper GTS-R race car",
+      "publisher": "Torque News",
+      "url": "https://www.torquenews.com/106/closer-look-2013-srt-viper-gts-r-race-car",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-18",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Secondary technical overview of the exact GTS-R race car, describing its transmission installation and cockpit safety equipment. Transmission paragraph: “an Xtrac rear transmission has been installed to help with weight distribution and handling” Reviewed for /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. Cockpit paragraph: “the 2013 SRT Viper GTS-R sports an ALMS approved roll cage and a climate controlled cockpit to keep the drivers safe and cool” Reviewed for /identity/real_world_identity_notes. Directly names an Xtrac transmission for the exact GTS-R race car (a rear-mounted racing transaxle, not the road car's Tremec manual), but does not itself state gear count, paddle actuation, or clutch operation; those come from the GT3-R lineage source below."
+    },
+    {
+      "source_id": "stellantis.srt-viper-gt3-r-readies-worldwide-gt",
+      "title": "New SRT Viper GT3-R Readies for Worldwide GT Competition",
+      "publisher": "Stellantis North America Media (Chrysler Group LLC)",
+      "url": "https://media.stellantisnorthamerica.com/newsrelease.do?id=14437&mid=",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-18",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Manufacturer press release for the customer-spec SRT Viper GT3-R, explicitly describing it as incorporating technology developed for the factory GTS-R, and detailing the GT3-R's own transmission and clutch. Technology-transfer paragraph: “The technology developed by the Chrysler Group for the factory GTS-R for engine, chassis, suspension, electronics and aerodynamics is incorporated into every Viper GT3-R.” Reviewed for /identity/real_world_identity_notes. GT3-R specification paragraph: “Xtrac six-speed sequential transmission with paddle shifters, six-piston front brake calipers with four-piston rears, lightweight wheels and a multi-disc race clutch for maximum performance from the V-10 engine.” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. This release describes the customer GT3-R's own equipment, not the factory GTS-R's directly. It is used here only as manufacturer-stated lineage evidence (the GT3-R explicitly inherits GTS-R-developed technology) corroborating the six-speed Xtrac sequential paddle-shift architecture that torquenews.srt-viper-gts-r-closer-look-2013 independently names for the GTS-R itself; it is not treated as a direct statement about the GTS-R's own clutch operation (pedal versus paddle), which remains not-established."
+    },
+    {
+      "source_id": "cockpit-photo-search.srt-viper-gts-r-unavailable",
+      "title": "2013 SRT Viper GTS-R Image Gallery",
+      "publisher": "Stellantis North America Media (Chrysler Group LLC)",
+      "url": "https://media.stellantisnorthamerica.com/image-gallery.do?imageGalleryId=500&method=view",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-18",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Record of a diligent, unsuccessful search for a usable interior or cockpit photograph of the exact SRT Viper GTS-R showing the steering wheel. Full gallery reviewed (21 images, checked by caption/alt text for cockpit, interior, wheel, dash, or cabin content): “(no cockpit or interior photograph present; all images are exterior track, pit-lane, or driver-portrait shots)” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top. This official manufacturer press gallery was the most authoritative attempted source and is registered as the representative record of the search. The same diligent search also checked Getty Images (searches for \"srt viper gts-r cockpit\" and \"...interior\" both returned zero results), the Racing Sports Cars event photo archive for SRT Viper GTS-R (exterior race/pit photographs only, across every listed 2012-2014 event), a Flickr photograph credited to the 2014 Rolex 24 (exterior, per its own caption), and enthusiast registries including exclusivecarregistry.com (\"No images available\") and viperracinghistory.com's for-sale listings (exterior only, and none of the listed chassis are this specific SRT-era car). No usable exact-car cockpit image was found; this absence is not used as evidence that any particular wheel-rim value is correct, only that the required fields stay not-established."
+    },
+    {
+      "source_id": "pmr.local-live-srt-viper-gts-r-controls.2.2.1.0",
+      "title": "Live PMR SRT Viper GTS-R guided-verification drive",
+      "publisher": "Local PMR observation",
+      "url": "https://github.com/Milky28/as-driven/issues/141",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-18",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation pmr.srt-viper-gts-r.20260918t192249838z-458717f9 by Jason Kinslow; PMR 2.2.1.0. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "racer.chevy-c8r-technical-details-2019",
+      "title": "Chevy reveals technical details of Corvette C8.R",
+      "publisher": "RACER",
+      "url": "https://racer.com/2019/10/10/chevy-reveals-technical-details-of-c8-r",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-18",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: RACER's report on Chevrolet's own October 2019 technical presentation of the exact C8.R, quoting Corvette chief engineer Ed Piatek and Chevrolet Performance Cars personnel. Engine paragraph: “the C8.R will feature a 5.5-liter naturally-aspirated V8 engine, producing 500hp and 480 ft.-lb. of torque” Reviewed for /identity/real_world_identity_notes. Transmission paragraph: “A new compact Xtrac 6-speed sequential gearbox was developed in order to provide room at the rear of the C8.R to package the race car's diffuser.” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_pattern. Direct manufacturer-sourced report on the exact car. Confirms six forward gears and a sequential gearbox but does not state paddle versus lever actuation, dog-ring versus synchromesh construction, or any clutch or cockpit detail.",
+      "author": "RACER Staff",
+      "published_or_updated_at": "2019-10-10"
+    },
+    {
+      "source_id": "jalopnik.c8r-vs-road-car-technical-2019",
+      "title": "Smaller Wheels, Smaller Engine, Bigger Speed: How The Corvette C8.R Differs From The Road Car",
+      "publisher": "Jalopnik",
+      "url": "https://www.jalopnik.com/smaller-wheels-smaller-engine-bigger-speed-how-the-c-1839026771/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-18",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Firsthand report from Chevrolet's technical presentation of the exact C8.R at Road Atlanta, comparing the race car's engine, transmission, fuel system, and aerodynamics to the road-going C8 Corvette. Transmission paragraph: “As with most race cars in this class, the road going transmission is replaced by a sequential box that is a better fit for race duty. In this case, Chevy worked with Xtrac to develop a six-speed unit that is compact and pushed closer to the engine to allow for the large diffuser” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_pattern. Independent firsthand corroboration of the RACER report from a journalist present at the same technical presentation. Does not address paddle-versus-lever actuation, gearbox engagement construction, or clutch/cockpit equipment.",
+      "author": "Bozi Tatarevic",
+      "published_or_updated_at": "2019-10-15"
+    },
+    {
+      "source_id": "cockpit-photo-search.corvette-c8-r-unavailable",
+      "title": "The interior of the Chevrolet Corvette C8.R. Steering wheel.",
+      "publisher": "Alamy",
+      "url": "https://www.alamy.com/the-interior-of-the-chevrolet-corvette-c8r-steering-wheel-image499545295.html",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-18",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Record of a diligent cockpit-photo search, including one contributor-captioned photograph found and inspected at full resolution, then rejected as depicting the wrong car. Full-resolution image (ID 2M0M73B), viewed directly: “(photograph; captioned \"The interior of the Chevrolet Corvette C8.R. Steering wheel.\" by the contributor)” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top. This Alamy stock photo is captioned as the C8.R's interior, but direct inspection shows a plain, road-car-style round-ish steering wheel with a conventional rear-view mirror, ordinary door trim, and a standard centre console with yellow accent stitching – consistent with the road-going Corvette Stingray (very likely the 2022 'IMSA GTLM Championship C8.R Edition' appearance package, a street trim commemorating the race car, not the FIA-homologated race car itself, which has no rear-view mirror, a stripped roll-cage interior, and a fixed-grip racing wheel). The contributor's caption is therefore treated as unreliable and this image is not used as cockpit evidence for the real race car. Beyond this rejected photo, this session also checked Chevrolet/Corvette Racing's own RACER and Jalopnik technical-reveal coverage, the Wikipedia article's images, GM Authority's C8.R photo collection, an archived Autoblog C8.R photo gallery, and general web/image searches for Corvette Racing cockpit or steering-wheel photography; none had a usable interior photograph of the actual race car. This absence is not used as evidence that any particular wheel-rim value is correct, only that the required fields stay not-established."
+    },
+    {
+      "source_id": "pmr.local-live-corvette-c8-r-controls.2.2.1.0",
+      "title": "Live PMR Corvette C8.R guided-verification drive",
+      "publisher": "Local PMR observation",
+      "url": "https://github.com/Milky28/as-driven/issues/142",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-18",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation pmr.corvette-c8-r.20260918t200941490z-0b20a80a by Jason Kinslow; PMR 2.2.1.0. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }

@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.8.5",
+  "approved_at": "2026-09-18",
+  "records": [
+    {
+      "record_id": "chevrolet-corvette-c8-r",
+      "bundle": "build/review-cases/issue-142/staged.json",
+      "display_name": "Chevrolet Corvette C8.R",
+      "class": "GTE",
+      "manufacturer": "Chevrolet",
+      "model": "Corvette C8.R",
+      "year": {
+        "from": 2020,
+        "to": 2023,
+        "label": "2020-2023 GTLM/GTE competition years"
+      },
+      "real_world_identity_notes": "The Corvette C8.R is Chevrolet's mid-engine GTE-class factory race car, built by Pratt & Miller for Corvette Racing on the 2020 Corvette Stingray's aluminum chassis, unveiled in 2019 and competing from 2020 in IMSA GTLM (later GTD Pro) and FIA WEC/Le Mans LMGTE. This PMR observation's telemetry identity (\"Corvette C8.R\", class GTE) matches the real car directly, and this is the same real car already curated at record_id chevrolet-corvette-c8-r from an existing AMS2 identity. This observation should be added to that existing record as a new PMR simulator identity rather than creating a new record.",
+      "real_world_source_refs": [
+        "racer.chevy-c8r-technical-details-2019",
+        "jalopnik.c8r-vs-road-car-technical-2019",
+        "wikipedia.chevrolet-corvette-c8r",
+        "cockpit-photo-search.corvette-c8-r-unavailable"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Chevrolet's own October 2019 technical reveal (reported firsthand by RACER and Jalopnik, both present at the Road Atlanta presentation) and Wikipedia agree on the manufacturer, model, Pratt & Miller build, competition debut, and Xtrac six-speed sequential transmission architecture, with no conflicting source found for the car's core identity.",
+      "identity_basis": "Chevrolet's own October 2019 technical reveal (reported firsthand by RACER and Jalopnik, both present at the Road Atlanta presentation) and Wikipedia agree on the manufacturer, model, Pratt & Miller build, competition debut, and Xtrac six-speed sequential transmission architecture, with no conflicting source found for the car's core identity.",
+      "specification_basis": "All three sources independently state a six-speed Xtrac transmission, matching the staged observation and the existing curated record. Two independent firsthand reports of Chevrolet's own technical presentation both describe a sequential racing gearbox replacing the road car's transmission. Neither states whether gear engagement is by dog rings or synchromesh, so this is recorded at the coarser 'sequential' category rather than a specific engagement mechanism, matching the existing curated record's convention. All three sources describe a sequential gearbox, matching the staged observation and the existing curated record. Structural: a throttle blip is a downshift rev-matching technique and is not applicable to upshifts, independent of which car is under review. The reviewed source establishes this is a sequential gearbox to which the concept applies. Structural: an automatic throttle blip is a downshift rev-matching technique and is not applicable to upshifts, independent of which car is under review. The reviewed source establishes this is a sequential gearbox to which the concept applies. Structural: throttle-lift-to-permit-engagement is an upshift concept for a sequential gearbox and is not applicable to downshifts, independent of which car is under review. Structural: an ignition/fuel cut unloads gear teeth under power on an upshift and is not applicable to downshifts, independent of which car is under review. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_actuation": "unknown",
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "standing_start_clutch": "unknown",
+        "wheel_rim": {
+          "shape": "unknown",
+          "integrated_display": "unknown",
+          "shift_lights": "unknown",
+          "open_top": "unknown",
+          "source_label": "real-car-research-not-established",
+          "notes": "Exact real-car wheel details were not established by the reviewed sources."
+        }
+      },
+      "simulator_overrides": [],
+      "confidence_notes": "The exact 2020-2023 GTLM/GTE competition years identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/transmission/downshift/automatic_cut",
+        "/authentic_controls/transmission/downshift/throttle_lift",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/gearbox_type",
+        "/authentic_controls/transmission/shift_pattern",
+        "/authentic_controls/transmission/upshift/automatic_blip",
+        "/authentic_controls/transmission/upshift/manual_blip"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 6; gearbox construction: sequential; shift pattern: sequential; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable.",
+        "The reviewed real-car sources do not establish launch technique, running-shift technique, cut and blip behavior or wheel topology; those baseline fields remain unknown.",
+        "Project Motor Racing 2.2.1.0 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/142",
+      "live_source_notes": "Guided-verification observation pmr.corvette-c8-r.20260918t200941490z-0b20a80a by Jason Kinslow; PMR 2.2.1.0. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering.",
+      "driver_summary": "Xtrac built the C8.R a bespoke P529 six-speed sequential transaxle, unusually compact so the mid-engine car could package it. Paddles, no clutch to pull away, and it cuts and blips for itself."
+    }
+  ]
+}

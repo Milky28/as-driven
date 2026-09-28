@@ -1,8 +1,8 @@
 {
   "$schema": "../../schema/v1/dataset-index.schema.json",
   "schema_version": "1.0.0",
-  "dataset_version": "0.8.0",
-  "released_at": "2026-09-17",
+  "dataset_version": "0.8.5",
+  "released_at": "2026-09-18",
   "records": [
     "cars/alfa-romeo-155-v6-ti-1993.json",
     "cars/alfa-romeo-156-super-touring.json",
@@ -41,6 +41,7 @@
     "cars/bmw-m4-gt3.json",
     "cars/bmw-m4-gt4.json",
     "cars/bmw-m6-gt3.json",
+    "cars/bmw-m8-gte.json",
     "cars/bmw-v12-lmr-1999.json",
     "cars/brabham-bmw-bt52.json",
     "cars/brabham-bt26a.json",
@@ -317,6 +318,7 @@
     "cars/sigma-p1.json",
     "cars/sprint-race.json",
     "cars/spyker-c8-spyder-gt2-r.json",
+    "cars/srt-viper-gts-r.json",
     "cars/stock-usa-gen1.json",
     "cars/stock-usa-gen2.json",
     "cars/stock-usa-gen3-lm.json",

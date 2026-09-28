@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.8.2",
+  "approved_at": "2026-09-18",
+  "records": [
+    {
+      "record_id": "lamborghini-sc63",
+      "bundle": "build/review-cases/issue-140/staged.json",
+      "display_name": "Lamborghini SC63",
+      "class": "LMDh",
+      "manufacturer": "Lamborghini",
+      "model": "SC63",
+      "year": {
+        "from": 2024,
+        "label": "2024 competition debut"
+      },
+      "real_world_identity_notes": "LMU's telemetry identity for this car is \"Lamborghini Iron Lynx 2024\", naming the operating team (Iron Lynx) rather than the manufacturer's own model designation. The real car is the Lamborghini SC63, Lamborghini Squadra Corse's first hybrid endurance racing prototype, unveiled at the 2023 Goodwood Festival of Speed and run by the Italian team Iron Lynx from its 2024 competition debut in the FIA WEC Hypercar class and the IMSA GTP class (the observation's staged class \"Hyper\" matches the WEC naming). This is the same real car already curated at record_id lamborghini-sc63 from an AMS2 identity; the deterministic curated-record-lead check for this case found no match because it compares the observation's own \"Lamborghini Iron Lynx 2024\" string against curated identities, and that team-branded string does not textually contain \"SC63\". This LMU observation should be attached to the existing record as an additional simulator identity rather than creating a new record.",
+      "real_world_source_refs": [
+        "lamborghini.sc63.unveiling",
+        "xtrac.p1359.lmdh",
+        "wikipedia.lamborghini-sc63",
+        "jalopnik.gtp-lmdh-clutch-bump-start",
+        "motorsport-it.sc63-steering-wheel-feature",
+        "as-driven.repository.lamborghini-sc63-record-scan"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Lamborghini's own manufacturer announcement, Wikipedia, and the existing curated record (built from an independent AMS2 identity and primary Lamborghini/Xtrac sources) all agree on the manufacturer, model, 2024 debut, dual Hypercar/GTP class naming, and the Iron Lynx team partnership, with no conflicting source found.",
+      "identity_basis": "Lamborghini's own manufacturer announcement, Wikipedia, and the existing curated record (built from an independent AMS2 identity and primary Lamborghini/Xtrac sources) all agree on the manufacturer, model, 2024 debut, dual Hypercar/GTP class naming, and the Iron Lynx team partnership, with no conflicting source found.",
+      "specification_basis": "The gearbox supplier's own product page, Wikipedia, and Lamborghini's statement that the LMDh gearbox is standardised all agree on seven forward gears, matching the staged observation and the existing curated record. Xtrac's own P1359 product page describes a '7 speed sequential' construction, and Lamborghini confirms this exact gearbox is standard across every LMDh car including the SC63. Neither source states whether gear engagement is by dog rings or synchromesh, so the coarser 'sequential' category is used rather than a specific engagement mechanism, matching the existing curated record's own gearbox_type value. The spec gearbox is paddle-actuated; Lamborghini's own article discusses the steering wheel's paddle-shift controls. All reviewed sources describe a sequential gearbox, matching the staged observation. LMDh/GTP cars use a dashboard button rather than a foot pedal to engage the clutch, per a class-wide technical account; Lamborghini's own article confirms the SC63 uses this identical, standardised LMDh gearbox and clutch system rather than a bespoke one, so there is no driver-operated clutch pedal for standing starts. Matches the existing curated record's finding. The class-wide LMDh clutch system has no foot pedal at all; the computer engages the button-operated clutch, so no driver clutch action of any kind exists for running upshifts. Matches the existing curated record. Structural: a throttle blip is a downshift rev-matching technique and is not applicable to upshifts, independent of which car is under review. The reviewed supplier source establishes this is a sequential paddle-shift gearbox to which the concept applies. Structural: an automatic throttle blip is a downshift rev-matching technique and is not applicable to upshifts, independent of which car is under review. The reviewed supplier source establishes this is a sequential paddle-shift gearbox to which the concept applies. The class-wide LMDh clutch system has no foot pedal at all; the computer engages the button-operated clutch, so no driver clutch action of any kind exists for running downshifts either. Matches the existing curated record. Structural: throttle-lift-to-permit-engagement is an upshift concept for a clutchless sequential gearbox and is not applicable to downshifts, independent of which car is under review. Structural: an ignition/fuel cut unloads gear teeth under power on an upshift and is not applicable to downshifts, independent of which car is under review. The reviewed photograph of the exact SC63 steering wheel clearly shows two fixed, molded hand-grip pods joined by a flat control face carrying switches, rotary dials, and a display, the defining gt-formula construction. Matches the existing curated record. The reviewed photograph shows a large rectangular LCD screen built into the wheel's own control face between the grips, and Lamborghini's own article separately discusses the steering wheel's hybrid-system display controls. Matches the existing curated record. The reviewed photograph shows a curved red LED segment on the left and a green LED segment on the right, built into the top edge of the wheel body above the display, consistent with a rev/shift-light array. The wheel is photographed with power off, so no lights are seen actually illuminated, which is why this is held at medium rather than high confidence. This establishes a value where the existing curated record currently has 'unknown'. The wheel is gt-formula shape (fixed-grip, control-face construction), for which open_top is not applicable by definition. Matches the existing curated record. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        }
+      },
+      "simulator_overrides": [],
+      "confidence_notes": "The exact 2024 competition debut identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/steering/wheel_rim/integrated_display",
+        "/authentic_controls/steering/wheel_rim/open_top",
+        "/authentic_controls/steering/wheel_rim/shape",
+        "/authentic_controls/steering/wheel_rim/shift_lights",
+        "/authentic_controls/transmission/downshift/automatic_cut",
+        "/authentic_controls/transmission/downshift/clutch",
+        "/authentic_controls/transmission/downshift/throttle_lift",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/gearbox_type",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/shift_pattern",
+        "/authentic_controls/transmission/standing_start_clutch",
+        "/authentic_controls/transmission/upshift/automatic_blip",
+        "/authentic_controls/transmission/upshift/clutch",
+        "/authentic_controls/transmission/upshift/manual_blip"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 7; gearbox construction: sequential; shift actuation: sequential paddles; shift pattern: sequential; standing-start clutch use: not required; transmission upshift clutch: not required; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift clutch: not required; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable; wheel-rim shape: gt formula; integrated wheel display: yes; wheel shift lights: yes; conventional rim open-top section: not applicable.",
+        "The reviewed real-car sources do not establish cut and blip behavior; those baseline fields remain unknown.",
+        "Le Mans Ultimate 1.4150 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/140",
+      "live_source_notes": "Guided-verification observation other.lamborghini-iron-lynx-2024.20260918t055917684z-132eb8d7 by Jason Kinslow; LMU 1.4150. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering.",
+      "accept_from_drive": [
+        "/authentic_controls/steering/wheel_rim/shift_lights"
+      ],
+      "driver_summary": "The SC63 is Lamborghini's first LMDh prototype, pairing a 3.8-litre twin-turbo V8 developed in-house with the category's standard hybrid gearbox. Iron Lynx raced it from 2024 in WEC and IMSA endurance events."
+    }
+  ]
+}

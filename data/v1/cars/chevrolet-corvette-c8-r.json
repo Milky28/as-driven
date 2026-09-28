@@ -90,6 +90,52 @@
         "level": "high",
         "basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the Xtrac P529 six-speed sequential transaxle is supported by a registered secondary source."
       }
+    },
+    {
+      "simulator": "pmr",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Corvette C8.R"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Corvette C8.R"
+        },
+        {
+          "kind": "class-id",
+          "value": "GTE"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "unknown",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "not-applicable",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in PMR 2.2.1.0 via guided verification observation pmr.corvette-c8-r.20260918t200941490z-0b20a80a by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "2.2.1.0",
+      "verified_at": "2026-09-18",
+      "source_refs": [
+        "racer.chevy-c8r-technical-details-2019",
+        "jalopnik.c8r-vs-road-car-technical-2019",
+        "wikipedia.chevrolet-corvette-c8r",
+        "cockpit-photo-search.corvette-c8-r-unavailable",
+        "pmr.local-live-corvette-c8-r-controls.2.2.1.0"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Chevrolet's own October 2019 technical reveal (reported firsthand by RACER and Jalopnik, both present at the Road Atlanta presentation) and Wikipedia agree on the manufacturer, model, Pratt & Miller build, competition debut, and Xtrac six-speed sequential transmission architecture, with no conflicting source found for the car's core identity."
+      }
     }
   ],
   "provenance": {
@@ -142,6 +188,30 @@
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "racer.chevy-c8r-technical-details-2019",
+          "jalopnik.c8r-vs-road-car-technical-2019",
+          "wikipedia.chevrolet-corvette-c8r",
+          "cockpit-photo-search.corvette-c8-r-unavailable",
+          "pmr.local-live-corvette-c8-r-controls.2.2.1.0"
+        ],
+        "confidence": "high",
+        "basis": "Chevrolet's own October 2019 technical reveal (reported firsthand by RACER and Jalopnik, both present at the Road Atlanta presentation) and Wikipedia agree on the manufacturer, model, Pratt & Miller build, competition debut, and Xtrac six-speed sequential transmission architecture, with no conflicting source found for the car's core identity."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "pmr.local-live-corvette-c8-r-controls.2.2.1.0"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -152,6 +222,6 @@
   "notes": [
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-27",
+  "updated_at": "2026-09-18",
   "driver_summary": "Xtrac built the C8.R a bespoke P529 six-speed sequential transaxle, unusually compact so the mid-engine car could package it. Paddles, no clutch to pull away, and it cuts and blips for itself."
 }

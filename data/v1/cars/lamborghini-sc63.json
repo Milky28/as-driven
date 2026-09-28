@@ -41,7 +41,7 @@
         "shape": "gt-formula",
         "diameter_mm": null,
         "integrated_display": "yes",
-        "shift_lights": "unknown",
+        "shift_lights": "yes",
         "open_top": "not-applicable",
         "source_label": "live-cockpit-observation",
         "notes": "Direct cockpit inspection showed a closed GT/Formula rim with an integrated display; exact diameter remains unknown."
@@ -99,6 +99,54 @@
       "confidence": {
         "level": "verified",
         "basis": "The exact base identity and full user-facing control technique were directly tested, while primary manufacturer sources independently establish the LMDh hybrid and gearbox architecture. Low Downforce remains an explicitly noted aero-package inheritance."
+      }
+    },
+    {
+      "simulator": "lmu",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Lamborghini Iron Lynx 2024"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Lamborghini Iron Lynx 2024"
+        },
+        {
+          "kind": "class-id",
+          "value": "Hyper"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "unknown",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "yes",
+          "shift_lights": "yes",
+          "open_top": "not-applicable",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in LMU 1.4150 via guided verification observation other.lamborghini-iron-lynx-2024.20260918t055917684z-132eb8d7 by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.4150",
+      "verified_at": "2026-09-18",
+      "source_refs": [
+        "lamborghini.sc63.unveiling",
+        "xtrac.p1359.lmdh",
+        "wikipedia.lamborghini-sc63",
+        "jalopnik.gtp-lmdh-clutch-bump-start",
+        "motorsport-it.sc63-steering-wheel-feature",
+        "as-driven.repository.lamborghini-sc63-record-scan",
+        "lmu.local-live-lamborghini-iron-lynx-2024-controls.1.4150"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Lamborghini's own manufacturer announcement, Wikipedia, and the existing curated record (built from an independent AMS2 identity and primary Lamborghini/Xtrac sources) all agree on the manufacturer, model, 2024 debut, dual Hypercar/GTP class naming, and the Iron Lynx team partnership, with no conflicting source found."
       }
     }
   ],
@@ -194,6 +242,47 @@
         ],
         "confidence": "verified",
         "basis": "Direct cockpit inspection showed a closed GT/Formula rim with an integrated display."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/shift_lights"
+        ],
+        "source_refs": [
+          "lamborghini.sc63.unveiling",
+          "xtrac.p1359.lmdh",
+          "wikipedia.lamborghini-sc63",
+          "jalopnik.gtp-lmdh-clutch-bump-start",
+          "motorsport-it.sc63-steering-wheel-feature",
+          "as-driven.repository.lamborghini-sc63-record-scan"
+        ],
+        "confidence": "high",
+        "basis": "The gearbox supplier's own product page, Wikipedia, and Lamborghini's statement that the LMDh gearbox is standardised all agree on seven forward gears, matching the staged observation and the existing curated record. Xtrac's own P1359 product page describes a '7 speed sequential' construction, and Lamborghini confirms this exact gearbox is standard across every LMDh car including the SC63. Neither source states whether gear engagement is by dog rings or synchromesh, so the coarser 'sequential' category is used rather than a specific engagement mechanism, matching the existing curated record's own gearbox_type value. The spec gearbox is paddle-actuated; Lamborghini's own article discusses the steering wheel's paddle-shift controls. All reviewed sources describe a sequential gearbox, matching the staged observation. LMDh/GTP cars use a dashboard button rather than a foot pedal to engage the clutch, per a class-wide technical account; Lamborghini's own article confirms the SC63 uses this identical, standardised LMDh gearbox and clutch system rather than a bespoke one, so there is no driver-operated clutch pedal for standing starts. Matches the existing curated record's finding. The class-wide LMDh clutch system has no foot pedal at all; the computer engages the button-operated clutch, so no driver clutch action of any kind exists for running upshifts. Matches the existing curated record. Structural: a throttle blip is a downshift rev-matching technique and is not applicable to upshifts, independent of which car is under review. The reviewed supplier source establishes this is a sequential paddle-shift gearbox to which the concept applies. Structural: an automatic throttle blip is a downshift rev-matching technique and is not applicable to upshifts, independent of which car is under review. The reviewed supplier source establishes this is a sequential paddle-shift gearbox to which the concept applies. The class-wide LMDh clutch system has no foot pedal at all; the computer engages the button-operated clutch, so no driver clutch action of any kind exists for running downshifts either. Matches the existing curated record. Structural: throttle-lift-to-permit-engagement is an upshift concept for a clutchless sequential gearbox and is not applicable to downshifts, independent of which car is under review. Structural: an ignition/fuel cut unloads gear teeth under power on an upshift and is not applicable to downshifts, independent of which car is under review. The reviewed photograph of the exact SC63 steering wheel clearly shows two fixed, molded hand-grip pods joined by a flat control face carrying switches, rotary dials, and a display, the defining gt-formula construction. Matches the existing curated record. The reviewed photograph shows a large rectangular LCD screen built into the wheel's own control face between the grips, and Lamborghini's own article separately discusses the steering wheel's hybrid-system display controls. Matches the existing curated record. The reviewed photograph shows a curved red LED segment on the left and a green LED segment on the right, built into the top edge of the wheel body above the display, consistent with a rev/shift-light array. The wheel is photographed with power off, so no lights are seen actually illuminated, which is why this is held at medium rather than high confidence. This establishes a value where the existing curated record currently has 'unknown'. The wheel is gt-formula shape (fixed-grip, control-face construction), for which open_top is not applicable by definition. Matches the existing curated record. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "lamborghini.sc63.unveiling",
+          "xtrac.p1359.lmdh",
+          "wikipedia.lamborghini-sc63",
+          "jalopnik.gtp-lmdh-clutch-bump-start",
+          "motorsport-it.sc63-steering-wheel-feature",
+          "as-driven.repository.lamborghini-sc63-record-scan",
+          "lmu.local-live-lamborghini-iron-lynx-2024-controls.1.4150"
+        ],
+        "confidence": "high",
+        "basis": "Lamborghini's own manufacturer announcement, Wikipedia, and the existing curated record (built from an independent AMS2 identity and primary Lamborghini/Xtrac sources) all agree on the manufacturer, model, 2024 debut, dual Hypercar/GTP class naming, and the Iron Lynx team partnership, with no conflicting source found."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "lmu.local-live-lamborghini-iron-lynx-2024-controls.1.4150"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -206,6 +295,6 @@
     "The wheel-rim shape was originally recorded as \"prototype\", a value that named a racing category rather than a rim outline. That value is retired: the rims it covered are the same closed form, flattened at both the top and the bottom, that the project now records as \"gt-style\". The shape was remapped by definition and the rim was not observed again.",
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-09-16",
+  "updated_at": "2026-09-18",
   "driver_summary": "The SC63 is Lamborghini's first LMDh prototype, pairing a 3.8-litre twin-turbo V8 developed in-house with the category's standard hybrid gearbox. Iron Lynx raced it from 2024 in WEC and IMSA endurance events."
 }

@@ -1,0 +1,139 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.8.1",
+  "approved_at": "2026-09-18",
+  "records": [
+    {
+      "record_id": "bmw-m8-gte",
+      "bundle": "build/review-cases/issue-139/staged.json",
+      "display_name": "BMW M8 GTE",
+      "class": "GTE",
+      "manufacturer": "BMW",
+      "model": "M8 GTE",
+      "year": {
+        "from": 2018,
+        "to": 2021,
+        "label": "2018-2021 (BMW M8 GTE FIA WEC / IMSA GTLM competition seasons)"
+      },
+      "real_world_identity_notes": "The BMW M8 GTE is BMW Motorsport's factory GTE-class race car, unveiled at the September 2017 Frankfurt IAA and raced from the 2018 season through the end of 2021 in the FIA World Endurance Championship (LM GTE class) and the IMSA WeatherTech SportsCar Championship (GTLM class), ahead of the road-going BMW 8 Series' own launch. It replaced the previous-generation BMW M6 GTLM/GT3 as BMW's top factory GT contender and was itself succeeded by the BMW M4 GT3 for 2022. The observation's staged identity fields (telemetry_name/internal_id \"BMW M8 GTE\", class \"GTE\") match this car's name and racing class exactly, so this is a straightforward exact-name identification rather than a generic-class puzzle. No curated record for this exact car exists in this repository yet.",
+      "real_world_source_refs": [
+        "bmw.m8-gte.launch-release",
+        "wikipedia.bmw-m8-gte",
+        "motor1.bmw-m8-gte-homestead-drive",
+        "jalopnik.bmw-m8-gte-daytona-details",
+        "bmw.m8-gte.steering-wheel-photo-p90309230",
+        "as-driven.repository.bmw-m8-gte-record-scan"
+      ],
+      "confidence": "high",
+      "confidence_basis": "BMW's own launch press release and Wikipedia's infobox agree on the manufacturer, model name, unveiling/competition period, and dual WEC/IMSA class naming. Multiple independent secondary sources (Motor1, Jalopnik) describe first-person or technical accounts of the exact car and corroborate its identity without conflict.",
+      "identity_basis": "BMW's own launch press release and Wikipedia's infobox agree on the manufacturer, model name, unveiling/competition period, and dual WEC/IMSA class naming. Multiple independent secondary sources (Motor1, Jalopnik) describe first-person or technical accounts of the exact car and corroborate its identity without conflict.",
+      "specification_basis": "The manufacturer press release, Wikipedia, and a first-person drive of the exact car all independently state a six-speed transmission, matching the staged observation. BMW's own release describes an \"electric paddle shift system,\" Wikipedia calls it a \"paddle-shift\" transmission, and the first-person drive confirms shifting \"via paddles on the steering wheel.\" All reviewed sources describe a sequential gearbox, matching the staged observation. Two independent secondary sources describing the exact car both state the clutch pedal is needed to move off from a stop: the Motor1 driver describes a razor-thin bite point requiring a firm throttle to pull away, and Jalopnik states the clutch is \"usually only\" used to engage first gear. The first-person account states plainly that once moving, \"going from gear to gear requires nothing more than a pull of the up or down paddles,\" with the clutch needed only from a stop. The same account states running shifts require \"nothing more than a pull of the up or down paddles,\" implying no additional throttle technique, though no source uses the words \"throttle lift\" explicitly. Structural: a throttle blip is a downshift rev-matching technique and is not applicable to upshifts, independent of which car is under review. The reviewed first-person account establishes this is a sequential paddle-shift gearbox to which the concept applies. Structural: an automatic throttle blip is a downshift rev-matching technique and is not applicable to upshifts, independent of which car is under review. The reviewed first-person account establishes this is a sequential paddle-shift gearbox to which the concept applies. Jalopnik's account states the clutch is \"usually only\" used to engage first gear, \"or occasionally to downshift more smoothly in the rain,\" directly describing situational, optional clutch use on downshifts rather than a strict requirement or prohibition. Structural: throttle-lift-to-permit-engagement is an upshift concept for a clutchless sequential gearbox and is not applicable to downshifts, independent of which car is under review. The reviewed first-person account establishes this is a clutchless sequential paddle-shift gearbox to which the concept applies. Structural: an ignition/fuel cut unloads gear teeth under power on an upshift and is not applicable to downshifts, independent of which car is under review. The reviewed first-person account establishes this is a clutchless sequential paddle-shift gearbox to which the concept applies. The official cockpit photograph clearly shows two fixed, molded hand-grip pods joined by a flat control face carrying switches and a rotary dial cluster, the defining gt-formula construction; BMW's own release separately describes the wheel's \"16 buttons and seven dials.\" The cockpit photograph shows the digital display and a separate data/GPS screen mounted on the dash above and beside the wheel, remaining level while the wheel itself is turned off-center, indicating the display is dash-fixed rather than built into the wheel body. The cockpit photograph shows no dedicated LED shift/rev-light bar on the wheel's own face, only individually illuminated switch caps. The Motor1 first-person account separately describes vertical light bars that resemble shift lights but are explicitly mounted beside the dash-fixed gauge-cluster pod rather than on the wheel, and function as traction-control indicators rather than rev/shift lights. The wheel is gt-formula shape (fixed-grip, control-face construction), for which open_top is not applicable by definition. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip.",
+      "control_overrides": {
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "unknown",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "optional",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "standing_start_clutch": "required"
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "yes",
+          "condition": "The guided observation ams2.bmw-m8-gte.20260918t045316125z-0787ba7b directly recorded this behavior or cockpit value in the simulator version 1.6.9.95; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-bmw-m8-gte-controls.1.6.9.95"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation ams2.bmw-m8-gte.20260918t045316125z-0787ba7b directly recorded this behavior or cockpit value in the simulator version 1.6.9.95; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-bmw-m8-gte-controls.1.6.9.95"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "not-required",
+          "condition": "The guided observation ams2.bmw-m8-gte.20260918t045316125z-0787ba7b directly recorded this behavior or cockpit value in the simulator version 1.6.9.95; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-bmw-m8-gte-controls.1.6.9.95"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "yes",
+          "condition": "The guided observation ams2.bmw-m8-gte.20260918t045316125z-0787ba7b directly recorded this behavior or cockpit value in the simulator version 1.6.9.95; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-bmw-m8-gte-controls.1.6.9.95"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 2018-2021 (BMW M8 GTE FIA WEC / IMSA GTLM competition seasons) identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/steering/wheel_rim/integrated_display",
+        "/authentic_controls/steering/wheel_rim/open_top",
+        "/authentic_controls/steering/wheel_rim/shape",
+        "/authentic_controls/steering/wheel_rim/shift_lights",
+        "/authentic_controls/transmission/downshift/automatic_cut",
+        "/authentic_controls/transmission/downshift/clutch",
+        "/authentic_controls/transmission/downshift/throttle_lift",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/shift_pattern",
+        "/authentic_controls/transmission/standing_start_clutch",
+        "/authentic_controls/transmission/upshift/automatic_blip",
+        "/authentic_controls/transmission/upshift/clutch",
+        "/authentic_controls/transmission/upshift/manual_blip",
+        "/authentic_controls/transmission/upshift/throttle_lift"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 6; shift actuation: sequential paddles; shift pattern: sequential; standing-start clutch use: required; transmission upshift clutch: not required; transmission upshift throttle_lift: not required; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift clutch: optional; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable; wheel-rim shape: gt formula; integrated wheel display: no; wheel shift lights: no; conventional rim open-top section: not applicable.",
+        "The reviewed real-car sources do not establish cut and blip behavior; those baseline fields remain unknown.",
+        "AMS2 1.6.9.95 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/139",
+      "live_source_notes": "Guided-verification observation ams2.bmw-m8-gte.20260918t045316125z-0787ba7b by Jason Kinslow; AMS2 1.6.9.95. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering.",
+      "driver_summary": "Nicknamed \"Big M8\" for its size, BMW's factory GTE contender raced WEC and IMSA from 2018 to 2021, winning five GTLM races including two 24 Hours of Daytona victories. Its Xtrac sequential gearbox needs the clutch only to pull away; test drivers report the bite point is razor-thin, needing a firm throttle rather than a gentle feed to avoid stalling.",
+      "additional_claims": [
+        {
+          "paths": [
+            "/driver_summary"
+          ],
+          "source_refs": [
+            "motor1.bmw-m8-gte-homestead-drive"
+          ],
+          "confidence": "medium",
+          "basis": "The Motor1 first-person account of an exact ex-works chassis is the source for the nickname, the four-season GTLM win tally including two Daytona victories, the 2021 retirement, and the specific clutch bite-point technique; this is a single first-person source rather than a manufacturer statement, so confidence is medium."
+        }
+      ]
+    }
+  ]
+}

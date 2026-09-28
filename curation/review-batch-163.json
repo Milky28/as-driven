@@ -1,0 +1,175 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.8.4",
+  "approved_at": "2026-09-18",
+  "records": [
+    {
+      "record_id": "srt-viper-gts-r",
+      "bundle": "build/review-cases/issue-141/staged.json",
+      "display_name": "SRT Viper GTS-R",
+      "class": "GTE",
+      "manufacturer": "SRT",
+      "model": "Viper GTS-R",
+      "year": {
+        "from": 2012,
+        "to": 2014,
+        "label": "2012-2014 SRT Viper GTS-R (ALMS/WEC GTE) competition years"
+      },
+      "real_world_identity_notes": "The SRT Viper GTS-R is a purpose-built, non-street-legal factory GT race car developed by SRT Motorsports (Chrysler Group's performance brand) with Riley Technologies, unveiled in 2012 for a return to the American Le Mans Series GT class, and racing in the FIA WEC/24 Hours of Le Mans GTE Pro class in 2013 before winning the Tudor United SportsCar Championship's GTLM class in 2014, its final factory season. This is a distinct real car from the earlier, ORECA-built Chrysler/Dodge Viper GTS-R raced from 1996-2005 (already curated separately at record_id chrysler-viper-gts-r and dodge-viper-gts-r), and from the later customer-spec SRT Viper GT3-R. This repository has no existing record for this specific car.",
+      "real_world_source_refs": [
+        "stellantis.srt-viper-gts-r-unveiled-2012",
+        "motorauthority.srt-viper-gts-r-first-track-session",
+        "torquenews.srt-viper-gts-r-closer-look-2013",
+        "stellantis.srt-viper-gt3-r-readies-worldwide-gt",
+        "cockpit-photo-search.srt-viper-gts-r-unavailable"
+      ],
+      "confidence": "high",
+      "confidence_basis": "SRT/Chrysler's own 2012 launch press release names the exact car and its ALMS return; independent secondary sources (Motor Authority, Torque News) and the manufacturer's own GT3-R lineage press release corroborate the Riley Technologies build and Xtrac sequential transmission architecture without conflict, aside from unreliable spec-aggregator pages that appear to have copy-pasted the unrelated road car's manual transmission onto the race car's page (see confusion_risks).",
+      "identity_basis": "SRT/Chrysler's own 2012 launch press release names the exact car and its ALMS return; independent secondary sources (Motor Authority, Torque News) and the manufacturer's own GT3-R lineage press release corroborate the Riley Technologies build and Xtrac sequential transmission architecture without conflict, aside from unreliable spec-aggregator pages that appear to have copy-pasted the unrelated road car's manual transmission onto the race car's page (see confusion_risks).",
+      "specification_basis": "The GT3-R's manufacturer-stated lineage from GTS-R-developed technology gives six forward gears, and this is independently consistent with the exact GTS-R article's description of an installed Xtrac racing transaxle; matches the staged observation. The exact-car article names an installed Xtrac racing transaxle, and the manufacturer's GT3-R lineage release explicitly describes the inherited architecture as \"paddle shifters\"; matches the staged observation. Two low-quality spec-aggregator pages instead list the unrelated road car's Tremec manual transmission for this page, which is excluded as unreliable (see confusion_risks). Both the exact-car Xtrac racing transaxle description and the manufacturer's GT3-R lineage release describe a sequential gearbox; matches the staged observation. Structural: a throttle blip is a downshift rev-matching technique and is not applicable to upshifts, independent of which car is under review. The reviewed source establishes this is a sequential gearbox to which the concept applies. Structural: an automatic throttle blip is a downshift rev-matching technique and is not applicable to upshifts, independent of which car is under review. The reviewed source establishes this is a sequential gearbox to which the concept applies. Structural: throttle-lift-to-permit-engagement is an upshift concept for a sequential gearbox and is not applicable to downshifts, independent of which car is under review. Structural: an ignition/fuel cut unloads gear teeth under power on an upshift and is not applicable to downshifts, independent of which car is under review. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top.",
+      "control_overrides": {
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "standing_start_clutch": "unknown",
+        "wheel_rim": {
+          "shape": "unknown",
+          "integrated_display": "unknown",
+          "shift_lights": "unknown",
+          "open_top": "unknown",
+          "source_label": "real-car-research-not-established",
+          "notes": "Exact real-car wheel details were not established by the reviewed sources."
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation pmr.srt-viper-gts-r.20260918t192249838z-458717f9 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-srt-viper-gts-r-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation pmr.srt-viper-gts-r.20260918t192249838z-458717f9 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-srt-viper-gts-r-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "d-shaped",
+          "condition": "The guided observation pmr.srt-viper-gts-r.20260918t192249838z-458717f9 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-srt-viper-gts-r-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "yes",
+          "condition": "The guided observation pmr.srt-viper-gts-r.20260918t192249838z-458717f9 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-srt-viper-gts-r-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.srt-viper-gts-r.20260918t192249838z-458717f9 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-srt-viper-gts-r-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "not-required",
+          "condition": "The guided observation pmr.srt-viper-gts-r.20260918t192249838z-458717f9 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-srt-viper-gts-r-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation pmr.srt-viper-gts-r.20260918t192249838z-458717f9 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-srt-viper-gts-r-controls.2.2.1.0"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 2012-2014 SRT Viper GTS-R (ALMS/WEC GTE) competition years identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/transmission/downshift/automatic_cut",
+        "/authentic_controls/transmission/downshift/throttle_lift",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/shift_pattern",
+        "/authentic_controls/transmission/upshift/automatic_blip",
+        "/authentic_controls/transmission/upshift/manual_blip"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 6; shift actuation: sequential paddles; shift pattern: sequential; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable.",
+        "The reviewed real-car sources do not establish launch technique, running-shift technique, cut and blip behavior or wheel topology; those baseline fields remain unknown.",
+        "Project Motor Racing 2.2.1.0 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/141",
+      "live_source_notes": "Guided-verification observation pmr.srt-viper-gts-r.20260918t192249838z-458717f9 by Jason Kinslow; PMR 2.2.1.0. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering.",
+      "driver_summary": "Built by Riley Technologies for Chrysler's SRT brand, the Viper GTS-R marked the model's return to Le Mans in 2013 after a decade away, racing in the GTE Pro class before winning the Tudor United SportsCar Championship's GTLM title in 2014, its final season with factory support.",
+      "additional_claims": [
+        {
+          "paths": [
+            "/driver_summary"
+          ],
+          "source_refs": [
+            "stellantis.srt-viper-gts-r-unveiled-2012",
+            "motorauthority.srt-viper-gts-r-first-track-session"
+          ],
+          "confidence": "high",
+          "basis": "The 2012 manufacturer announcement establishes the car, its SRT/Riley Technologies development, and its ALMS/Le Mans return; the 2014 GTLM title and end of factory support were independently corroborated during research alongside these sources."
+        }
+      ]
+    }
+  ]
+}

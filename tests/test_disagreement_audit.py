@@ -135,18 +135,22 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
         self.assertEqual(["ams2"], adjudication["departing_simulators"])
 
     def test_new_launch_batch_is_supported_by_exact_car_evidence(self) -> None:
-        expected_sources = {
-            "mercedes-amg-gt3-evo--transmission-standing-start-clutch": [
-                "mercedes-amg.gt3-evo-2020.operation-manual-r01"
-            ],
-            "mercedes-amg-gt4--transmission-standing-start-clutch": [
-                "mercedes-amg.gt4.drivetrain-manual-r10"
-            ],
-            "bmw-m6-gt3--transmission-standing-start-clutch": [
-                "bmw.m6-gt3-m4-gt3-comparison"
-            ],
+        # PMR's GT4 drive also launched without the clutch.
+        expected = {
+            "mercedes-amg-gt3-evo--transmission-standing-start-clutch": (
+                ["mercedes-amg.gt3-evo-2020.operation-manual-r01"],
+                ["ams2"],
+            ),
+            "mercedes-amg-gt4--transmission-standing-start-clutch": (
+                ["mercedes-amg.gt4.drivetrain-manual-r10"],
+                ["ams2", "pmr"],
+            ),
+            "bmw-m6-gt3--transmission-standing-start-clutch": (
+                ["bmw.m6-gt3-m4-gt3-comparison"],
+                ["ams2"],
+            ),
         }
-        for finding_id, primary_sources in expected_sources.items():
+        for finding_id, (primary_sources, departing) in expected.items():
             with self.subTest(finding=finding_id):
                 finding = self.finding(finding_id)
                 baseline = finding["authentic_baseline"]
@@ -156,7 +160,7 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
                 adjudication = finding["adjudication"]
                 self.assertEqual("supported-departure", adjudication["status"])
                 self.assertEqual(["acc"], adjudication["matching_simulators"])
-                self.assertEqual(["ams2"], adjudication["departing_simulators"])
+                self.assertEqual(departing, adjudication["departing_simulators"])
 
     def test_lotus_variants_keep_the_authentic_baseline_open(self) -> None:
         finding = self.finding(

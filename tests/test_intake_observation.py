@@ -372,9 +372,9 @@ class ObservationIntakeTests(unittest.TestCase):
     def test_lmu_releases_an_old_draft_without_rewriting_it(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             temp = Path(directory)
-            payload = observation("Lamborghini Iron Lynx 2024")
+            payload = observation("Unreviewed LMU Car")
             payload["observation_id"] = (
-                "other.lamborghini-iron-lynx-2024.20260918t055917684z-132eb8d7"
+                "other.unreviewed-lmu-car.20260918t055917684z-132eb8d7"
             )
             payload["simulator"] = "other"
             payload["source_game_name"] = "LMU"

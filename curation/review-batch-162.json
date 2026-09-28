@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.8.3",
+  "approved_at": "2026-09-18",
+  "records": [
+    {
+      "record_id": "mercedes-amg-gt4",
+      "bundle": "build/review-cases/issue-138/staged.json",
+      "display_name": "Mercedes-AMG GT4",
+      "class": "GT4",
+      "manufacturer": "Mercedes-AMG",
+      "model": "GT4",
+      "year": {
+        "from": 2018,
+        "label": "2018 customer-racing debut"
+      },
+      "real_world_identity_notes": "The observation's own machine-recorded identity fields (telemetry_name \"GT4\", internal_id \"GT4\", class \"GT4\") are generic and, by themselves, do not distinguish which real car was driven: Project Motor Racing's own car catalogue lists at least ten different manufacturers' cars sharing the GT4 class (Audi R8 LMS GT4, Aston Martin AMR Vantage GT4, Ford Mustang GT4, Porsche 718 Cayman GT4 Clubsport, Toyota GR Supra GT4 EVO, Alpine A110 GT4, BMW M4 GT4 EVO (G82), Chevrolet Camaro ZL-1 GT4.R, Nissan Z GT4, and this one). The maintainer supplied the specific in-game car during this research session: https://projectmotorracing.com/car.php?carIndex=54, which the developer's own page titles \"MERCEDES-AMG GT4\" and lists under manufacturer \"MERCEDES\". This resolves the exact real car to the Mercedes-AMG GT4, the FIA/SRO GT4-class customer racer built on the Mercedes-AMG GT R platform, on sale since 2018 (per Mercedes-AMG's own customer-racing page: \"Since 2018, the Mercedes-AMG GT4 has been expanding Mercedes-AMG's customer sports portfolio\"). This is the same real car already curated at record_id mercedes-amg-gt4 (matched there from Automobilista 2 and Assetto Corsa Competizione telemetry that names the car explicitly), so this Project Motor Racing observation should be attached to that existing record as an additional simulator identity rather than creating a new record. The deterministic curated-record-lead check for this case returned no match because it compares the observation's own generic \"GT4\" strings against curated identities, and none of those strings mentions Mercedes-AMG by name; the match only becomes visible once the specific in-game car is identified externally, as done here. PMR's own per-car statistics page lists 470 HP @ 6,400 RPM / 580 Nm @ 5,800 RPM / 1,390 kg for this car; none of the real-world output figures found in this research (510 hp/442 lb-ft at the car's 2017 unveiling, 503 bhp/443 lb-ft in a 2019 Top Gear test, 400 kW/630 Nm on Mercedes-AMG's current customer-racing page) matches PMR's power/torque figures exactly, though the 1,390 kg weight matches every reviewed real-car source precisely. This is consistent with PMR applying its own balance-of-performance figures rather than one official homologation sheet, and does not by itself identify which of the GT4's several running production updates (2017 launch, 2020 update, 2022 update, 2025 Evo update) PMR modeled; the year is therefore left at the existing curated record's family-level \"2018 customer-racing debut\" rather than narrowed further.",
+      "real_world_source_refs": [
+        "pmr.gt4.car-page-carindex-54",
+        "mercedes-amg.gt4.official",
+        "mercedes-amg.gt4.drivetrain-manual-r10",
+        "topgear.mercedes-amg-gt4-first-drive",
+        "drive-com-au.mercedes-amg-gt4-review-2019",
+        "95octane.mercedes-amg-gt4-launch-2017",
+        "imbranded.mercedes-amg-gt4-steering-wheel-photo"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "High confidence attaches to the real car's identity and authentic controls once Mercedes-AMG GT4 is accepted as the car in question (manufacturer source, an exact drivetrain manual, and two independent first-person test drives all converge). Confidence is capped at medium overall because that acceptance rests on the maintainer's in-session identification of car index 54 on Project Motor Racing's own site, not on anything recorded in the observation's own machine-readable identity fields; the maintainer should confirm with the observer (Jason Kinslow, per the case's verification metadata) that car index 54 / Mercedes-AMG GT4 is in fact the car driven for observation pmr.gt4.20260915t203325518z-8f15b632 before this is treated as fully settled.",
+      "identity_basis": "High confidence attaches to the real car's identity and authentic controls once Mercedes-AMG GT4 is accepted as the car in question (manufacturer source, an exact drivetrain manual, and two independent first-person test drives all converge). Confidence is capped at medium overall because that acceptance rests on the maintainer's in-session identification of car index 54 on Project Motor Racing's own site, not on anything recorded in the observation's own machine-readable identity fields; the maintainer should confirm with the observer (Jason Kinslow, per the case's verification metadata) that car index 54 / Mercedes-AMG GT4 is in fact the car driven for observation pmr.gt4.20260915t203325518z-8f15b632 before this is treated as fully settled.",
+      "specification_basis": "Mercedes-AMG's own page and independent launch coverage both state a six-speed gearbox; matches the existing curated record and the staged observation. Mercedes-AMG's own page calls it a \"sequential six-speed racing gearbox\"; independent launch coverage corroborates \"six-speed sequential AMG competition gearbox.\" Matches the existing curated record. Mercedes-AMG's own page describes \"ergonomically arranged shift paddles\" mounted on the racing steering wheel, with the gearbox itself pneumatically operated. Matches the existing curated record and the staged observation. A pneumatically-actuated sequential racing gearbox operated by paddles has a sequential, not H-pattern, shift gate; consistent across the manufacturer source and the in-game statistics panel. The exact car's own drivetrain manual instructs the driver to depress and ease the clutch when engaging first gear from idle. Two independent first-person track tests corroborate this directly: both describe using the clutch pedal only to get the car moving from a stop (\"required when using first gear in the pitlane, but no other time\"; \"the only time you will need to use the left pedal is to get it going in first gear\"). Matches the existing curated record. Both first-person test drives state running shifts are clutchless (\"the rest of the time you shift clutchlessly\"; \"you just pull the paddles at full throttle\"). Both first-person accounts describe upshifting at full/flat throttle without lifting: \"you're always flat, upchanges slamming home\"; \"you just pull the paddles at full throttle.\" Derived rather than directly stated: both first-person tests describe clutchless, full-throttle paddle upshifts landing smoothly (\"no upset to the chassis\"; \"a joyous jolt as the gears hammer into place\"), which is only mechanically coherent without a clutch if the car's \"competition ECU\" and \"innovative torque control\" (Mercedes-AMG's own phrasing) briefly cut drive during the dog engagement. No reviewed source uses the words \"ignition cut\" or \"automatic cut\" outright, so this is held at medium rather than high confidence; it matches the existing curated record's own automatic_cut finding, independently corroborated there via guided live drives in two different simulators (AMS2 and ACC). Structural: a manual or automatic throttle blip is a downshift rev-matching technique and is not applicable to upshifts, independent of which car is under review. The reviewed manufacturer source establishes this is a sequential paddle-shift gearbox to which the concept applies. Structural: an automatic throttle blip is a downshift rev-matching technique and is not applicable to upshifts, independent of which car is under review. The reviewed manufacturer source establishes this is a sequential paddle-shift gearbox to which the concept applies. \"The rest of the time you shift clutchlessly\" is stated without distinguishing upshifts from downshifts, and the same account explicitly limits clutch use to first-gear pit-lane engagement, so running downshifts are covered by the same clutchless finding. Structural: throttle-lift-to-permit-engagement is an upshift concept for this class of clutchless sequential gearbox and is not applicable to downshifts, independent of which car is under review. The reviewed manufacturer source establishes this is a clutchless sequential paddle-shift gearbox to which the concept applies. Structural: an ignition/fuel cut is an upshift concept (to unload the dogs under power) and is not applicable to downshifts, independent of which car is under review. The reviewed manufacturer source establishes this is a clutchless sequential paddle-shift gearbox to which the concept applies. Derived: neither detailed first-person account, despite describing braking and downshifting into corners, mentions the driver performing a manual throttle blip or heel-toe technique, consistent with an automated rev-matching system handling it; matches the existing curated record's finding, independently corroborated there via guided live drives in two different simulators. Derived rather than directly stated, on the same basis as the upshift automatic_cut finding: clutchless downshifting with no manual blip technique described by either driver, on a car with a \"competition ECU\" and \"innovative torque control\" per the manufacturer, is only smoothly driveable with automated rev-matching. Held at medium confidence for the same reason; matches the existing curated record's finding. The full-resolution product photograph of the exact GT4 steering wheel clearly shows two fixed, molded hand-grip pods at roughly 9-and-3/10-and-2, joined by a flat control face between them carrying switches, buttons, and a display — the defining construction of gt-formula. Matches the existing curated record's shape finding. Corrected on review: an earlier draft of this claim read the reviewed cockpit photograph as showing an LCD built into the wheel's own control face, but that photograph is a tightly-cropped, straight-on shot in which a dash-mounted display positioned directly behind the wheel's top edge can appear to sit on the wheel from the camera's angle. Wider-angle real-world cockpit photographs of this wheel family resolve the ambiguity, showing the display mounted separately on the dash/steering column with clear depth separation from the wheel. Read literally, the topgear.mercedes-amg-gt4-first-drive account's \"screen behind the wheel\" describes exactly this: a display positioned behind, not on, the wheel. This matches the existing curated record's integrated_display value of \"no\", independently corroborated there by guided live drives in two different simulators (AMS2 and ACC). Corrected on review: the topgear.mercedes-amg-gt4-first-drive account's \"shift lights above\" sits in the same sentence as \"the titchy, info-laden screen behind the wheel\", describing the same dash/column-mounted unit rather than a light strip built into the wheel. The reviewed cockpit photograph shows no separate LED bar on the wheel's own control face, only individually illuminated pushbuttons, which is the more likely referent of 95octane's \"fancy light-up racing steering wheel\" description rather than a dedicated shift-light array. This matches the existing curated record's shift_lights value of \"no\", independently corroborated there by guided live drives in two different simulators (AMS2 and ACC). The wheel is gt-formula shape (fixed-grip, control-face construction), for which open_top is not applicable by definition, independent of any rim-cutaway question. Matches the existing curated record.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        },
+        "standing_start_clutch": "required"
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "not-required",
+          "condition": "The guided observation pmr.gt4.20260915t203325518z-8f15b632 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-gt4-controls.2.2.1.0"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 2018 customer-racing debut identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/steering/wheel_rim/integrated_display",
+        "/authentic_controls/steering/wheel_rim/open_top",
+        "/authentic_controls/steering/wheel_rim/shape",
+        "/authentic_controls/steering/wheel_rim/shift_lights",
+        "/authentic_controls/transmission/downshift/automatic_blip",
+        "/authentic_controls/transmission/downshift/automatic_cut",
+        "/authentic_controls/transmission/downshift/clutch",
+        "/authentic_controls/transmission/downshift/manual_blip",
+        "/authentic_controls/transmission/downshift/throttle_lift",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/gearbox_type",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/shift_pattern",
+        "/authentic_controls/transmission/standing_start_clutch",
+        "/authentic_controls/transmission/upshift/automatic_blip",
+        "/authentic_controls/transmission/upshift/automatic_cut",
+        "/authentic_controls/transmission/upshift/clutch",
+        "/authentic_controls/transmission/upshift/manual_blip",
+        "/authentic_controls/transmission/upshift/throttle_lift"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 6; gearbox construction: sequential; shift actuation: sequential paddles; shift pattern: sequential; standing-start clutch use: required; transmission upshift clutch: not required; transmission upshift throttle_lift: not required; transmission upshift automatic_cut: yes; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift clutch: not required; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable; transmission downshift manual_blip: not required; transmission downshift automatic_blip: yes; wheel-rim shape: gt formula; integrated wheel display: no; wheel shift lights: no; conventional rim open-top section: not applicable.",
+        "Project Motor Racing 2.2.1.0 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/138",
+      "live_source_notes": "Guided-verification observation pmr.gt4.20260915t203325518z-8f15b632 by Jason Kinslow; PMR 2.2.1.0. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering.",
+      "driver_summary": "Based on the AMG GT R road car, the GT4 uses a purpose-built six-speed sequential racing transaxle with pneumatic paddle shifts. Its clutch pedal is only needed to move off in first."
+    }
+  ]
+}

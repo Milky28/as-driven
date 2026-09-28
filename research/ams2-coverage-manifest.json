@@ -1,15 +1,16 @@
 {
   "manifest": "ams2-exact-identity-coverage",
   "manifest_version": "0.1.0",
-  "generated_at": "2026-09-17",
-  "dataset_version": "0.8.0",
+  "generated_at": "2026-08-12",
+  "dataset_version": "0.8.5",
   "simhub_version": "9.11.22",
   "identity_sources": {
     "stored_car_files": "C:\\Program Files (x86)\\SimHub\\PluginsData\\Automobilista2\\Cars",
     "live_diagnostics_log": "C:\\Users\\jerky\\AppData\\Local\\SimHub\\AsDriven\\Diagnostics\\unmatched-identities.jsonl",
-    "live_identities_seen": 208,
+    "live_identities_seen": 209,
     "live_only_identities": [
       "ARC Camaro",
+      "BMW M8 GTE",
       "Brabham BMW BT52 - High Downforce",
       "Brabham BT44",
       "Brabham BT62",
@@ -169,13 +170,13 @@
     "A retired identity is never aliased onto its renamed record, because it cannot be verified in the certified build."
   ],
   "stats": {
-    "observed_identities": 372,
-    "curated_records": 337,
-    "covered_exact_identities": 356,
+    "observed_identities": 373,
+    "curated_records": 339,
+    "covered_exact_identities": 357,
     "uncovered_identities": 16,
     "full_guided_verifications": 1,
     "dispositions": {
-      "covered-exact": 356,
+      "covered-exact": 357,
       "full-guided-verification": 1,
       "out-of-scope": 1,
       "retired-identity": 7,
@@ -646,6 +647,20 @@
         "year": "2017"
       },
       "research_readiness": "legacy-controls-candidate-available"
+    },
+    {
+      "telemetry_name": "BMW M8 GTE",
+      "car_id": "BMW M8 GTE",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "gt",
+      "related_record_id": "bmw-m8-gte",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "GTE",
+      "live_observed_at": "2026-09-18T04:52:33.3749704Z",
+      "live_game_version": "1.6.9.95",
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Brabham BMW BT52",

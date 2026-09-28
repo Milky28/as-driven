@@ -574,6 +574,7 @@ class SiteTests(unittest.TestCase):
                 {"id": "ac-evo", "label": "Assetto Corsa EVO"},
                 {"id": "ams1", "label": "Automobilista"},
                 {"id": "gtr2", "label": "GTR 2"},
+                {"id": "lmu", "label": "Le Mans Ultimate"},
                 {"id": "pmr", "label": "Project Motor Racing"},
                 {"id": "raceroom", "label": "RaceRoom Racing Experience"},
                 {"id": "rfactor2", "label": "rFactor 2"},
@@ -586,6 +587,7 @@ class SiteTests(unittest.TestCase):
         self.assertIn('<option value="gtr2">GTR2</option>', page)
         self.assertIn('<option value="raceroom">RaceRoom</option>', page)
         self.assertIn('<option value="rfactor2">rF2</option>', page)
+        self.assertIn('<option value="lmu">LMU</option>', page)
         self.assertIn('<option value="pmr">PMR</option>', page)
         self.assertIn('<option value="ams2">AMS2</option>', page)
 

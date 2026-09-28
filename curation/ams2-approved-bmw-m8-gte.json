@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.8.1",
+  "approved_at": "2026-09-18",
+  "record_id": "bmw-m8-gte",
+  "simulator": "ams2",
+  "telemetry_name": "BMW M8 GTE",
+  "observed_game_version": "1.6.9.95",
+  "observed_through": "SimHub guided verification observation ams2.bmw-m8-gte.20260918t045316125z-0787ba7b",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-paddles",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "yes",
+    "automatic_blip": "yes",
+    "wheel_rim_shape": "gt-formula",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "not-applicable"
+  },
+  "confidence_notes": "The exact 2018-2021 (BMW M8 GTE FIA WEC / IMSA GTLM competition seasons) identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "telemetry_class": "GTE"
+}

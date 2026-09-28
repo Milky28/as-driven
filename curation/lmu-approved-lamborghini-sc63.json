@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.8.2",
+  "approved_at": "2026-09-18",
+  "record_id": "lamborghini-sc63",
+  "simulator": "lmu",
+  "telemetry_name": "Lamborghini Iron Lynx 2024",
+  "observed_game_version": "1.4150",
+  "observed_through": "SimHub guided verification observation other.lamborghini-iron-lynx-2024.20260918t055917684z-132eb8d7",
+  "approved_controls": {
+    "forward_gears": 7,
+    "shift_actuation": "sequential-paddles",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "not-required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "yes",
+    "automatic_blip": "unknown",
+    "manual_blip": "not-required",
+    "wheel_rim_shape": "gt-formula",
+    "wheel_integrated_display": "yes",
+    "wheel_shift_lights": "yes",
+    "wheel_open_top": "not-applicable",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "The exact 2024 competition debut identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "telemetry_class": "Hyper"
+}
