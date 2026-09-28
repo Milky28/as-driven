@@ -57,7 +57,7 @@ current dataset, the generated README coverage block for counts, and
 
 ## Simulator coverage and disagreements
 
-- Of 370 AMS2 identities observed on this PC, 355 are covered exactly and 15
+- Of 373 AMS2 identities observed on this PC, 357 are covered exactly and 16
   are closed by written decisions. No observed identity currently awaits guided
   verification. New content can still be absent because the inventory only
   contains cars loaded here. See `docs/ams2-coverage-plan.md`.

@@ -294,11 +294,14 @@ def build(
     verification = [entry for entry in uncovered if entry["coverage_disposition"] == "full-guided-verification"]
     family_counts = Counter(entry["family"] for entry in verification)
     readiness = Counter(entry["research_readiness"] for entry in verification)
+    # Dated by the dataset it describes rather than the clock, so a refresh
+    # with unchanged inputs stays byte-identical.
+    index = read_json(root / "data" / "v1" / "index.json")
     return {
         "manifest": "ams2-exact-identity-coverage",
         "manifest_version": "0.1.0",
-        "generated_at": "2026-08-12",
-        "dataset_version": read_json(root / "data" / "v1" / "index.json")["dataset_version"],
+        "generated_at": index["released_at"],
+        "dataset_version": index["dataset_version"],
         "simhub_version": audit.get("simhub_version"),
         "identity_sources": {
             "stored_car_files": str(cars_dir),

@@ -147,6 +147,15 @@
       "related_record_id": null,
       "source_refs": [],
       "basis": "The maintainer identifies this as modded content and no longer has the mod installed, so it is not selectable in the certified build and AMS2 never shipped it. SimHub stored the identity when the mod was present, which is how it entered the inventory. Not curated and not queued for verification."
+    },
+    {
+      "telemetry_name": "Panoz Esperante GTR1",
+      "disposition": "third-party-content",
+      "last_observed": "2026-09-12",
+      "superseded_by": null,
+      "related_record_id": null,
+      "source_refs": [],
+      "basis": "Maintainer judged this run-together identity to be a mod car that existed before the official Panoz Esperante GTR-1 was released. The official car is curated under its own hyphenated identity as panoz-esperante-gtr-1, and both names were observed live on 1.6.9.95 on 2026-09-12. The irregular name does not match Reiza's official spelling, so the modded car is not that record and must not be aliased onto it. Not curated and not queued for verification."
     }
   ]
 }

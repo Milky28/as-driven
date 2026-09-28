@@ -26,10 +26,10 @@ The machine-readable queue is checked in at:
 
 ## Current coverage snapshot
 
-- 355 observed identities are covered exactly by curated records.
-- 15 observed identities are not covered.
+- 357 observed identities are covered exactly by curated records.
+- 16 observed identities are not covered.
 - No observed identity currently needs full guided verification.
-- 15 identities are closed by explicit review rather than driving: retired
+- 16 identities are closed by explicit review rather than driving: retired
   pre-rename observations of official cars, third-party mod content, and one
   vehicle out of product scope. Each carries a written basis in
   `research/ams2-identity-decisions.json`.
