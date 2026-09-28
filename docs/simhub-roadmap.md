@@ -353,8 +353,7 @@ live on the same card after the change.
 
 `as_driven_db/site.py`'s `shifter()` mirrors `PreflightLabels.Shifter` for the
 public catalog page by design (its module docstring says so); it now names the
-construction too, though not yet its confidence asterisk - the catalog and the
-in-sim card agree on the word but not yet on the marker.
+construction too, and since 2026-09-28 its confidence asterisk (see below).
 
 **The asterisk: done and released in 0.23.0.** Per `docs/gearbox-construction-research.md`,
 a lot of `gearbox_type` values are inferred at `medium` confidence rather
@@ -395,9 +394,14 @@ already tolerates a database published before `conventions.json` existed.
 `(sync*)`, `(dog*)` - when the confidence is anything other than `verified`
 or `high`; the settings-page primer explains what the marker means.
 
-Released in 0.23.0 / dataset 0.8.0. Still open: `as_driven_db/site.py`'s
-`shifter()` names the construction (see above) but does not yet show its
-confidence asterisk.
+Released in 0.23.0 / dataset 0.8.0. On 2026-09-28 `as_driven_db/site.py`'s
+`shifter()` gained the same asterisk, with a key under the catalog's tone
+legend defining sync, dog and the marker, so the catalog and the card now
+agree on both. Direct selection names no construction on either, since the
+driver never steps through the gears. The .NET suite now measures every
+string `PreflightLabels` can produce against the box that draws it
+(`simhub/dash/card-text-boxes.json`), so a label that would clip fails the
+build rather than a live drive.
 
 **The primer.** A new, collapsed-by-default section on the native SimHub
 settings page (alongside the existing car-browser guidance cells in
