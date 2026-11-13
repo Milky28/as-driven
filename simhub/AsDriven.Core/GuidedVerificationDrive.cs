@@ -151,9 +151,8 @@ namespace AsDriven.Core
         /// <summary>
         /// The slowest telemetry at which "nothing was seen" still means
         /// nothing happened. An automatic blip or an ignition cut lasts on the
-        /// order of a tenth of a second, so at ten samples a second - which is
-        /// what an unlicensed SimHub delivers - one can pass entirely between
-        /// two samples. A spike that was seen is still a spike at any rate;
+        /// order of a tenth of a second, so at ten samples a second one can
+        /// pass entirely between two samples. A spike that was seen is still a spike at any rate;
         /// only its absence needs the rate to vouch for it.
         /// </summary>
         public const double MinimumRateForNegativeHz = 20.0;
