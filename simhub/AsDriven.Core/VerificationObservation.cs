@@ -53,6 +53,11 @@ namespace AsDriven.Core
         public string WheelOpenTop { get; set; }
         public string WheelNotes { get; set; }
         public string[] EvidenceNotes { get; set; }
+        /// <summary>
+        /// The samples the guided results were decided from. Null for a draft
+        /// answered entirely by hand.
+        /// </summary>
+        public GuidedDriveTelemetry Telemetry { get; set; }
     }
 
     public static class VerificationObservationWriter
@@ -124,6 +129,7 @@ namespace AsDriven.Core
                 throw new FileNotFoundException("Observation draft was not found.", fullPath);
             }
             JObject payload = JObject.Parse(File.ReadAllText(fullPath));
+            CompactTraceRows(payload);
             payload["observer"] = "Anonymous";
             payload.Remove("implementation");
             const string disclosure =
@@ -326,7 +332,143 @@ namespace AsDriven.Core
             {
                 payload.Add("evidence_notes", new JArray(notes));
             }
+            JObject telemetry = TelemetryPayload(draft.Telemetry);
+            if (telemetry != null)
+            {
+                payload.Add("telemetry", telemetry);
+            }
             return payload;
+        }
+
+        private static readonly string[] TraceColumns =
+        {
+            "t_ms", "gear", "clutch", "throttle", "brake", "rpm", "speed_kmh",
+            "engine_torque", "engine_started"
+        };
+
+        private static readonly HashSet<string> TraceTests = new HashSet<string>(
+            new[]
+            {
+                "move_off", "full_throttle_upshift", "lifted_upshift",
+                "coast_downshift", "manual_blip_downshift"
+            },
+            StringComparer.Ordinal);
+
+        /// <summary>
+        /// The recorded samples as the draft stores them: channels exactly as
+        /// SimHub published them, before any resting offset is subtracted, so
+        /// a later detector can make its own decision about them.
+        /// </summary>
+        private static JObject TelemetryPayload(GuidedDriveTelemetry telemetry)
+        {
+            if (telemetry == null || telemetry.Traces == null)
+            {
+                return null;
+            }
+            var traces = new JArray();
+            foreach (GuidedTestTrace trace in telemetry.Traces)
+            {
+                if (trace == null || trace.Samples == null || trace.Samples.Length == 0)
+                {
+                    continue;
+                }
+                RequireChoice(trace.Test, TraceTests, "Telemetry trace test");
+                DateTime start = trace.Samples[0].TimestampUtc;
+                var rows = new JArray();
+                foreach (GuidedTelemetrySample sample in trace.Samples)
+                {
+                    // One sample per line. Indented like the rest of the file,
+                    // a trace would be nine lines a sample and most of the
+                    // draft would be whitespace.
+                    rows.Add(new JRaw("["
+                        + Number(Math.Round((sample.TimestampUtc - start).TotalMilliseconds), 0) + ","
+                        + sample.Gear.ToString(CultureInfo.InvariantCulture) + ","
+                        + Number(sample.Clutch, 1) + ","
+                        + Number(sample.Throttle, 1) + ","
+                        + Number(sample.Brake, 1) + ","
+                        + Number(sample.Rpm, 0) + ","
+                        + Number(sample.SpeedKmh, 1) + ","
+                        + Number(sample.EngineTorque, 1) + ","
+                        + (sample.EngineStarted ? "1" : "0")
+                        + "]"));
+                }
+                traces.Add(new JObject
+                {
+                    { "test", trace.Test },
+                    {
+                        "outcome",
+                        string.Equals(trace.Outcome, "accepted", StringComparison.Ordinal)
+                            ? "accepted"
+                            : "rejected"
+                    },
+                    { "sample_rate_hz", NullableNumber(trace.SampleRateHz) },
+                    { "columns", new JArray(TraceColumns) },
+                    { "samples", rows }
+                });
+            }
+            if (traces.Count == 0)
+            {
+                return null;
+            }
+            return new JObject
+            {
+                { "sample_rate_hz", NullableNumber(telemetry.SampleRateHz) },
+                { "resting_throttle", NullableNumber(telemetry.RestingThrottle) },
+                { "resting_clutch", NullableNumber(telemetry.RestingClutch) },
+                { "traces", traces }
+            };
+        }
+
+        /// <summary>
+        /// JSON has no NaN or infinity, and a simulator that publishes no
+        /// torque can supply either. Null says the channel had no value.
+        /// </summary>
+        private static string Number(double value, int decimals)
+        {
+            if (double.IsNaN(value) || double.IsInfinity(value))
+            {
+                return "null";
+            }
+            return Math.Round(value, decimals).ToString(
+                decimals == 0 ? "0" : "0.#", CultureInfo.InvariantCulture);
+        }
+
+        private static JToken NullableNumber(double? value)
+        {
+            if (!value.HasValue || double.IsNaN(value.Value) || double.IsInfinity(value.Value))
+            {
+                return JValue.CreateNull();
+            }
+            return new JValue(Math.Round(value.Value, 1));
+        }
+
+        /// <summary>
+        /// Puts each recorded sample back on one line after a draft has been
+        /// parsed, which otherwise spreads it over nine.
+        /// </summary>
+        private static void CompactTraceRows(JObject payload)
+        {
+            JObject telemetry = payload["telemetry"] as JObject;
+            JArray traces = telemetry == null ? null : telemetry["traces"] as JArray;
+            if (traces == null)
+            {
+                return;
+            }
+            foreach (JToken trace in traces)
+            {
+                JArray rows = trace["samples"] as JArray;
+                if (rows == null)
+                {
+                    continue;
+                }
+                for (int index = 0; index < rows.Count; index++)
+                {
+                    if (rows[index] is JArray)
+                    {
+                        rows[index] = new JRaw(rows[index].ToString(Formatting.None));
+                    }
+                }
+            }
         }
 
         private static string CreateObservationId(

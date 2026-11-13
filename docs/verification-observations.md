@@ -113,6 +113,32 @@ is detected only from a shift-local engine-torque collapse while throttle demand
 stays high. Imports of older ACC drafts degrade any throttle-derived cut answer
 to `unknown` because ACC exposes no engine-torque channel through SimHub.
 
+## Recorded telemetry and sample rate
+
+A draft keeps the samples each accepted guided result was decided from, under
+the optional `telemetry` block. Each trace holds at most the last six seconds
+or 300 samples of one test, ending at the sample that settled it, with the
+channels exactly as SimHub published them. The gear count has no trace because
+the driver ends it. A retried or skipped attempt is not kept, and a draft
+answered by hand has no `telemetry` block at all.
+
+The traces exist so a detector fault found later does not cost a second drive.
+Until 2026-08-17 the automatic-blip test read the driver's own carried throttle
+as a blip, and because drafts held only verdicts, every exposed record had to be
+flagged in `research/auto-blip-premeasurement.json` for a re-drive. A corrected
+detector can instead be run over the stored samples. `resting_throttle` and
+`resting_clutch` record what those channels read with the car stopped, which is
+what decides whether a later reading can be attributed to the pedal.
+
+The draft also records the median sample rate, for the drive and for each
+attempt. An automatic blip or an ignition cut lasts about a tenth of a second,
+so at ten samples a second one can pass between two samples unseen. Below 20
+samples a second the absence of a blip is therefore recorded as `unknown`
+rather than `no`, and the cut and blip method text says so. A blip or cut that
+was sampled is still recorded at any rate, and clutchless-shift acceptance does
+not depend on the rate at all. A rate is reported only from at least eight
+intervals; with fewer the result is taken at face value.
+
 Cockpit mechanism and wheel fields carry an orange `OPTIONAL · REVIEW` badge
 until the tester supplies them. These fields improve a draft but never block
 submission: a partial, falsifiable observation is preferable to a guess. If a

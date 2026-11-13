@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace AsDriven.Core
@@ -38,6 +39,11 @@ namespace AsDriven.Core
         public string FullThrottleUpshift { get; set; }
         public string CoastDownshift { get; set; }
         public string EvidenceNote { get; set; }
+        /// <summary>
+        /// The samples each accepted result was decided from. Null until the
+        /// drive has recorded at least one attempt.
+        /// </summary>
+        public GuidedDriveTelemetry Telemetry { get; set; }
 
         public GuidedDriveResults()
         {
@@ -58,6 +64,36 @@ namespace AsDriven.Core
         {
             return (GuidedDriveResults)MemberwiseClone();
         }
+    }
+
+    /// <summary>
+    /// The samples one guided test was decided from.
+    ///
+    /// A draft used to keep only the verdict and a sentence about it, so a
+    /// detector fault found later could be corrected only by driving every
+    /// affected car again: the automatic-blip fault of 2026-08-17 left 84
+    /// records flagged for exactly that reason. With the samples kept, a
+    /// corrected detector can be run over the drive that was already taken.
+    /// </summary>
+    public sealed class GuidedTestTrace
+    {
+        public string Test { get; set; }
+        /// <summary>Whether the detector accepted the maneuver: "accepted" or "rejected".</summary>
+        public string Outcome { get; set; }
+        /// <summary>Median rate over this attempt, or null when too few samples arrived to say.</summary>
+        public double? SampleRateHz { get; set; }
+        public GuidedTelemetrySample[] Samples { get; set; }
+    }
+
+    public sealed class GuidedDriveTelemetry
+    {
+        /// <summary>Median rate over the whole drive, or null when it could not be measured.</summary>
+        public double? SampleRateHz { get; set; }
+        /// <summary>Published throttle with the car stopped and untouched, when that moment was seen.</summary>
+        public double? RestingThrottle { get; set; }
+        /// <summary>Published clutch at the same moment.</summary>
+        public double? RestingClutch { get; set; }
+        public GuidedTestTrace[] Traces { get; set; }
     }
 
     public sealed class GuidedDriveSnapshot
@@ -98,6 +134,27 @@ namespace AsDriven.Core
         // to stop the grinding quickly.
         private static readonly TimeSpan RunningShiftRefusalWindow =
             TimeSpan.FromMilliseconds(900.0);
+
+        // What an attempt keeps for the draft. The newest samples are the ones
+        // the result was decided from, so the window is trimmed from the old
+        // end. Five traces of this size stay well inside the observation
+        // intake limit of 256 KB.
+        private static readonly TimeSpan TraceWindow = TimeSpan.FromSeconds(6.0);
+        private const int TraceMaximumSamples = 300;
+
+        // A rate is only reported from enough intervals to take a median of.
+        // Fewer than this is a handful of samples, not a measurement.
+        private const int RateMinimumIntervals = 8;
+
+        /// <summary>
+        /// The slowest telemetry at which "nothing was seen" still means
+        /// nothing happened. An automatic blip or an ignition cut lasts on the
+        /// order of a tenth of a second, so at ten samples a second - which is
+        /// what an unlicensed SimHub delivers - one can pass entirely between
+        /// two samples. A spike that was seen is still a spike at any rate;
+        /// only its absence needs the rate to vouch for it.
+        /// </summary>
+        public const double MinimumRateForNegativeHz = 20.0;
 
         private enum Phase
         {
@@ -193,6 +250,17 @@ namespace AsDriven.Core
         private double _upshiftMaximumThrottle;
         private double _upshiftMinimumThrottle;
         private DateTime? _upshiftGearChangedUtc;
+        private readonly Queue<GuidedTelemetrySample> _attemptSamples =
+            new Queue<GuidedTelemetrySample>();
+        private readonly List<GuidedTestTrace> _traces = new List<GuidedTestTrace>();
+        /// <summary>
+        /// Whole-millisecond gaps between consecutive samples across the drive,
+        /// the last bucket holding everything slower. A median from this is
+        /// not moved by a paused game or a stalled frame.
+        /// </summary>
+        private readonly int[] _sessionIntervals = new int[1001];
+        private int _sessionIntervalCount;
+        private DateTime? _previousSampleUtc;
 
         public void Start(int? suggestedForwardGears, string simulator = null)
         {
@@ -212,6 +280,10 @@ namespace AsDriven.Core
                 _restingClutchSeen = false;
                 _restingThrottle = 0.0;
                 _restingThrottleSeen = false;
+                _traces.Clear();
+                Array.Clear(_sessionIntervals, 0, _sessionIntervals.Length);
+                _sessionIntervalCount = 0;
+                _previousSampleUtc = null;
                 ResetTrace();
             }
         }
@@ -238,11 +310,13 @@ namespace AsDriven.Core
             lock (_sync)
             {
                 _lastSample = sample;
+                RecordInterval(sample);
                 if (!IsTestPhase(_phase)
                     || (_resultReady && _phase != Phase.GearCount))
                 {
                     return;
                 }
+                RecordAttemptSample(sample);
                 UpdateTrace(sample);
                 DetectResult(sample);
             }
@@ -344,7 +418,9 @@ namespace AsDriven.Core
         {
             lock (_sync)
             {
-                return _results.Clone();
+                GuidedDriveResults results = _results.Clone();
+                results.Telemetry = BuildTelemetry();
+                return results;
             }
         }
 
@@ -626,7 +702,7 @@ namespace AsDriven.Core
                 : "Full-throttle clutchless upshift accepted. "
                     + (automaticCut
                         ? "A shift-local torque interruption was detected while throttle demand stayed high."
-                        : CutEvidenceSummary())
+                        : CutEvidenceSummary() + SlowTelemetrySummary("an automatic cut"))
                     + VehicleClutchSummary();
             SetResult(true, automaticCut, message);
         }
@@ -773,7 +849,8 @@ namespace AsDriven.Core
                                         + _downshiftArmedThrottle.ToString("0", CultureInfo.InvariantCulture)
                                         + "% (the threshold is 15%)."
                                         + RestingThrottleSummary()
-                                    : "No automatic throttle spike was detected.")
+                                    : "No automatic throttle spike was detected."
+                                        + SlowTelemetrySummary("an automatic blip"))
                                 )
                                 + VehicleClutchSummary());
                     return;
@@ -817,6 +894,7 @@ namespace AsDriven.Core
         private void AcceptResultAndAdvance()
         {
             RememberVehicleClutchTelemetry();
+            KeepAttemptTrace();
             if (_attemptNotTested)
             {
                 // Nothing was measured, so every downstream flag stays as it
@@ -879,9 +957,15 @@ namespace AsDriven.Core
                         // unknown rather than no when nothing could be measured.
                         _results.AutomaticBlip = !AutomaticBlipIsMeasurable()
                             ? "unknown"
-                            : ThrottleChannelFollowsPedal()
-                            ? (_automaticActionObserved ? "yes" : "no")
-                            : "unknown";
+                            : !ThrottleChannelFollowsPedal()
+                            ? "unknown"
+                            : _automaticActionObserved
+                            ? "yes"
+                            // A spike that was never sampled looks the same as
+                            // one that never happened. The message already says
+                            // the telemetry was too slow to tell, and the value
+                            // has to agree with it.
+                            : (TelemetryTooSlowForNegative() ? "unknown" : "no");
                         _results.AutomaticBlipMethod = _result;
                         MoveTo(Phase.Complete);
                     }
@@ -1213,8 +1297,163 @@ namespace AsDriven.Core
             return sample.Rpm / Math.Max(sample.SpeedKmh, 1.0);
         }
 
+        private void RecordInterval(GuidedTelemetrySample sample)
+        {
+            if (_previousSampleUtc.HasValue)
+            {
+                double milliseconds = (sample.TimestampUtc - _previousSampleUtc.Value).TotalMilliseconds;
+                // A repeated or backward timestamp is not an interval.
+                if (milliseconds > 0.0)
+                {
+                    int bucket = (int)Math.Min(Math.Round(milliseconds), _sessionIntervals.Length - 1);
+                    _sessionIntervals[bucket]++;
+                    _sessionIntervalCount++;
+                }
+            }
+            _previousSampleUtc = sample.TimestampUtc;
+        }
+
+        private void RecordAttemptSample(GuidedTelemetrySample sample)
+        {
+            // The gear count is ended by the driver and decided from the
+            // highest gear alone, so there is nothing in its samples to
+            // re-examine later.
+            if (_phase == Phase.GearCount)
+            {
+                return;
+            }
+            _attemptSamples.Enqueue(sample);
+            while (_attemptSamples.Count > TraceMaximumSamples
+                || sample.TimestampUtc - _attemptSamples.Peek().TimestampUtc > TraceWindow)
+            {
+                _attemptSamples.Dequeue();
+            }
+        }
+
+        /// <summary>
+        /// Median sample rate over the current attempt, or null when too few
+        /// samples arrived to measure one.
+        /// </summary>
+        private double? AttemptSampleRateHz()
+        {
+            var intervals = new List<double>();
+            DateTime? previous = null;
+            foreach (GuidedTelemetrySample sample in _attemptSamples)
+            {
+                if (previous.HasValue)
+                {
+                    double milliseconds = (sample.TimestampUtc - previous.Value).TotalMilliseconds;
+                    if (milliseconds > 0.0)
+                    {
+                        intervals.Add(milliseconds);
+                    }
+                }
+                previous = sample.TimestampUtc;
+            }
+            if (intervals.Count < RateMinimumIntervals)
+            {
+                return null;
+            }
+            intervals.Sort();
+            return 1000.0 / intervals[intervals.Count / 2];
+        }
+
+        private double? SessionSampleRateHz()
+        {
+            if (_sessionIntervalCount < RateMinimumIntervals)
+            {
+                return null;
+            }
+            int seen = 0;
+            for (int milliseconds = 0; milliseconds < _sessionIntervals.Length; milliseconds++)
+            {
+                seen += _sessionIntervals[milliseconds];
+                if (seen * 2 > _sessionIntervalCount)
+                {
+                    return 1000.0 / Math.Max(milliseconds, 1);
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Whether this attempt was sampled too slowly for the absence of a
+        /// brief event to mean anything. An unmeasured rate disqualifies
+        /// nothing, the same way an unseen resting throttle does not.
+        /// </summary>
+        private bool TelemetryTooSlowForNegative()
+        {
+            double? rate = AttemptSampleRateHz();
+            return rate.HasValue && rate.Value < MinimumRateForNegativeHz;
+        }
+
+        private string SlowTelemetrySummary(string what)
+        {
+            double? rate = AttemptSampleRateHz();
+            if (!rate.HasValue || rate.Value >= MinimumRateForNegativeHz)
+            {
+                return string.Empty;
+            }
+            return " Telemetry arrived at about "
+                + rate.Value.ToString("0", CultureInfo.InvariantCulture)
+                + " samples a second, which is too slow to rule out " + what
+                + ": one can pass between two samples. This stays unknown rather than no."
+                + " A licensed SimHub updates fast enough to settle it.";
+        }
+
+        private static string TraceName(Phase phase)
+        {
+            switch (phase)
+            {
+                case Phase.MoveOff: return "move_off";
+                case Phase.FullThrottleUpshift: return "full_throttle_upshift";
+                case Phase.LiftedUpshift: return "lifted_upshift";
+                case Phase.CoastDownshift: return "coast_downshift";
+                case Phase.ManualBlipDownshift: return "manual_blip_downshift";
+                default: return null;
+            }
+        }
+
+        /// <summary>
+        /// Keeps the samples behind a result the driver has just accepted.
+        /// Retry and Skip discard theirs: only an attempt that was written
+        /// into the results has anything to be checked against later.
+        /// </summary>
+        private void KeepAttemptTrace()
+        {
+            string name = TraceName(_phase);
+            if (name == null || _attemptNotTested || _attemptSamples.Count == 0)
+            {
+                return;
+            }
+            _traces.RemoveAll(trace => string.Equals(trace.Test, name, StringComparison.Ordinal));
+            _traces.Add(new GuidedTestTrace
+            {
+                Test = name,
+                Outcome = _attemptAccepted ? "accepted" : "rejected",
+                SampleRateHz = AttemptSampleRateHz(),
+                Samples = _attemptSamples.ToArray()
+            });
+        }
+
+        private GuidedDriveTelemetry BuildTelemetry()
+        {
+            if (_traces.Count == 0)
+            {
+                return null;
+            }
+            return new GuidedDriveTelemetry
+            {
+                SampleRateHz = SessionSampleRateHz(),
+                RestingThrottle = _restingThrottleSeen ? (double?)_restingThrottle : null,
+                RestingClutch = _restingClutchSeen ? (double?)_restingClutch : null,
+                Traces = _traces.ToArray()
+            };
+        }
+
         private void ResetTrace()
         {
+            _attemptSamples.Clear();
             _baselineGear = 0;
             _downshiftCandidateGear = 0;
             _downshiftCandidateAtUtc = DateTime.MinValue;
@@ -1421,8 +1660,12 @@ namespace AsDriven.Core
                     {
                         return "Downshift detected; automatic blip unavailable in telemetry";
                     }
-                    return _automaticActionObserved
-                        ? "Downshift and automatic blip detected"
+                    if (_automaticActionObserved)
+                    {
+                        return "Downshift and automatic blip detected";
+                    }
+                    return TelemetryTooSlowForNegative()
+                        ? "Downshift detected; telemetry too slow to rule out a blip"
                         : "Downshift detected; no automatic blip";
                 case Phase.ManualBlipDownshift:
                     return _attemptAccepted

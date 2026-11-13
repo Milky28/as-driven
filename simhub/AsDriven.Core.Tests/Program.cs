@@ -1547,6 +1547,141 @@ namespace AsDriven.Core.Tests
                     Equal("yes", guidedResults.ClutchlessDownshift, "prefills accepted clutchless downshift");
                     Equal("yes", guidedResults.AutomaticBlip, "prefills telemetry-supported automatic blip");
 
+                    // The drive keeps the samples each accepted result was
+                    // decided from. A draft that holds only verdicts cannot be
+                    // re-examined when a detector fault is found later, which
+                    // is what left 84 records waiting on a second drive after
+                    // the automatic-blip fault.
+                    True(guidedResults.Telemetry != null, "keeps the samples behind the guided results");
+                    Equal(
+                        "move_off,full_throttle_upshift,coast_downshift",
+                        string.Join(",", guidedResults.Telemetry.Traces.Select(trace => trace.Test)),
+                        "keeps one trace per accepted test and none for the driver-ended gear count");
+                    True(
+                        guidedResults.Telemetry.Traces.All(trace => trace.Outcome == "accepted"),
+                        "records that each kept attempt was accepted");
+                    True(
+                        guidedResults.Telemetry.Traces.All(trace => !trace.SampleRateHz.HasValue),
+                        "reports no sample rate from a handful of samples");
+                    {
+                        // Sixty samples a second with no blip is a measured no.
+                        GuidedVerificationDrive fast = CoastDownshiftDrive(now, 16, 1000, false);
+                        Equal("no", fast.GetResults().AutomaticBlip,
+                            "a blip that never appeared at a fast sample rate is recorded as no");
+                        GuidedTestTrace fastTrace = fast.GetResults().Telemetry.Traces
+                            .Single(trace => trace.Test == "coast_downshift");
+                        True(fastTrace.SampleRateHz.HasValue
+                                && Math.Abs(fastTrace.SampleRateHz.Value - 62.5) < 0.01,
+                            "measures the attempt's median sample rate");
+                        True(fast.GetResults().Telemetry.SampleRateHz.HasValue,
+                            "measures a sample rate for the drive as a whole");
+
+                        // Ten a second can step straight over one, so the same
+                        // absence proves nothing and the answer stays unknown.
+                        GuidedVerificationDrive slow = CoastDownshiftDrive(now, 100, 1000, false);
+                        Equal("yes", slow.GetResults().ClutchlessDownshift,
+                            "slow telemetry still establishes that the downshift was accepted");
+                        Equal("unknown", slow.GetResults().AutomaticBlip,
+                            "an unseen blip at a slow sample rate stays unknown rather than no");
+                        True(slow.GetResults().AutomaticBlipMethod.Contains("too slow to rule out an automatic blip"),
+                            "says why the slow-rate blip answer is unknown");
+
+                        // A spike that was sampled is a spike at any rate.
+                        GuidedVerificationDrive slowBlip = CoastDownshiftDrive(now, 100, 1000, true);
+                        Equal("yes", slowBlip.GetResults().AutomaticBlip,
+                            "a blip seen at a slow sample rate is still recorded");
+
+                        // A long run-up must not grow the draft without bound.
+                        GuidedVerificationDrive longCoast = CoastDownshiftDrive(now, 16, 20000, false);
+                        GuidedTestTrace longTrace = longCoast.GetResults().Telemetry.Traces
+                            .Single(trace => trace.Test == "coast_downshift");
+                        True(longTrace.Samples.Length <= 300, "caps the samples kept for one attempt");
+                        True(longTrace.Samples.Any(sample => sample.Gear == 3)
+                                && longTrace.Samples.Any(sample => sample.Gear == 4),
+                            "keeps the end of the attempt, where the shift happened");
+
+                        // The same holds for the torque cut on the upshift.
+                        GuidedVerificationDrive slowUpshift = new GuidedVerificationDrive();
+                        slowUpshift.Start(6);
+                        for (int guard = 0; guard < 40
+                            && slowUpshift.GetSnapshot().Title != "Full-throttle upshift"; guard++)
+                        {
+                            slowUpshift.AddSample(GuidedSample(now, 3, 0, 0, 4000, 80, 100, true));
+                            slowUpshift.Next();
+                        }
+                        for (int tick = 1; tick <= 12; tick++)
+                        {
+                            slowUpshift.AddSample(GuidedSample(
+                                now.AddMilliseconds(tick * 100), tick < 12 ? 3 : 4, 0, 95, 6000, 120, 300, true));
+                        }
+                        True(slowUpshift.GetSnapshot().ResultReady, "accepts the slow-rate full-throttle upshift");
+                        True(slowUpshift.GetSnapshot().Result.Contains("too slow to rule out an automatic cut"),
+                            "does not present held torque at a slow sample rate as the absence of a cut");
+
+                        // The draft stores the trace one sample to a line, and
+                        // a corrected detector can be run over it later.
+                        GuidedDriveTelemetry recorded = slow.GetResults().Telemetry;
+                        GuidedTestTrace recordedCoast = recorded.Traces
+                            .Single(trace => trace.Test == "coast_downshift");
+                        recordedCoast.Samples[0].EngineTorque = double.NaN;
+                        verificationDraft.Telemetry = recorded;
+                        string traceDirectory = Path.Combine(
+                            Path.GetTempPath(), "as-driven-trace-" + Guid.NewGuid().ToString("N"));
+                        try
+                        {
+                            string tracePath = VerificationObservationWriter.WriteDraft(
+                                traceDirectory, verificationDraft);
+                            string traceText = File.ReadAllText(tracePath);
+                            True(traceText.Contains("[0,4,0,0,0,4500,80,null,1]"),
+                                "writes each sample on one line and a missing torque value as null");
+                            JObject traceJson = JObject.Parse(traceText);
+                            JToken storedCoast = traceJson["telemetry"]["traces"]
+                                .Single(trace => (string)trace["test"] == "coast_downshift");
+                            Equal(9, ((JArray)storedCoast["columns"]).Count, "names every stored channel");
+                            Equal(recordedCoast.Samples.Length, ((JArray)storedCoast["samples"]).Count,
+                                "stores every kept sample");
+                            Equal(10.0, (double)storedCoast["sample_rate_hz"], "stores the attempt's sample rate");
+
+                            GuidedVerificationDrive replay = new GuidedVerificationDrive();
+                            replay.Start(6);
+                            for (int guard = 0; guard < 40
+                                && replay.GetSnapshot().Title != "Downshift without pedal input"; guard++)
+                            {
+                                replay.AddSample(GuidedSample(now, 4, 0, 0, 4000, 80, 100, true));
+                                replay.Next();
+                            }
+                            foreach (JToken row in (JArray)storedCoast["samples"])
+                            {
+                                replay.AddSample(GuidedSample(
+                                    now.AddMilliseconds((double)row[0]),
+                                    (int)row[1],
+                                    (double)row[2],
+                                    (double)row[3],
+                                    (double)row[5],
+                                    (double)row[6],
+                                    row[7].Type == JTokenType.Null ? double.NaN : (double)row[7],
+                                    (int)row[8] == 1,
+                                    (double)row[4]));
+                            }
+                            True(replay.GetSnapshot().ResultReady, "a stored trace settles the same test when replayed");
+                            replay.Next();
+                            Equal(slow.GetResults().AutomaticBlip, replay.GetResults().AutomaticBlip,
+                                "replaying a stored trace reproduces the recorded answer");
+
+                            string redactedTracePath = VerificationObservationWriter.WriteRedactedCopy(tracePath);
+                            True(File.ReadAllText(redactedTracePath).Contains("[0,4,0,0,0,4500,80,null,1]"),
+                                "the redacted copy keeps the trace and its one-line samples");
+                        }
+                        finally
+                        {
+                            verificationDraft.Telemetry = null;
+                            if (Directory.Exists(traceDirectory))
+                            {
+                                Directory.Delete(traceDirectory, true);
+                            }
+                        }
+                    }
+
                     // A result-ready phase still receives live telemetry while
                     // it waits for Next. Preserve that current gear when the
                     // coast test opens, or a first-attempt downshift whose blip
@@ -2907,6 +3042,46 @@ namespace AsDriven.Core.Tests
                     + "\"released_at\":\"2026-08-13\",\"records\":[\"cars/" + recordId + ".json\"]}");
             AsDrivenDatabase database = AsDrivenDatabase.Load(directory);
             return database.Match("Automobilista2", telemetryName);
+        }
+
+        /// <summary>
+        /// Drives a fresh guided session to the coast-downshift test, coasts in
+        /// 4th for <paramref name="coastMilliseconds"/>, takes 3rd, and accepts
+        /// the result. Samples arrive every <paramref name="intervalMilliseconds"/>.
+        /// </summary>
+        private static GuidedVerificationDrive CoastDownshiftDrive(
+            DateTime now,
+            int intervalMilliseconds,
+            int coastMilliseconds,
+            bool blip)
+        {
+            GuidedVerificationDrive drive = new GuidedVerificationDrive();
+            drive.Start(6);
+            for (int guard = 0; guard < 40
+                && drive.GetSnapshot().Title != "Downshift without pedal input"; guard++)
+            {
+                drive.AddSample(GuidedSample(now, 4, 0, 0, 4000, 80, 100, true));
+                drive.Next();
+            }
+            for (int elapsed = 0;
+                elapsed <= coastMilliseconds + 3000 && !drive.GetSnapshot().ResultReady;
+                elapsed += intervalMilliseconds)
+            {
+                bool shifted = elapsed >= coastMilliseconds;
+                bool blipping = blip && shifted && elapsed < coastMilliseconds + 150;
+                drive.AddSample(GuidedSample(
+                    now.AddMilliseconds(elapsed),
+                    shifted ? 3 : 4,
+                    0,
+                    blipping ? 60 : 0,
+                    shifted ? 6000 : 4500,
+                    shifted ? 78 : 80,
+                    100,
+                    true));
+            }
+            True(drive.GetSnapshot().ResultReady, "the simulated coast downshift settles");
+            drive.Next();
+            return drive;
         }
 
         private static GuidedTelemetrySample GuidedSample(
