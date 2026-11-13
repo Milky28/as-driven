@@ -33,8 +33,10 @@ the research backlog, or a curation approval.
    and that creep reads as moving off without a clutch. Held against the
    brake the engine either stalls or it does not. Time spent stationary under
    throttle while braking is therefore never counted as a refusal to move.
-4. Count accepted forward gears.
-5. Test clutchless upshift and downshift acceptance.
+4. Drive normally up to top gear. This counts the forward gears and watches
+   every shift on the way; see "Free driving" below.
+5. Test clutchless upshift and downshift acceptance, for whatever free driving
+   did not already settle.
 6. Capture or confirm automatic cut and blip, including the observation method.
 7. Record visible cockpit actuators and select the primary mechanism from
    hardware plus driver animation or reliable documentation. Direct gear inputs
@@ -89,7 +91,8 @@ name. ACC's executables expose no useful file version, so the draft records the
 exact Steam content build from `appmanifest_805550.acf`. A missing or inaccessible
 manifest remains `unknown` and must be resolved during review rather than guessed.
 
-The overlay starts directly with the move-off maneuver. Each test uses the same
+The overlay starts directly with the move-off maneuver, followed by free
+driving. Each scripted test uses the same
 cycle: perform the maneuver, wait for a captured result, then accept it or choose
 Retry/Skip. The overlay uses a short summary and green capture mark so completion is immediately
 visible; the longer falsifiable description is retained for form review.
@@ -112,6 +115,39 @@ control, driver input, or a simulator's telemetry representation. Automatic cut
 is detected only from a shift-local engine-torque collapse while throttle demand
 stays high. Imports of older ACC drafts degrade any throttle-derived cut answer
 to `unknown` because ACC exposes no engine-torque channel through SimHub.
+
+## Free driving
+
+The second step asks the driver to drive normally up to top gear, shifting up
+at full throttle and down off the throttle, without the clutch where the car
+allows it. Each of those shifts is one of the scripted tests taken without
+being asked, so the step counts them:
+
+- a clutchless upshift with the throttle held at 70% or more is a full-throttle
+  upshift, and a torque collapse with the throttle still held is a cut;
+- a clutchless downshift on a closed throttle that takes drive is a coast
+  downshift, and a throttle spike of 15% or more after it is a blip.
+
+The thresholds are the scripted detector's own. Three or more like shifts stand
+in for the scripted test, which is then skipped: a car that takes flat upshifts
+and off-throttle downshifts finishes the drive after this step. The overlay
+shows the running counts, and the result line says which tests remain.
+
+Free driving can only see what the gearbox accepted. A refusal looks the same
+as a shift the driver never tried, so it never records that a lift, a blip or
+the clutch is required; that still takes the scripted two-stage test. For the
+same reason:
+
+- a shift with clutch input is set aside and counted separately;
+- a lifted upshift is counted but settles nothing, because lifting having
+  worked does not show it was needed;
+- flat upshifts with no torque collapse leave the cut `unknown`, never `no`;
+- downshifts that disagree about a throttle spike settle nothing, because a
+  driver who blipped on some of them looks the same, and the scripted test
+  with the pedal held closed is what separates the two.
+
+The counts are stored under `telemetry.free_drive`, and the trace kept for a
+test settled this way is the most recent shift that counted.
 
 ## Recorded telemetry and sample rate
 

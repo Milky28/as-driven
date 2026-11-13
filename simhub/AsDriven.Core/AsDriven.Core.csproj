@@ -54,6 +54,7 @@
     <Compile Include="UnmatchedIdentityLog.cs" />
     <Compile Include="VerificationObservation.cs" />
     <Compile Include="VerificationReviewRules.cs" />
+    <Compile Include="FreeDriveObserver.cs" />
     <Compile Include="GuidedVerificationDrive.cs" />
     <Compile Include="VersionText.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

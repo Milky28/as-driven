@@ -361,12 +361,12 @@ namespace AsDriven.Core
         /// </summary>
         private static JObject TelemetryPayload(GuidedDriveTelemetry telemetry)
         {
-            if (telemetry == null || telemetry.Traces == null)
+            if (telemetry == null)
             {
                 return null;
             }
             var traces = new JArray();
-            foreach (GuidedTestTrace trace in telemetry.Traces)
+            foreach (GuidedTestTrace trace in telemetry.Traces ?? new GuidedTestTrace[0])
             {
                 if (trace == null || trace.Samples == null || trace.Samples.Length == 0)
                 {
@@ -406,17 +406,32 @@ namespace AsDriven.Core
                     { "samples", rows }
                 });
             }
-            if (traces.Count == 0)
+            FreeDriveSummary freeDrive = telemetry.FreeDrive;
+            if (traces.Count == 0 && freeDrive == null)
             {
                 return null;
             }
-            return new JObject
+            var payload = new JObject
             {
                 { "sample_rate_hz", NullableNumber(telemetry.SampleRateHz) },
                 { "resting_throttle", NullableNumber(telemetry.RestingThrottle) },
-                { "resting_clutch", NullableNumber(telemetry.RestingClutch) },
-                { "traces", traces }
+                { "resting_clutch", NullableNumber(telemetry.RestingClutch) }
             };
+            if (freeDrive != null)
+            {
+                payload.Add("free_drive", new JObject
+                {
+                    { "full_throttle_upshifts", freeDrive.FullThrottleUpshifts },
+                    { "cut_measured", freeDrive.CutMeasured },
+                    { "with_torque_cut", freeDrive.WithTorqueCut },
+                    { "lifted_upshifts", freeDrive.LiftedUpshifts },
+                    { "coast_downshifts", freeDrive.CoastDownshifts },
+                    { "with_throttle_spike", freeDrive.WithThrottleSpike },
+                    { "shifts_with_clutch", freeDrive.ShiftsWithClutch }
+                });
+            }
+            payload.Add("traces", traces);
+            return payload;
         }
 
         /// <summary>

@@ -112,6 +112,15 @@ class ImportObservationTests(unittest.TestCase):
             "sample_rate_hz": 10.0,
             "resting_throttle": 0.0,
             "resting_clutch": None,
+            "free_drive": {
+                "full_throttle_upshifts": 5,
+                "cut_measured": 5,
+                "with_torque_cut": 5,
+                "lifted_upshifts": 0,
+                "coast_downshifts": 3,
+                "with_throttle_spike": 0,
+                "shifts_with_clutch": 1,
+            },
             "traces": [
                 {
                     "test": "coast_downshift",

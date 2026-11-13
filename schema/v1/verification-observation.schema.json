@@ -303,6 +303,48 @@
             "null"
           ]
         },
+        "free_drive": {
+          "description": "What the free-driving step counted before the driver ended it. These are shifts the gearbox accepted in ordinary driving; a refusal cannot be seen there, so the counts never establish that a lift, a blip or the clutch is required. Three or more like shifts stand in for the scripted test, and the trace kept for that test is then the most recent of them.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "full_throttle_upshifts": {
+              "description": "Clutchless upshifts accepted with the throttle held open.",
+              "type": "integer",
+              "minimum": 0
+            },
+            "cut_measured": {
+              "description": "Of those, how many published engine torque with the throttle still held through the change.",
+              "type": "integer",
+              "minimum": 0
+            },
+            "with_torque_cut": {
+              "description": "Of the measured ones, how many showed a torque collapse.",
+              "type": "integer",
+              "minimum": 0
+            },
+            "lifted_upshifts": {
+              "description": "Clutchless upshifts accepted on a lifted throttle.",
+              "type": "integer",
+              "minimum": 0
+            },
+            "coast_downshifts": {
+              "description": "Clutchless downshifts on a closed throttle that took drive.",
+              "type": "integer",
+              "minimum": 0
+            },
+            "with_throttle_spike": {
+              "description": "Of those, how many were followed by a throttle spike of 15% or more.",
+              "type": "integer",
+              "minimum": 0
+            },
+            "shifts_with_clutch": {
+              "description": "Shifts set aside because clutch input was present.",
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
         "traces": {
           "type": "array",
           "items": {
@@ -329,7 +371,7 @@
   },
   "$defs": {
     "telemetryTrace": {
-      "description": "One guided test's samples, ending at the sample that settled the result. Only an attempt whose result was accepted into the draft is kept; a retried or skipped attempt is not.",
+      "description": "One guided test's samples. A scripted test's trace ends at the sample that settled the result; a test settled by free driving keeps the samples around the most recent shift that counted. Only a result accepted into the draft has one; a retried or skipped attempt does not.",
       "type": "object",
       "additionalProperties": false,
       "required": [
