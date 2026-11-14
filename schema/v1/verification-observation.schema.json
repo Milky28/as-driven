@@ -339,7 +339,17 @@
               "minimum": 0
             },
             "shifts_with_clutch": {
-              "description": "Shifts set aside because clutch input was present.",
+              "description": "Shifts set aside because clutch input was present on a channel that follows the pedal.",
+              "type": "integer",
+              "minimum": 0
+            },
+            "counted_with_vehicle_clutch": {
+              "description": "Counted shifts during which the clutch channel moved, where resting_clutch shows the channel reports the car's own clutch rather than the pedal.",
+              "type": "integer",
+              "minimum": 0
+            },
+            "other_shifts": {
+              "description": "Shifts that were none of the tests: taken on part throttle, or a lower gear that never took drive.",
               "type": "integer",
               "minimum": 0
             }

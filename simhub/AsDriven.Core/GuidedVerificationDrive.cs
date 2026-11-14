@@ -143,6 +143,8 @@ namespace AsDriven.Core
         // intake limit of 256 KB.
         private static readonly TimeSpan TraceWindow = TimeSpan.FromSeconds(6.0);
         private const int TraceMaximumSamples = 300;
+        private static readonly TimeSpan TraceAfterResult = TimeSpan.FromMilliseconds(500.0);
+        private const int TraceAfterResultMaximumSamples = 40;
 
         // A rate is only reported from enough intervals to take a median of.
         // Fewer than this is a handful of samples, not a measurement.
@@ -270,6 +272,7 @@ namespace AsDriven.Core
         private readonly int[] _sessionIntervals = new int[1001];
         private int _sessionIntervalCount;
         private DateTime? _previousSampleUtc;
+        private DateTime? _resultReadyAtUtc;
         private readonly FreeDriveObserver _freeDrive = new FreeDriveObserver();
         /// <summary>What free driving had counted when the driver accepted it.</summary>
         private FreeDriveSummary _freeDriveAccepted;
@@ -326,6 +329,15 @@ namespace AsDriven.Core
             {
                 _lastSample = sample;
                 RecordInterval(sample);
+                if (IsTestPhase(_phase) && _resultReady && _phase != Phase.GearCount
+                    && _resultReadyAtUtc.HasValue
+                    && sample.TimestampUtc - _resultReadyAtUtc.Value <= TraceAfterResult
+                    && _attemptSamples.Count < TraceMaximumSamples + TraceAfterResultMaximumSamples)
+                {
+                    // The result is settled at the gear change, which is the
+                    // one moment a later reader most wants to see past.
+                    _attemptSamples.Enqueue(sample);
+                }
                 if (!IsTestPhase(_phase)
                     || (_resultReady && _phase != Phase.GearCount))
                 {
@@ -335,6 +347,8 @@ namespace AsDriven.Core
                 if (_phase == Phase.GearCount)
                 {
                     _freeDrive.ThrottleOffset = ThrottleOffset();
+                    _freeDrive.ClutchChannelReportsVehicle =
+                        _restingClutchSeen && _restingClutch > 20.0;
                     _freeDrive.AddSample(sample);
                 }
                 UpdateTrace(sample);
@@ -909,6 +923,7 @@ namespace AsDriven.Core
             _attemptAccepted = accepted;
             _automaticActionObserved = automaticAction;
             _resultReady = true;
+            _resultReadyAtUtc = _lastSample == null ? (DateTime?)null : _lastSample.TimestampUtc;
             _result = message;
         }
 
@@ -1506,8 +1521,9 @@ namespace AsDriven.Core
             return " Free driving saw " + summary.FullThrottleUpshifts
                 + " full-throttle and " + summary.LiftedUpshifts
                 + " lifted clutchless upshifts, " + summary.CoastDownshifts
-                + " off-throttle clutchless downshifts, and " + summary.ShiftsWithClutch
-                + " shifts with clutch input, which were set aside.";
+                + " off-throttle clutchless downshifts, " + summary.ShiftsWithClutch
+                + " shifts with clutch input, which were set aside, and " + summary.OtherShifts
+                + " that were none of these.";
         }
 
         /// <summary>
@@ -1539,7 +1555,8 @@ namespace AsDriven.Core
                             + " change, so nothing was measured about a cut."
                         : "Engine torque collapsed on " + summary.WithTorqueCut + " of "
                             + summary.CutMeasured + " measured, which does not establish a cut."
-                            + SlowTelemetrySummary("an automatic cut", rate));
+                            + SlowTelemetrySummary("an automatic cut", rate))
+                    + FreeDriveClutchSummary(summary);
                 KeepFreeDriveTrace("full_throttle_upshift", summary.UpshiftExample);
             }
             _downshiftSettledByFreeDrive = FreeDriveSettlesDownshift(summary);
@@ -1562,10 +1579,28 @@ namespace AsDriven.Core
                             + summary.PeakThrottleSpike.ToString("0", CultureInfo.InvariantCulture)
                             + "% (the threshold is 15%)." + RestingThrottleSummary()
                         : "No throttle spike followed any of them."
-                            + SlowTelemetrySummary("an automatic blip", rate));
+                            + SlowTelemetrySummary("an automatic blip", rate))
+                    + FreeDriveClutchSummary(summary);
                 KeepFreeDriveTrace("coast_downshift", summary.DownshiftExample);
             }
             return upshiftSettled;
+        }
+
+        /// <summary>
+        /// The same caution the scripted tests attach, for the same reason:
+        /// on a channel that reports the car's clutch, a driver's foot on the
+        /// pedal cannot be told from the car working it.
+        /// </summary>
+        private string FreeDriveClutchSummary(FreeDriveSummary summary)
+        {
+            if (summary.CountedWithVehicleClutch == 0)
+            {
+                return string.Empty;
+            }
+            return " The clutch channel moved during " + summary.CountedWithVehicleClutch
+                + " of the counted shifts. It already read " + Math.Round(_restingClutch)
+                + "% with the car stopped before any test began, so this simulator reports the"
+                + " car's own clutch here; confirm the pedal was untouched.";
         }
 
         private void KeepFreeDriveTrace(string name, GuidedTelemetrySample[] samples)
@@ -1603,6 +1638,7 @@ namespace AsDriven.Core
         private void ResetTrace()
         {
             _attemptSamples.Clear();
+            _resultReadyAtUtc = null;
             _freeDrive.Reset();
             _baselineGear = 0;
             _downshiftCandidateGear = 0;

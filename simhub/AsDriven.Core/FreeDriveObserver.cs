@@ -24,6 +24,16 @@ namespace AsDriven.Core
         public double PeakThrottleSpike { get; set; }
         /// <summary>Shifts set aside because clutch input was present.</summary>
         public int ShiftsWithClutch { get; set; }
+        /// <summary>
+        /// Counted shifts during which the clutch channel moved, on a channel
+        /// already known to report the car's own clutch rather than the pedal.
+        /// </summary>
+        public int CountedWithVehicleClutch { get; set; }
+        /// <summary>
+        /// Shifts that were none of the tests: taken on part throttle, or a
+        /// lower gear that never took drive.
+        /// </summary>
+        public int OtherShifts { get; set; }
         /// <summary>The samples around the most recent counted full-throttle upshift.</summary>
         public GuidedTelemetrySample[] UpshiftExample { get; set; }
         /// <summary>The samples around the most recent counted coast downshift.</summary>
@@ -39,7 +49,7 @@ namespace AsDriven.Core
             get
             {
                 return FullThrottleUpshifts > 0 || LiftedUpshifts > 0
-                    || CoastDownshifts > 0 || ShiftsWithClutch > 0;
+                    || CoastDownshifts > 0 || ShiftsWithClutch > 0 || OtherShifts > 0;
             }
         }
     }
@@ -100,6 +110,17 @@ namespace AsDriven.Core
         /// telemetry readers never report as zero.
         /// </summary>
         public double ThrottleOffset { get; set; }
+
+        /// <summary>
+        /// True when the clutch channel is known not to follow the pedal: it
+        /// already read as depressed with the car stopped and the driver doing
+        /// nothing. Project Motor Racing reads 100% at rest and again through
+        /// every downshift, as the car works its own clutch. Setting those
+        /// shifts aside as the driver's left nothing to count at all, so on
+        /// such a channel a shift is counted and the clutch movement recorded
+        /// beside it, which is how the scripted test already treats it.
+        /// </summary>
+        public bool ClutchChannelReportsVehicle { get; set; }
 
         public void Reset()
         {
@@ -174,32 +195,49 @@ namespace AsDriven.Core
             DateTime left = shift.LeftAtUtc;
             DateTime arrived = shift.ArrivedAtUtc;
 
-            if (Maximum(samples, left.AddMilliseconds(-250.0), arrived.AddMilliseconds(300.0),
-                    sample => sample.Clutch) > ClutchPresent)
+            bool clutchMoved = Maximum(
+                samples, left.AddMilliseconds(-250.0), arrived.AddMilliseconds(300.0),
+                sample => sample.Clutch) > ClutchPresent;
+            if (clutchMoved && !ClutchChannelReportsVehicle)
             {
                 _summary.ShiftsWithClutch++;
                 return;
             }
 
+            // The car's own shift can show on the pedal channels just before
+            // the gear index changes: a cut pulls the published throttle down
+            // and a blip pushes it up. What the driver was doing is therefore
+            // read from before that, and the last moments only have to not
+            // contradict it.
+            DateTime settled = left.AddMilliseconds(-150.0);
+            GuidedTelemetrySample beforeShift = LastAtOrBefore(samples, settled)
+                ?? LastAtOrBefore(samples, left);
+
             if (shift.To > shift.From)
             {
-                // The sample the old gear was last seen in is always inside
-                // this window, so it is never empty however slow the telemetry.
-                double before = Minimum(samples, left.AddMilliseconds(-250.0), left, Throttle);
-                if (before >= FullThrottle)
+                double held = Minimum(samples, left.AddMilliseconds(-600.0), settled, Throttle);
+                if (double.IsNaN(held))
+                {
+                    held = Throttle(beforeShift);
+                }
+                double atChange = Minimum(samples, settled, left, Throttle);
+                if (held >= FullThrottle && atChange > LiftedThrottle)
                 {
                     _summary.FullThrottleUpshifts++;
                     _summary.UpshiftExample = samples;
-                    DateTime from = left.AddMilliseconds(-100.0);
+                    if (clutchMoved)
+                    {
+                        _summary.CountedWithVehicleClutch++;
+                    }
                     DateTime to = arrived.AddMilliseconds(300.0);
                     double highest = Maximum(
                         samples, left.AddMilliseconds(-600.0), to, Torque);
-                    double lowest = Minimum(samples, from, to, Torque);
+                    double lowest = Minimum(samples, settled, to, Torque);
                     // A cut is a torque collapse the driver did not ask for.
-                    // With the throttle eased during the change the collapse
+                    // With the throttle lifted during the change the collapse
                     // has an ordinary explanation, so that shift measures
                     // nothing about a cut either way.
-                    if (highest > 0.0 && Minimum(samples, from, to, Throttle) >= FullThrottle)
+                    if (highest > 0.0 && Minimum(samples, settled, to, Throttle) > LiftedThrottle)
                     {
                         _summary.CutMeasured++;
                         if (highest > 20.0 && lowest <= highest * 0.40)
@@ -208,9 +246,13 @@ namespace AsDriven.Core
                         }
                     }
                 }
-                else if (Throttle(LastAtOrBefore(samples, left)) <= LiftedThrottle)
+                else if (atChange <= LiftedThrottle)
                 {
                     _summary.LiftedUpshifts++;
+                }
+                else
+                {
+                    _summary.OtherShifts++;
                 }
                 return;
             }
@@ -218,21 +260,25 @@ namespace AsDriven.Core
             // A blip can lead the reported gear change slightly, so the
             // throttle has to be closed before that and anything from there on
             // counts as the spike.
-            DateTime spikeFrom = left.AddMilliseconds(-150.0);
+            DateTime spikeFrom = settled;
             double closedBefore = Maximum(
                 samples, left.AddMilliseconds(-500.0), spikeFrom, Throttle);
-            if (double.IsNaN(closedBefore) || closedBefore > ClosedThrottle)
-            {
-                return;
-            }
             // The gear index only says what was selected. A lower gear that
             // took drive holds the engine at a higher speed for the same road
-            // speed, which a box left in neutral cannot do.
-            if (DriveRatio(latest) < shift.BaselineRatio * EngagementRatioMargin)
+            // speed, which a box left in neutral cannot do. The comparison is
+            // with the engine before any blip began raising it.
+            double baseline = beforeShift == null ? shift.BaselineRatio : DriveRatio(beforeShift);
+            if (double.IsNaN(closedBefore) || closedBefore > ClosedThrottle
+                || DriveRatio(latest) < baseline * EngagementRatioMargin)
             {
+                _summary.OtherShifts++;
                 return;
             }
             _summary.CoastDownshifts++;
+            if (clutchMoved)
+            {
+                _summary.CountedWithVehicleClutch++;
+            }
             _summary.DownshiftExample = samples;
             double spike = Maximum(
                 samples, spikeFrom.AddMilliseconds(1.0), arrived.AddMilliseconds(500.0), Throttle);

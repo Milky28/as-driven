@@ -427,7 +427,9 @@ namespace AsDriven.Core
                     { "lifted_upshifts", freeDrive.LiftedUpshifts },
                     { "coast_downshifts", freeDrive.CoastDownshifts },
                     { "with_throttle_spike", freeDrive.WithThrottleSpike },
-                    { "shifts_with_clutch", freeDrive.ShiftsWithClutch }
+                    { "shifts_with_clutch", freeDrive.ShiftsWithClutch },
+                    { "counted_with_vehicle_clutch", freeDrive.CountedWithVehicleClutch },
+                    { "other_shifts", freeDrive.OtherShifts }
                 });
             }
             payload.Add("traces", traces);

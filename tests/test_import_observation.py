@@ -120,6 +120,8 @@ class ImportObservationTests(unittest.TestCase):
                 "coast_downshifts": 3,
                 "with_throttle_spike": 0,
                 "shifts_with_clutch": 1,
+                "counted_with_vehicle_clutch": 0,
+                "other_shifts": 2,
             },
             "traces": [
                 {

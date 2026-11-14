@@ -1809,6 +1809,81 @@ namespace AsDriven.Core.Tests
                         Equal("not-tested", slipping.GetResults().ClutchlessDownshift,
                             "a selected gear that never took drive is not counted as a downshift");
 
+                        // Project Motor Racing reports the car's own clutch on
+                        // the clutch channel: 100% with the car stopped, and
+                        // 100% again through every downshift, together with
+                        // the car's blip. Its published throttle also dips to
+                        // 80% just before an upshift. The first live drive of
+                        // free driving, in a TS050, set every downshift aside
+                        // as the driver's clutch and matched no upshift at all,
+                        // so nothing was settled. These are that drive's shapes.
+                        clock = 0;
+                        GuidedVerificationDrive pmrLap = new GuidedVerificationDrive();
+                        pmrLap.Start(7, "pmr");
+                        pmrLap.AddSample(GuidedSample(now, 0, 100, 0, 1500, 0, -0.4, true, 50));
+                        for (int guard = 0; guard < 40
+                            && pmrLap.GetSnapshot().Title != "Free driving"; guard++)
+                        {
+                            pmrLap.Next();
+                        }
+                        for (int gear = 1; gear < 7; gear++)
+                        {
+                            double speed = 100 + gear * 20;
+                            FreeSteady(pmrLap, now, ref clock, 16, 1000, gear, 0, 100, 8200, speed, 410);
+                            FreeSteady(pmrLap, now, ref clock, 16, 100, gear, 0, 100, 8200, speed, 300);
+                            FreeSteady(pmrLap, now, ref clock, 16, 100, gear, 0, 100, 8200, speed, 190);
+                            FreeSteady(pmrLap, now, ref clock, 16, 64, gear, 0, 80, 8200, speed, 140);
+                            FreeSteady(pmrLap, now, ref clock, 16, 800, gear + 1, 0, 100, 8000, speed, 300);
+                        }
+                        for (int gear = 7; gear > 3; gear--)
+                        {
+                            FreeSteady(pmrLap, now, ref clock, 16, 1000, gear, 0, 0, 5700, 155, -95);
+                            FreeSteady(pmrLap, now, ref clock, 16, 100, gear, 100, 100, 5800, 153, -80);
+                            FreeSteady(pmrLap, now, ref clock, 16, 32, gear - 1, 80, 0, 6100, 152, -57);
+                            FreeSteady(pmrLap, now, ref clock, 16, 700, gear - 1, 0, 0, 6750, 149, -90);
+                        }
+                        pmrLap.Next();
+                        pmrLap.Next();
+                        GuidedDriveResults pmrResults = pmrLap.GetResults();
+                        Equal(6, pmrResults.Telemetry.FreeDrive.FullThrottleUpshifts,
+                            "counts a flat upshift whose published throttle dips as the car cuts");
+                        Equal(4, pmrResults.Telemetry.FreeDrive.CoastDownshifts,
+                            "counts a downshift where the channel shows the car's own clutch");
+                        Equal(0, pmrResults.Telemetry.FreeDrive.ShiftsWithClutch,
+                            "sets no shift aside as the driver's clutch on a channel that reads 100% at rest");
+                        Equal(4, pmrResults.Telemetry.FreeDrive.CountedWithVehicleClutch,
+                            "records how many counted shifts moved the clutch channel");
+                        True(pmrLap.GetSnapshot().Completed,
+                            "free driving settles both tests on a car that works its own clutch");
+                        Equal("yes", pmrResults.FullThrottleUpshift, "the live drive's upshifts are settled");
+                        Equal("yes", pmrResults.AutomaticCut, "the live drive's torque collapse is read as a cut");
+                        Equal("yes", pmrResults.CoastDownshift, "the live drive's downshifts are settled");
+                        True(pmrResults.AutomaticBlipMethod.Contains("car's own clutch"),
+                            "attaches the scripted test's clutch caution to the free-driving result");
+
+                        // The scripted trace used to end on the sample that
+                        // settled it, which for an upshift is the gear change
+                        // itself, leaving nothing after the shift to look at.
+                        GuidedVerificationDrive tail = new GuidedVerificationDrive();
+                        tail.Start(6);
+                        for (int guard = 0; guard < 40
+                            && tail.GetSnapshot().Title != "Full-throttle upshift"; guard++)
+                        {
+                            tail.AddSample(GuidedSample(now, 3, 0, 0, 4000, 80, 100, true));
+                            tail.Next();
+                        }
+                        for (int tick = 1; tick <= 120; tick++)
+                        {
+                            tail.AddSample(GuidedSample(
+                                now.AddMilliseconds(tick * 16), tick < 30 ? 3 : 4, 0, 95, 6000, 120, 300, true));
+                        }
+                        tail.Next();
+                        GuidedTelemetrySample[] tailSamples = tail.GetResults().Telemetry.Traces
+                            .Single(trace => trace.Test == "full_throttle_upshift").Samples;
+                        int afterShift = tailSamples.Count(sample => sample.Gear == 4);
+                        True(afterShift > 20 && afterShift < 45,
+                            "keeps about half a second of samples after the result, and no more");
+
                         // At ten samples a second a blip can pass unseen, so
                         // its absence is unknown here too.
                         clock = 0;

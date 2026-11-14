@@ -128,7 +128,10 @@ being asked, so the step counts them:
 - a clutchless downshift on a closed throttle that takes drive is a coast
   downshift, and a throttle spike of 15% or more after it is a blip.
 
-The thresholds are the scripted detector's own. Three or more like shifts stand
+The driver's throttle is read from before the last 150 ms, because the car's
+own cut or blip can show on the published throttle just ahead of the gear
+change; those last moments only have to not be a lift. The thresholds are the
+scripted detector's own. Three or more like shifts stand
 in for the scripted test, which is then skipped: a car that takes flat upshifts
 and off-throttle downshifts finishes the drive after this step. The overlay
 shows the running counts, and the result line says which tests remain.
@@ -138,7 +141,12 @@ as a shift the driver never tried, so it never records that a lift, a blip or
 the clutch is required; that still takes the scripted two-stage test. For the
 same reason:
 
-- a shift with clutch input is set aside and counted separately;
+- a shift with clutch input is set aside and counted separately, unless the
+  clutch channel already read above 20% with the car stopped. Such a channel
+  reports the car's own clutch (Project Motor Racing reads 100% at rest and
+  through every downshift), so the shift is counted, the count of shifts where
+  the channel moved is stored, and the result carries the scripted test's
+  caution to confirm the pedal was untouched;
 - a lifted upshift is counted but settles nothing, because lifting having
   worked does not show it was needed;
 - flat upshifts with no torque collapse leave the cut `unknown`, never `no`;
@@ -153,8 +161,8 @@ test settled this way is the most recent shift that counted.
 
 A draft keeps the samples each accepted guided result was decided from, under
 the optional `telemetry` block. Each trace holds at most the last six seconds
-or 300 samples of one test, ending at the sample that settled it, with the
-channels exactly as SimHub published them. The gear count has no trace because
+or 300 samples of one test up to the sample that settled it, then up to half a
+second more, with the channels exactly as SimHub published them. The gear count has no trace because
 the driver ends it. A retried or skipped attempt is not kept, and a draft
 answered by hand has no `telemetry` block at all.
 
