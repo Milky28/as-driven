@@ -86,6 +86,11 @@ namespace AsDriven.Core
         private const double NeutralPassageMilliseconds = 600.0;
         // How long the new gear has to hold before the shift is counted.
         private const double ConfirmMilliseconds = 600.0;
+        // A driver going down through the gears for a corner does not wait
+        // that long between shifts. A gear held at least this long before the
+        // next shift began is judged on what it showed in that time, rather
+        // than being dropped because it was not held for longer.
+        private const double QuickShiftMilliseconds = 300.0;
         private const double BufferMilliseconds = 2500.0;
         private const int BufferMaximumSamples = 300;
 
@@ -96,11 +101,14 @@ namespace AsDriven.Core
             public DateTime LeftAtUtc;
             public DateTime ArrivedAtUtc;
             public double BaselineRatio;
+            /// <summary>The most recent sample still in the new gear.</summary>
+            public GuidedTelemetrySample Latest;
         }
 
         private readonly Queue<GuidedTelemetrySample> _buffer = new Queue<GuidedTelemetrySample>();
         private FreeDriveSummary _summary = new FreeDriveSummary();
         private PendingShift _pending;
+        private DateTime _coastDownshiftArrivedUtc = DateTime.MinValue;
         private int _engagedGear;
         private DateTime _engagedSeenUtc;
         private double _engagedRatio;
@@ -127,6 +135,7 @@ namespace AsDriven.Core
             _buffer.Clear();
             _summary = new FreeDriveSummary();
             _pending = null;
+            _coastDownshiftArrivedUtc = DateTime.MinValue;
             _engagedGear = 0;
             _engagedRatio = 0.0;
         }
@@ -153,8 +162,15 @@ namespace AsDriven.Core
             {
                 if (sample.Gear != _pending.To)
                 {
-                    // The gear did not hold, so whatever this was, it was not
-                    // an accepted shift.
+                    // Left again before the full confirmation. Held long
+                    // enough, it was a shift followed quickly by another;
+                    // otherwise the gear did not hold and it was not an
+                    // accepted shift at all.
+                    if ((_pending.Latest.TimestampUtc - _pending.ArrivedAtUtc).TotalMilliseconds
+                        >= QuickShiftMilliseconds)
+                    {
+                        Classify(_pending, _pending.Latest);
+                    }
                     _pending = null;
                 }
                 else if ((sample.TimestampUtc - _pending.ArrivedAtUtc).TotalMilliseconds
@@ -162,6 +178,10 @@ namespace AsDriven.Core
                 {
                     Classify(_pending, sample);
                     _pending = null;
+                }
+                else
+                {
+                    _pending.Latest = sample;
                 }
             }
             if (sample.Gear <= 0)
@@ -181,7 +201,8 @@ namespace AsDriven.Core
                     To = sample.Gear,
                     LeftAtUtc = _engagedSeenUtc,
                     ArrivedAtUtc = sample.TimestampUtc,
-                    BaselineRatio = _engagedRatio
+                    BaselineRatio = _engagedRatio,
+                    Latest = sample
                 };
             }
             _engagedGear = sample.Gear;
@@ -194,9 +215,13 @@ namespace AsDriven.Core
             GuidedTelemetrySample[] samples = _buffer.ToArray();
             DateTime left = shift.LeftAtUtc;
             DateTime arrived = shift.ArrivedAtUtc;
+            // Nothing after the last sample in this gear belongs to this
+            // shift. When another followed quickly, what comes next is that
+            // shift's cut or blip, not this one's.
+            DateTime until = latest.TimestampUtc;
 
             bool clutchMoved = Maximum(
-                samples, left.AddMilliseconds(-250.0), arrived.AddMilliseconds(300.0),
+                samples, left.AddMilliseconds(-250.0), Earlier(arrived.AddMilliseconds(300.0), until),
                 sample => sample.Clutch) > ClutchPresent;
             if (clutchMoved && !ClutchChannelReportsVehicle)
             {
@@ -229,7 +254,7 @@ namespace AsDriven.Core
                     {
                         _summary.CountedWithVehicleClutch++;
                     }
-                    DateTime to = arrived.AddMilliseconds(300.0);
+                    DateTime to = Earlier(arrived.AddMilliseconds(300.0), until);
                     double highest = Maximum(
                         samples, left.AddMilliseconds(-600.0), to, Torque);
                     double lowest = Minimum(samples, settled, to, Torque);
@@ -261,8 +286,20 @@ namespace AsDriven.Core
             // throttle has to be closed before that and anything from there on
             // counts as the spike.
             DateTime spikeFrom = settled;
-            double closedBefore = Maximum(
-                samples, left.AddMilliseconds(-500.0), spikeFrom, Throttle);
+            double closedBefore;
+            if ((left - _coastDownshiftArrivedUtc).TotalMilliseconds < ConfirmMilliseconds)
+            {
+                // This follows straight on from a downshift already counted
+                // as taken off the throttle, and that one's blip is still
+                // inside the usual window. A driver on the throttle would
+                // still be on it now, so it only has to have closed again.
+                closedBefore = Throttle(beforeShift);
+            }
+            else
+            {
+                closedBefore = Maximum(
+                    samples, left.AddMilliseconds(-500.0), spikeFrom, Throttle);
+            }
             // The gear index only says what was selected. A lower gear that
             // took drive holds the engine at a higher speed for the same road
             // speed, which a box left in neutral cannot do. The comparison is
@@ -275,13 +312,15 @@ namespace AsDriven.Core
                 return;
             }
             _summary.CoastDownshifts++;
+            _coastDownshiftArrivedUtc = arrived;
             if (clutchMoved)
             {
                 _summary.CountedWithVehicleClutch++;
             }
             _summary.DownshiftExample = samples;
             double spike = Maximum(
-                samples, spikeFrom.AddMilliseconds(1.0), arrived.AddMilliseconds(500.0), Throttle);
+                samples, spikeFrom.AddMilliseconds(1.0),
+                Earlier(arrived.AddMilliseconds(500.0), until), Throttle);
             if (!double.IsNaN(spike) && spike >= BlipThrottle)
             {
                 _summary.WithThrottleSpike++;
@@ -297,6 +336,11 @@ namespace AsDriven.Core
         private static double Torque(GuidedTelemetrySample sample)
         {
             return double.IsInfinity(sample.EngineTorque) ? double.NaN : sample.EngineTorque;
+        }
+
+        private static DateTime Earlier(DateTime first, DateTime second)
+        {
+            return first <= second ? first : second;
         }
 
         private static double DriveRatio(GuidedTelemetrySample sample)

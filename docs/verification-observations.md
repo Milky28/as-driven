@@ -131,7 +131,11 @@ being asked, so the step counts them:
 The driver's throttle is read from before the last 150 ms, because the car's
 own cut or blip can show on the published throttle just ahead of the gear
 change; those last moments only have to not be a lift. The thresholds are the
-scripted detector's own. Three or more like shifts stand
+scripted detector's own. A shift counts once its gear has held for 600 ms, or
+for 300 ms when the next shift follows straight on, as it does going down the
+gears for a corner; only what happened before that next shift is read. A gear
+held for less is not counted. In a run of downshifts the throttle only has to
+have closed again after the previous blip. Three or more like shifts stand
 in for the scripted test, which is then skipped: a car that takes flat upshifts
 and off-throttle downshifts finishes the drive after this step. The overlay
 shows the running counts, and the result line says which tests remain.

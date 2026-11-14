@@ -1892,6 +1892,53 @@ namespace AsDriven.Core.Tests
                         True(afterShift > 20 && afterShift < 45,
                             "keeps about half a second of samples after the result, and no more");
 
+                        // Going down the gears for a corner, a driver takes
+                        // the next gear well inside the time one is normally
+                        // confirmed over. A live drive lost most of its quick
+                        // downshifts that way. Each gear here is held 350 ms,
+                        // with the car's blip on every one.
+                        clock = 0;
+                        GuidedVerificationDrive quick = FreeDrivingDrive(now);
+                        FreeSteady(quick, now, ref clock, 16, 1000, 6, 0, 0, 4500, 220, 0);
+                        for (int gear = 5; gear >= 2; gear--)
+                        {
+                            double quickSpeed = 100 + gear * 20;
+                            FreeSteady(quick, now, ref clock, 16, 100, gear, 0, 60, 6000, quickSpeed, 0);
+                            FreeSteady(quick, now, ref clock, 16, 250, gear, 0, 0, 6500, quickSpeed, 0);
+                        }
+                        FreeSteady(quick, now, ref clock, 16, 700, 2, 0, 0, 6500, 140, 0);
+                        Equal(4, QuickCount(quick, false),
+                            "counts each of a run of quick downshifts");
+                        Equal(4, QuickCount(quick, true),
+                            "attributes one blip to each quick downshift, not its neighbour's");
+
+                        // Short gears on the way up are taken just as fast.
+                        clock = 0;
+                        GuidedVerificationDrive quickUp = FreeDrivingDrive(now);
+                        FreeSteady(quickUp, now, ref clock, 16, 1000, 1, 0, 100, 7000, 60, 300);
+                        for (int gear = 2; gear <= 5; gear++)
+                        {
+                            FreeSteady(quickUp, now, ref clock, 16, 400, gear, 0, 100, 7000, 40 + gear * 25, 300);
+                        }
+                        FreeSteady(quickUp, now, ref clock, 16, 700, 6, 0, 100, 7000, 200, 300);
+                        quickUp.Next();
+                        quickUp.Next();
+                        Equal(5, quickUp.GetResults().Telemetry.FreeDrive.FullThrottleUpshifts,
+                            "counts each of a run of quick full-throttle upshifts");
+
+                        // A gear touched for an instant on the way past is
+                        // still not an accepted shift.
+                        clock = 0;
+                        GuidedVerificationDrive passing = FreeDrivingDrive(now);
+                        FreeSteady(passing, now, ref clock, 16, 1000, 6, 0, 0, 4500, 220, 0);
+                        for (int gear = 5; gear >= 2; gear--)
+                        {
+                            FreeSteady(passing, now, ref clock, 16, 120, gear, 0, 0, 6500, 100 + gear * 20, 0);
+                        }
+                        FreeSteady(passing, now, ref clock, 16, 700, 2, 0, 0, 6500, 140, 0);
+                        Equal(1, QuickCount(passing, false),
+                            "does not count gears passed through in an instant, only the one that held");
+
                         // At ten samples a second a blip can pass unseen, so
                         // its absence is unknown here too.
                         clock = 0;
@@ -3308,6 +3355,21 @@ namespace AsDriven.Core.Tests
             True(drive.GetSnapshot().ResultReady, "the simulated coast downshift settles");
             drive.Next();
             return drive;
+        }
+
+        /// <summary>
+        /// Ends the free-driving step and returns how many coast downshifts it
+        /// counted, or how many of them carried a throttle spike.
+        /// </summary>
+        private static int QuickCount(GuidedVerificationDrive drive, bool withSpike)
+        {
+            if (!drive.GetSnapshot().ResultReady)
+            {
+                drive.Next();
+                drive.Next();
+            }
+            FreeDriveSummary counted = drive.GetResults().Telemetry.FreeDrive;
+            return withSpike ? counted.WithThrottleSpike : counted.CoastDownshifts;
         }
 
         /// <summary>A fresh guided session advanced to the free-driving step.</summary>
