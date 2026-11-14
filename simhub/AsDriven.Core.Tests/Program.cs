@@ -1926,6 +1926,30 @@ namespace AsDriven.Core.Tests
                         Equal(5, quickUp.GetResults().Telemetry.FreeDrive.FullThrottleUpshifts,
                             "counts each of a run of quick full-throttle upshifts");
 
+                        // The driver arrives at the coast test off the
+                        // throttle, shifts up to set it up, and the engine is
+                        // still coming down when the higher gear first shows.
+                        // That first sample must not become the ratio the
+                        // downshift is judged against.
+                        GuidedVerificationDrive setUp = new GuidedVerificationDrive();
+                        setUp.Start(6);
+                        for (int guard = 0; guard < 40
+                            && setUp.GetSnapshot().Title != "Downshift without pedal input"; guard++)
+                        {
+                            setUp.AddSample(GuidedSample(now, 4, 0, 0, 4000, 80, 100, true));
+                            setUp.Next();
+                        }
+                        clock = 0;
+                        FreeSteady(setUp, now, ref clock, 16, 100, 5, 0, 0, 4000, 80, 0);
+                        FreeSteady(setUp, now, ref clock, 16, 1000, 5, 0, 80, 3200, 80, 100);
+                        FreeSteady(setUp, now, ref clock, 16, 500, 5, 0, 0, 3200, 80, 0);
+                        FreeSteady(setUp, now, ref clock, 16, 1000, 4, 0, 0, 4000, 80, 0);
+                        True(setUp.GetSnapshot().ResultReady,
+                            "confirms a downshift after an upshift made to set it up");
+                        setUp.Next();
+                        Equal("yes", setUp.GetResults().CoastDownshift,
+                            "judges the downshift against the settled ratio of the gear left");
+
                         // An H-pattern box taken flat without the clutch
                         // leaves the engine unloaded between gears: it runs
                         // up to the limiter and its torque falls away, then

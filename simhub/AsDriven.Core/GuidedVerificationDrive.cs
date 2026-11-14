@@ -779,6 +779,17 @@ namespace AsDriven.Core
                 _baselineDriveRatio = DriveRatio(sample);
                 _downshiftArmedThrottle = 0.0;
             }
+            // The ratio a gear holds the engine at is the lowest it shows:
+            // slip, a blip or an engine still falling from the previous gear
+            // can only read higher. A baseline taken from the first sample in
+            // a gear the driver had just shifted up into caught the engine
+            // before it had come down, read as high as the gear below, and so
+            // a live downshift that plainly took drive was never confirmed.
+            if (_downshiftCandidateGear == 0 && sample.Gear == _baselineGear
+                && sample.SpeedKmh > 5.0)
+            {
+                _baselineDriveRatio = Math.Min(_baselineDriveRatio, DriveRatio(sample));
+            }
             // Arming already required a closed throttle, so anything above it
             // from here is the car blipping or a pedal the driver was asked not
             // to touch. Either way it is not throttle carried in from before.
