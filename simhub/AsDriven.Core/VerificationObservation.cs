@@ -424,6 +424,7 @@ namespace AsDriven.Core
                     { "full_throttle_upshifts", freeDrive.FullThrottleUpshifts },
                     { "cut_measured", freeDrive.CutMeasured },
                     { "with_torque_cut", freeDrive.WithTorqueCut },
+                    { "engine_ran_free", freeDrive.EngineRanFree },
                     { "lifted_upshifts", freeDrive.LiftedUpshifts },
                     { "coast_downshifts", freeDrive.CoastDownshifts },
                     { "with_throttle_spike", freeDrive.WithThrottleSpike },

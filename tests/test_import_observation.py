@@ -122,6 +122,7 @@ class ImportObservationTests(unittest.TestCase):
                 "shifts_with_clutch": 1,
                 "counted_with_vehicle_clutch": 0,
                 "other_shifts": 2,
+                "engine_ran_free": 1,
             },
             "traces": [
                 {

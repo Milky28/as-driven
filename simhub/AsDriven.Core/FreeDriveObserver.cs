@@ -14,6 +14,11 @@ namespace AsDriven.Core
         public int CutMeasured { get; set; }
         /// <summary>Of the measured ones, how many showed the torque collapse of an automatic cut.</summary>
         public int WithTorqueCut { get; set; }
+        /// <summary>
+        /// Full-throttle upshifts whose torque fell because the engine ran
+        /// free between gears, which measures nothing about a cut.
+        /// </summary>
+        public int EngineRanFree { get; set; }
         /// <summary>Clutchless upshifts taken on a lifted throttle, and accepted.</summary>
         public int LiftedUpshifts { get; set; }
         /// <summary>Clutchless downshifts taken on a closed throttle that took drive.</summary>
@@ -91,6 +96,9 @@ namespace AsDriven.Core
         // next shift began is judged on what it showed in that time, rather
         // than being dropped because it was not held for longer.
         private const double QuickShiftMilliseconds = 300.0;
+        // Engine speed at the torque minimum, relative to when the gear was
+        // left, above which the engine is taken to have run free.
+        private const double FreeRevvingMargin = 1.03;
         private const double BufferMilliseconds = 2500.0;
         private const int BufferMaximumSamples = 300;
 
@@ -264,10 +272,27 @@ namespace AsDriven.Core
                     // nothing about a cut either way.
                     if (highest > 0.0 && Minimum(samples, settled, to, Throttle) > LiftedThrottle)
                     {
-                        _summary.CutMeasured++;
-                        if (highest > 20.0 && lowest <= highest * 0.40)
+                        bool collapsed = highest > 20.0 && lowest <= highest * 0.40;
+                        // An engine held flat with no gear driving it runs
+                        // away, and its torque falls as it climbs to the
+                        // limiter. That is what an H-pattern box does between
+                        // gears, and it is not a cut: a cut takes torque away
+                        // while the engine holds its speed or slows. A live
+                        // drive of such a car read as a cut on every upshift.
+                        GuidedTelemetrySample leaving = LastAtOrBefore(samples, left);
+                        GuidedTelemetrySample weakest = LowestTorque(samples, settled, to);
+                        if (collapsed && leaving != null && weakest != null
+                            && weakest.Rpm > leaving.Rpm * FreeRevvingMargin)
                         {
-                            _summary.WithTorqueCut++;
+                            _summary.EngineRanFree++;
+                        }
+                        else
+                        {
+                            _summary.CutMeasured++;
+                            if (collapsed)
+                            {
+                                _summary.WithTorqueCut++;
+                            }
                         }
                     }
                 }
@@ -380,6 +405,25 @@ namespace AsDriven.Core
                 if (!double.IsNaN(value) && (double.IsNaN(result) || value > result))
                 {
                     result = value;
+                }
+            }
+            return result;
+        }
+
+        private static GuidedTelemetrySample LowestTorque(
+            GuidedTelemetrySample[] samples, DateTime from, DateTime to)
+        {
+            GuidedTelemetrySample result = null;
+            foreach (GuidedTelemetrySample sample in samples)
+            {
+                if (sample.TimestampUtc < from || sample.TimestampUtc > to)
+                {
+                    continue;
+                }
+                double value = Torque(sample);
+                if (!double.IsNaN(value) && (result == null || value < Torque(result)))
+                {
+                    result = sample;
                 }
             }
             return result;

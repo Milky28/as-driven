@@ -338,6 +338,11 @@
               "type": "integer",
               "minimum": 0
             },
+            "engine_ran_free": {
+              "description": "Full-throttle upshifts whose torque fell while engine speed climbed, as an unloaded engine does between the gears of an H-pattern box. They measure nothing about a cut and are not in cut_measured.",
+              "type": "integer",
+              "minimum": 0
+            },
             "shifts_with_clutch": {
               "description": "Shifts set aside because clutch input was present on a channel that follows the pedal.",
               "type": "integer",

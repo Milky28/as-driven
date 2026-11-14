@@ -1555,6 +1555,11 @@ namespace AsDriven.Core
                     + (cut
                         ? "Engine torque collapsed on all " + summary.CutMeasured
                             + " measured while throttle demand stayed high."
+                        : summary.CutMeasured == 0 && summary.EngineRanFree > 0
+                        ? "Engine torque fell on " + summary.EngineRanFree
+                            + " while engine speed climbed with no gear driving it, which is"
+                            + " an unloaded engine and not a cut, so nothing was measured"
+                            + " about a cut."
                         : summary.CutMeasured == 0
                         ? "None published engine torque with the throttle held through the"
                             + " change, so nothing was measured about a cut."

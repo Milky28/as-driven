@@ -1926,6 +1926,33 @@ namespace AsDriven.Core.Tests
                         Equal(5, quickUp.GetResults().Telemetry.FreeDrive.FullThrottleUpshifts,
                             "counts each of a run of quick full-throttle upshifts");
 
+                        // An H-pattern box taken flat without the clutch
+                        // leaves the engine unloaded between gears: it runs
+                        // up to the limiter and its torque falls away, then
+                        // returns once the next gear takes drive. A live
+                        // drive of such a car recorded a cut on every one.
+                        clock = 0;
+                        GuidedVerificationDrive hPattern = FreeDrivingDrive(now);
+                        FreeSteady(hPattern, now, ref clock, 16, 1000, 2, 0, 100, 8600, 150, 600);
+                        for (int gear = 3; gear <= 6; gear++)
+                        {
+                            double hSpeed = 60 + gear * 30;
+                            FreeSteady(hPattern, now, ref clock, 16, 64, 0, 0, 100, 8800, hSpeed, 520);
+                            FreeSteady(hPattern, now, ref clock, 16, 150, gear, 0, 100, 9450, hSpeed, 180);
+                            FreeSteady(hPattern, now, ref clock, 16, 800, gear, 0, 100, 8600, hSpeed + 5, 600);
+                        }
+                        hPattern.Next();
+                        hPattern.Next();
+                        GuidedDriveResults hResults = hPattern.GetResults();
+                        Equal(4, hResults.Telemetry.FreeDrive.FullThrottleUpshifts,
+                            "counts flat upshifts through neutral on an H-pattern box");
+                        Equal(4, hResults.Telemetry.FreeDrive.EngineRanFree,
+                            "sees the engine running free between gears");
+                        Equal(0, hResults.Telemetry.FreeDrive.WithTorqueCut,
+                            "does not read an unloaded engine's falling torque as a cut");
+                        Equal("unknown", hResults.AutomaticCut,
+                            "leaves the cut unknown when the engine only ran free");
+
                         // A gear touched for an instant on the way past is
                         // still not an accepted shift.
                         clock = 0;
