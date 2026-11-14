@@ -1858,6 +1858,14 @@ namespace AsDriven.Core.Tests
                         Equal("yes", pmrResults.FullThrottleUpshift, "the live drive's upshifts are settled");
                         Equal("yes", pmrResults.AutomaticCut, "the live drive's torque collapse is read as a cut");
                         Equal("yes", pmrResults.CoastDownshift, "the live drive's downshifts are settled");
+                        // That drive read 0% throttle with the car stopped, so
+                        // the channel follows the pedal and PMR's older 15%
+                        // idle figure does not apply to it. A spike after every
+                        // downshift is then a blip, not an unknown.
+                        Equal("yes", pmrResults.AutomaticBlip,
+                            "a measured zero resting throttle overrides PMR's fallback offset");
+                        True(pmrResults.AutomaticBlipMethod.Contains("peaking at 100%"),
+                            "reports the spike without subtracting an offset the drive did not measure");
                         True(pmrResults.AutomaticBlipMethod.Contains("car's own clutch"),
                             "attaches the scripted test's clutch caution to the free-driving result");
 

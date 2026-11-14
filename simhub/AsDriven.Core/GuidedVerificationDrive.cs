@@ -1092,9 +1092,14 @@ namespace AsDriven.Core
         /// <summary>
         /// The guided tests are about the driver's pedal. Some readers retain
         /// a small idle offset even with the pedal fully released. PMR has
-        /// consistently reported 15%, including when a drive begins after the
-        /// stationary move-off sample was missed. Preserve a captured offset
-        /// when available, otherwise apply PMR's established value. A
+        /// reported 15% on the drives that established this, including when a
+        /// drive begins after the stationary move-off sample was missed. A
+        /// reading taken with the car stopped always wins over that figure:
+        /// PMR 2.3.0.3 read 0% at rest in a TS050, and subtracting 15% anyway
+        /// made full throttle read 85% and marked a channel that plainly
+        /// followed the pedal as one that did not, so a blip seen on every
+        /// downshift was recorded as unknown. PMR's established value is only
+        /// the fallback for a drive that never saw the car at rest. A
         /// non-pedal channel remains ineligible to establish an automatic blip
         /// through <see cref="ThrottleChannelFollowsPedal"/>.
         /// </summary>
@@ -1105,9 +1110,9 @@ namespace AsDriven.Core
 
         private double ThrottleOffset()
         {
-            if (_restingThrottleSeen && _restingThrottle > 5.0)
+            if (_restingThrottleSeen)
             {
-                return _restingThrottle;
+                return _restingThrottle > 5.0 ? _restingThrottle : 0.0;
             }
             return string.Equals(_simulator, "pmr", StringComparison.Ordinal)
                 ? 15.0

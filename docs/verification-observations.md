@@ -174,6 +174,13 @@ detector can instead be run over the stored samples. `resting_throttle` and
 `resting_clutch` record what those channels read with the car stopped, which is
 what decides whether a later reading can be attributed to the pedal.
 
+A throttle reading taken with the car stopped is the offset the drive uses: a
+channel that rests above 5% has that much subtracted and cannot establish an
+automatic blip, and one that rests at or near zero follows the pedal. Project
+Motor Racing rested at 15% on the drives that first measured it and at 0% in a
+TS050 on 2.3.0.3, so its 15% figure is applied only when a drive never saw the
+car at rest.
+
 The draft also records the median sample rate, for the drive and for each
 attempt. An automatic blip or an ignition cut lasts about a tenth of a second,
 so at ten samples a second one can pass between two samples unseen. Below 20
