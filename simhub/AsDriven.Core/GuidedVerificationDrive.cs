@@ -1574,6 +1574,11 @@ namespace AsDriven.Core
                         : summary.CutMeasured == 0
                         ? "None published engine torque with the throttle held through the"
                             + " change, so nothing was measured about a cut."
+                        : summary.CutMeasured < FreeDriveShiftsToSettle
+                        ? "Only " + summary.CutMeasured + " could be measured for a cut, of which "
+                            + summary.WithTorqueCut + " showed a torque collapse; "
+                            + FreeDriveShiftsToSettle + " are needed to establish one."
+                            + SlowTelemetrySummary("an automatic cut", rate)
                         : "Engine torque collapsed on " + summary.WithTorqueCut + " of "
                             + summary.CutMeasured + " measured, which does not establish a cut."
                             + SlowTelemetrySummary("an automatic cut", rate))

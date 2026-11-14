@@ -99,6 +99,9 @@ namespace AsDriven.Core
         // Engine speed at the torque minimum, relative to when the gear was
         // left, above which the engine is taken to have run free.
         private const double FreeRevvingMargin = 1.03;
+        // Time between the last sample in one gear and the first in the next
+        // beyond which the box is taken to have passed through neutral.
+        private const double NeutralSeenMilliseconds = 40.0;
         private const double BufferMilliseconds = 2500.0;
         private const int BufferMaximumSamples = 300;
 
@@ -281,8 +284,15 @@ namespace AsDriven.Core
                         // drive of such a car read as a cut on every upshift.
                         GuidedTelemetrySample leaving = LastAtOrBefore(samples, left);
                         GuidedTelemetrySample weakest = LowestTorque(samples, settled, to);
+                        // Shifted at the limiter the engine has nowhere left
+                        // to climb, so through neutral it only has to have
+                        // held its speed: a cut with nothing driving the
+                        // engine would let it fall.
+                        bool throughNeutral = (arrived - left).TotalMilliseconds
+                            >= NeutralSeenMilliseconds;
                         if (collapsed && leaving != null && weakest != null
-                            && weakest.Rpm > leaving.Rpm * FreeRevvingMargin)
+                            && (weakest.Rpm > leaving.Rpm * FreeRevvingMargin
+                                || (throughNeutral && weakest.Rpm >= leaving.Rpm * 0.99)))
                         {
                             _summary.EngineRanFree++;
                         }

@@ -1977,6 +1977,26 @@ namespace AsDriven.Core.Tests
                         Equal("unknown", hResults.AutomaticCut,
                             "leaves the cut unknown when the engine only ran free");
 
+                        // The same box shifted at the limiter: the engine
+                        // cannot climb any further, and holds its speed
+                        // through neutral while the torque falls away.
+                        clock = 0;
+                        GuidedVerificationDrive limiter = FreeDrivingDrive(now);
+                        FreeSteady(limiter, now, ref clock, 16, 1000, 2, 0, 100, 9450, 150, 600);
+                        for (int gear = 3; gear <= 6; gear++)
+                        {
+                            double limitSpeed = 60 + gear * 30;
+                            FreeSteady(limiter, now, ref clock, 16, 96, 0, 0, 100, 9450, limitSpeed, 100);
+                            FreeSteady(limiter, now, ref clock, 16, 100, gear, 0, 100, 9450, limitSpeed, 100);
+                            FreeSteady(limiter, now, ref clock, 16, 800, gear, 0, 100, 9450, limitSpeed + 5, 600);
+                        }
+                        limiter.Next();
+                        limiter.Next();
+                        Equal(0, limiter.GetResults().Telemetry.FreeDrive.WithTorqueCut,
+                            "does not read the limiter in neutral as a cut");
+                        Equal("unknown", limiter.GetResults().AutomaticCut,
+                            "leaves the cut unknown for shifts taken at the limiter through neutral");
+
                         // A gear touched for an instant on the way past is
                         // still not an accepted shift.
                         clock = 0;

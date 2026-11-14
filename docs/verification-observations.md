@@ -133,7 +133,9 @@ own cut or blip can show on the published throttle just ahead of the gear
 change; those last moments only have to not be a lift. The thresholds are the
 scripted detector's own. A torque collapse on a flat upshift is not counted as
 a cut when engine speed climbed while it fell: that is an engine running free
-between the gears of an H-pattern box, and it measures nothing about a cut
+between the gears of an H-pattern box, and it measures nothing about a cut.
+The same holds when the box passed through neutral and the engine held its
+speed, as it does when shifted at the limiter
 (`engine_ran_free`). A shift counts once its gear has held for 600 ms, or
 for 300 ms when the next shift follows straight on, as it does going down the
 gears for a corner; only what happened before that next shift is read. A gear
