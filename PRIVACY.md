@@ -53,8 +53,10 @@ verification. It stores the following information locally:
 
 Verification drafts may contain the observer name entered in the form, exact
 simulator and vehicle identity, game and SimHub versions, test observations,
-notes, and timestamps. They are never added to the curated database or sent
-elsewhere automatically.
+notes, and timestamps. A draft from a guided drive also holds a few seconds of
+the telemetry each accepted test was decided from: gear, pedal positions,
+engine speed and torque, and road speed. They are never added to the curated
+database or sent elsewhere automatically.
 
 The plugin can open a public contribution form only after the user explicitly
 asks it to. It does not attach or transmit the draft; the user chooses the file

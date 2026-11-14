@@ -30,7 +30,9 @@ A full public draft can contain:
 
 - the chosen observer name or handle and exact observation timestamp;
 - simulator, game, client, and dataset versions;
-- exact telemetry names, internal identifiers, test results, and notes; and
+- exact telemetry names, internal identifiers, test results, and notes;
+- for a guided drive, a few seconds of gear, pedal, engine and speed samples
+  around each accepted test; and
 - for Assetto Corsa, the driven package's content id, author, declared version,
   and fingerprint.
 

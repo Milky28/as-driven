@@ -33,8 +33,10 @@ the research backlog, or a curation approval.
    and that creep reads as moving off without a clutch. Held against the
    brake the engine either stalls or it does not. Time spent stationary under
    throttle while braking is therefore never counted as a refusal to move.
-4. Count accepted forward gears.
-5. Test clutchless upshift and downshift acceptance.
+4. Drive normally up to top gear. This counts the forward gears and watches
+   every shift on the way; see "Free driving" below.
+5. Test clutchless upshift and downshift acceptance, for whatever free driving
+   did not already settle.
 6. Capture or confirm automatic cut and blip, including the observation method.
 7. Record visible cockpit actuators and select the primary mechanism from
    hardware plus driver animation or reliable documentation. Direct gear inputs
@@ -89,7 +91,8 @@ name. ACC's executables expose no useful file version, so the draft records the
 exact Steam content build from `appmanifest_805550.acf`. A missing or inaccessible
 manifest remains `unknown` and must be resolved during review rather than guessed.
 
-The overlay starts directly with the move-off maneuver. Each test uses the same
+The overlay starts directly with the move-off maneuver, followed by free
+driving. Each scripted test uses the same
 cycle: perform the maneuver, wait for a captured result, then accept it or choose
 Retry/Skip. The overlay uses a short summary and green capture mark so completion is immediately
 visible; the longer falsifiable description is retained for form review.
@@ -112,6 +115,89 @@ control, driver input, or a simulator's telemetry representation. Automatic cut
 is detected only from a shift-local engine-torque collapse while throttle demand
 stays high. Imports of older ACC drafts degrade any throttle-derived cut answer
 to `unknown` because ACC exposes no engine-torque channel through SimHub.
+
+## Free driving
+
+The second step asks the driver to drive normally up to top gear, shifting up
+at full throttle and down off the throttle, without the clutch where the car
+allows it. Each of those shifts is one of the scripted tests taken without
+being asked, so the step counts them:
+
+- a clutchless upshift with the throttle held at 70% or more is a full-throttle
+  upshift, and a torque collapse with the throttle still held is a cut;
+- a clutchless downshift on a closed throttle that takes drive is a coast
+  downshift, and a throttle spike of 15% or more after it is a blip.
+
+The driver's throttle is read from before the last 150 ms, because the car's
+own cut or blip can show on the published throttle just ahead of the gear
+change; those last moments only have to not be a lift. The thresholds are the
+scripted detector's own. A torque collapse on a flat upshift is not counted as
+a cut when engine speed climbed while it fell: that is an engine running free
+between the gears of an H-pattern box, and it measures nothing about a cut.
+The same holds when the box passed through neutral and the engine held its
+speed, as it does when shifted at the limiter
+(`engine_ran_free`). A shift counts once its gear has held for 600 ms, or
+for 300 ms when the next shift follows straight on, as it does going down the
+gears for a corner; only what happened before that next shift is read. A gear
+held for less is not counted. In a run of downshifts the throttle only has to
+have closed again after the previous blip. Three or more like shifts stand
+in for the scripted test, which is then skipped: a car that takes flat upshifts
+and off-throttle downshifts finishes the drive after this step. The overlay
+shows the running counts, and the result line says which tests remain.
+
+Free driving can only see what the gearbox accepted. A refusal looks the same
+as a shift the driver never tried, so it never records that a lift, a blip or
+the clutch is required; that still takes the scripted two-stage test. For the
+same reason:
+
+- a shift with clutch input is set aside and counted separately, unless the
+  clutch channel already read above 20% with the car stopped. Such a channel
+  reports the car's own clutch (Project Motor Racing reads 100% at rest and
+  through every downshift), so the shift is counted, the count of shifts where
+  the channel moved is stored, and the result carries the scripted test's
+  caution to confirm the pedal was untouched;
+- a lifted upshift is counted but settles nothing, because lifting having
+  worked does not show it was needed;
+- flat upshifts with no torque collapse leave the cut `unknown`, never `no`;
+- downshifts that disagree about a throttle spike settle nothing, because a
+  driver who blipped on some of them looks the same, and the scripted test
+  with the pedal held closed is what separates the two.
+
+The counts are stored under `telemetry.free_drive`, and the trace kept for a
+test settled this way is the most recent shift that counted.
+
+## Recorded telemetry and sample rate
+
+A draft keeps the samples each accepted guided result was decided from, under
+the optional `telemetry` block. Each trace holds at most the last six seconds
+or 300 samples of one test up to the sample that settled it, then up to half a
+second more, with the channels exactly as SimHub published them. The gear count has no trace because
+the driver ends it. A retried or skipped attempt is not kept, and a draft
+answered by hand has no `telemetry` block at all.
+
+The traces exist so a detector fault found later does not cost a second drive.
+Until 2026-08-17 the automatic-blip test read the driver's own carried throttle
+as a blip, and because drafts held only verdicts, every exposed record had to be
+flagged in `research/auto-blip-premeasurement.json` for a re-drive. A corrected
+detector can instead be run over the stored samples. `resting_throttle` and
+`resting_clutch` record what those channels read with the car stopped, which is
+what decides whether a later reading can be attributed to the pedal.
+
+A throttle reading taken with the car stopped is the offset the drive uses: a
+channel that rests above 5% has that much subtracted and cannot establish an
+automatic blip, and one that rests at or near zero follows the pedal. Project
+Motor Racing rested at 15% on the drives that first measured it and at 0% in a
+TS050 on 2.3.0.3, so its 15% figure is applied only when a drive never saw the
+car at rest.
+
+The draft also records the median sample rate, for the drive and for each
+attempt. An automatic blip or an ignition cut lasts about a tenth of a second,
+so at ten samples a second one can pass between two samples unseen. Below 20
+samples a second the absence of a blip is therefore recorded as `unknown`
+rather than `no`, and the cut and blip method text says so. A blip or cut that
+was sampled is still recorded at any rate, and clutchless-shift acceptance does
+not depend on the rate at all. A rate is reported only from at least eight
+intervals; with fewer the result is taken at face value.
 
 Cockpit mechanism and wheel fields carry an orange `OPTIONAL · REVIEW` badge
 until the tester supplies them. These fields improve a draft but never block

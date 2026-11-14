@@ -274,6 +274,100 @@
         "type": "string"
       }
     },
+    "telemetry": {
+      "description": "The samples the guided-drive results were decided from, kept so a corrected detector can be run over a drive that was already taken instead of asking for it again. Optional: a draft answered by hand, or written before the plugin recorded them, has none. Channels are stored as the telemetry client published them, before any resting offset is subtracted.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "traces"
+      ],
+      "properties": {
+        "sample_rate_hz": {
+          "description": "Median sample rate across the whole drive; null when too few samples arrived to measure it.",
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "resting_throttle": {
+          "description": "Published throttle with the car stopped and untouched before the first test; null when that moment was not seen. A channel already open at rest is not reporting the pedal alone.",
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "resting_clutch": {
+          "description": "Published clutch at the same moment.",
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "free_drive": {
+          "description": "What the free-driving step counted before the driver ended it. These are shifts the gearbox accepted in ordinary driving; a refusal cannot be seen there, so the counts never establish that a lift, a blip or the clutch is required. Three or more like shifts stand in for the scripted test, and the trace kept for that test is then the most recent of them.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "full_throttle_upshifts": {
+              "description": "Clutchless upshifts accepted with the throttle held open.",
+              "type": "integer",
+              "minimum": 0
+            },
+            "cut_measured": {
+              "description": "Of those, how many published engine torque with the throttle still held through the change.",
+              "type": "integer",
+              "minimum": 0
+            },
+            "with_torque_cut": {
+              "description": "Of the measured ones, how many showed a torque collapse.",
+              "type": "integer",
+              "minimum": 0
+            },
+            "lifted_upshifts": {
+              "description": "Clutchless upshifts accepted on a lifted throttle.",
+              "type": "integer",
+              "minimum": 0
+            },
+            "coast_downshifts": {
+              "description": "Clutchless downshifts on a closed throttle that took drive.",
+              "type": "integer",
+              "minimum": 0
+            },
+            "with_throttle_spike": {
+              "description": "Of those, how many were followed by a throttle spike of 15% or more.",
+              "type": "integer",
+              "minimum": 0
+            },
+            "engine_ran_free": {
+              "description": "Full-throttle upshifts whose torque fell while engine speed climbed, as an unloaded engine does between the gears of an H-pattern box. They measure nothing about a cut and are not in cut_measured.",
+              "type": "integer",
+              "minimum": 0
+            },
+            "shifts_with_clutch": {
+              "description": "Shifts set aside because clutch input was present on a channel that follows the pedal.",
+              "type": "integer",
+              "minimum": 0
+            },
+            "counted_with_vehicle_clutch": {
+              "description": "Counted shifts during which the clutch channel moved, where resting_clutch shows the channel reports the car's own clutch rather than the pedal.",
+              "type": "integer",
+              "minimum": 0
+            },
+            "other_shifts": {
+              "description": "Shifts that were none of the tests: taken on part throttle, or a lower gear that never took drive.",
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "traces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/telemetryTrace"
+          }
+        }
+      }
+    },
     "review_status": {
       "type": "string",
       "enum": [
@@ -291,6 +385,72 @@
     }
   },
   "$defs": {
+    "telemetryTrace": {
+      "description": "One guided test's samples. A scripted test's trace ends at the sample that settled the result; a test settled by free driving keeps the samples around the most recent shift that counted. Only a result accepted into the draft has one; a retried or skipped attempt does not.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "test",
+        "outcome",
+        "columns",
+        "samples"
+      ],
+      "properties": {
+        "test": {
+          "type": "string",
+          "enum": [
+            "move_off",
+            "full_throttle_upshift",
+            "lifted_upshift",
+            "coast_downshift",
+            "manual_blip_downshift"
+          ]
+        },
+        "outcome": {
+          "description": "Whether the detector accepted the maneuver. A rejected first stage is evidence too: it is what establishes that a lift or a blip was needed.",
+          "type": "string",
+          "enum": [
+            "accepted",
+            "rejected"
+          ]
+        },
+        "sample_rate_hz": {
+          "description": "Median sample rate over this attempt; null when too few samples arrived to measure it. Below 20 the absence of a brief cut or blip is recorded as unknown rather than no.",
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "columns": {
+          "description": "What each position in a sample holds. t_ms counts from the first sample of the trace; clutch, throttle and brake are percentages; engine_started is 1 or 0. A channel with no usable value is null.",
+          "const": [
+            "t_ms",
+            "gear",
+            "clutch",
+            "throttle",
+            "brake",
+            "rpm",
+            "speed_kmh",
+            "engine_torque",
+            "engine_started"
+          ]
+        },
+        "samples": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "array",
+            "minItems": 9,
+            "items": {
+              "type": [
+                "number",
+                "null"
+              ]
+            }
+          }
+        }
+      }
+    },
     "wheelOpenTopState": {
       "type": "string",
       "enum": [

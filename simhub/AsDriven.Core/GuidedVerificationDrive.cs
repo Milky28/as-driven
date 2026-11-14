@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace AsDriven.Core
@@ -38,6 +39,11 @@ namespace AsDriven.Core
         public string FullThrottleUpshift { get; set; }
         public string CoastDownshift { get; set; }
         public string EvidenceNote { get; set; }
+        /// <summary>
+        /// The samples each accepted result was decided from. Null until the
+        /// drive has recorded at least one attempt.
+        /// </summary>
+        public GuidedDriveTelemetry Telemetry { get; set; }
 
         public GuidedDriveResults()
         {
@@ -58,6 +64,38 @@ namespace AsDriven.Core
         {
             return (GuidedDriveResults)MemberwiseClone();
         }
+    }
+
+    /// <summary>
+    /// The samples one guided test was decided from.
+    ///
+    /// A draft used to keep only the verdict and a sentence about it, so a
+    /// detector fault found later could be corrected only by driving every
+    /// affected car again: the automatic-blip fault of 2026-08-17 left 84
+    /// records flagged for exactly that reason. With the samples kept, a
+    /// corrected detector can be run over the drive that was already taken.
+    /// </summary>
+    public sealed class GuidedTestTrace
+    {
+        public string Test { get; set; }
+        /// <summary>Whether the detector accepted the maneuver: "accepted" or "rejected".</summary>
+        public string Outcome { get; set; }
+        /// <summary>Median rate over this attempt, or null when too few samples arrived to say.</summary>
+        public double? SampleRateHz { get; set; }
+        public GuidedTelemetrySample[] Samples { get; set; }
+    }
+
+    public sealed class GuidedDriveTelemetry
+    {
+        /// <summary>Median rate over the whole drive, or null when it could not be measured.</summary>
+        public double? SampleRateHz { get; set; }
+        /// <summary>Published throttle with the car stopped and untouched, when that moment was seen.</summary>
+        public double? RestingThrottle { get; set; }
+        /// <summary>Published clutch at the same moment.</summary>
+        public double? RestingClutch { get; set; }
+        /// <summary>What free driving counted, or null when it saw no shifts.</summary>
+        public FreeDriveSummary FreeDrive { get; set; }
+        public GuidedTestTrace[] Traces { get; set; }
     }
 
     public sealed class GuidedDriveSnapshot
@@ -98,6 +136,36 @@ namespace AsDriven.Core
         // to stop the grinding quickly.
         private static readonly TimeSpan RunningShiftRefusalWindow =
             TimeSpan.FromMilliseconds(900.0);
+
+        // What an attempt keeps for the draft. The newest samples are the ones
+        // the result was decided from, so the window is trimmed from the old
+        // end. Five traces of this size stay well inside the observation
+        // intake limit of 256 KB.
+        private static readonly TimeSpan TraceWindow = TimeSpan.FromSeconds(6.0);
+        private const int TraceMaximumSamples = 300;
+        private static readonly TimeSpan TraceAfterResult = TimeSpan.FromMilliseconds(500.0);
+        private const int TraceAfterResultMaximumSamples = 40;
+
+        // A rate is only reported from enough intervals to take a median of.
+        // Fewer than this is a handful of samples, not a measurement.
+        private const int RateMinimumIntervals = 8;
+
+        /// <summary>
+        /// The slowest telemetry at which "nothing was seen" still means
+        /// nothing happened. An automatic blip or an ignition cut lasts on the
+        /// order of a tenth of a second, so at ten samples a second one can
+        /// pass entirely between two samples. A spike that was seen is still a spike at any rate;
+        /// only its absence needs the rate to vouch for it.
+        /// </summary>
+        public const double MinimumRateForNegativeHz = 20.0;
+
+        /// <summary>
+        /// How many like shifts free driving has to see before it stands in
+        /// for a scripted test. One could be a fluke of timing; the scripted
+        /// test itself accepts one, but there the driver was asked to do
+        /// exactly that and nothing else.
+        /// </summary>
+        public const int FreeDriveShiftsToSettle = 3;
 
         private enum Phase
         {
@@ -193,6 +261,22 @@ namespace AsDriven.Core
         private double _upshiftMaximumThrottle;
         private double _upshiftMinimumThrottle;
         private DateTime? _upshiftGearChangedUtc;
+        private readonly Queue<GuidedTelemetrySample> _attemptSamples =
+            new Queue<GuidedTelemetrySample>();
+        private readonly List<GuidedTestTrace> _traces = new List<GuidedTestTrace>();
+        /// <summary>
+        /// Whole-millisecond gaps between consecutive samples across the drive,
+        /// the last bucket holding everything slower. A median from this is
+        /// not moved by a paused game or a stalled frame.
+        /// </summary>
+        private readonly int[] _sessionIntervals = new int[1001];
+        private int _sessionIntervalCount;
+        private DateTime? _previousSampleUtc;
+        private DateTime? _resultReadyAtUtc;
+        private readonly FreeDriveObserver _freeDrive = new FreeDriveObserver();
+        /// <summary>What free driving had counted when the driver accepted it.</summary>
+        private FreeDriveSummary _freeDriveAccepted;
+        private bool _downshiftSettledByFreeDrive;
 
         public void Start(int? suggestedForwardGears, string simulator = null)
         {
@@ -212,6 +296,12 @@ namespace AsDriven.Core
                 _restingClutchSeen = false;
                 _restingThrottle = 0.0;
                 _restingThrottleSeen = false;
+                _traces.Clear();
+                _freeDriveAccepted = null;
+                _downshiftSettledByFreeDrive = false;
+                Array.Clear(_sessionIntervals, 0, _sessionIntervals.Length);
+                _sessionIntervalCount = 0;
+                _previousSampleUtc = null;
                 ResetTrace();
             }
         }
@@ -238,10 +328,28 @@ namespace AsDriven.Core
             lock (_sync)
             {
                 _lastSample = sample;
+                RecordInterval(sample);
+                if (IsTestPhase(_phase) && _resultReady && _phase != Phase.GearCount
+                    && _resultReadyAtUtc.HasValue
+                    && sample.TimestampUtc - _resultReadyAtUtc.Value <= TraceAfterResult
+                    && _attemptSamples.Count < TraceMaximumSamples + TraceAfterResultMaximumSamples)
+                {
+                    // The result is settled at the gear change, which is the
+                    // one moment a later reader most wants to see past.
+                    _attemptSamples.Enqueue(sample);
+                }
                 if (!IsTestPhase(_phase)
                     || (_resultReady && _phase != Phase.GearCount))
                 {
                     return;
+                }
+                RecordAttemptSample(sample);
+                if (_phase == Phase.GearCount)
+                {
+                    _freeDrive.ThrottleOffset = ThrottleOffset();
+                    _freeDrive.ClutchChannelReportsVehicle =
+                        _restingClutchSeen && _restingClutch > 20.0;
+                    _freeDrive.AddSample(sample);
                 }
                 UpdateTrace(sample);
                 DetectResult(sample);
@@ -278,7 +386,8 @@ namespace AsDriven.Core
                         {
                             _attemptAccepted = true;
                             _resultReady = true;
-                            _result = "Highest gear reached: " + _maximumGear + ".";
+                            _result = "Highest gear reached: " + _maximumGear + "."
+                                + FreeDriveCountSummary(_freeDrive.GetSummary());
                         }
                         break;
                     case Phase.FullThrottleUpshift:
@@ -344,7 +453,9 @@ namespace AsDriven.Core
         {
             lock (_sync)
             {
-                return _results.Clone();
+                GuidedDriveResults results = _results.Clone();
+                results.Telemetry = BuildTelemetry();
+                return results;
             }
         }
 
@@ -626,7 +737,7 @@ namespace AsDriven.Core
                 : "Full-throttle clutchless upshift accepted. "
                     + (automaticCut
                         ? "A shift-local torque interruption was detected while throttle demand stayed high."
-                        : CutEvidenceSummary())
+                        : CutEvidenceSummary() + SlowTelemetrySummary("an automatic cut"))
                     + VehicleClutchSummary();
             SetResult(true, automaticCut, message);
         }
@@ -667,6 +778,17 @@ namespace AsDriven.Core
                 _baselineGear = sample.Gear;
                 _baselineDriveRatio = DriveRatio(sample);
                 _downshiftArmedThrottle = 0.0;
+            }
+            // The ratio a gear holds the engine at is the lowest it shows:
+            // slip, a blip or an engine still falling from the previous gear
+            // can only read higher. A baseline taken from the first sample in
+            // a gear the driver had just shifted up into caught the engine
+            // before it had come down, read as high as the gear below, and so
+            // a live downshift that plainly took drive was never confirmed.
+            if (_downshiftCandidateGear == 0 && sample.Gear == _baselineGear
+                && sample.SpeedKmh > 5.0)
+            {
+                _baselineDriveRatio = Math.Min(_baselineDriveRatio, DriveRatio(sample));
             }
             // Arming already required a closed throttle, so anything above it
             // from here is the car blipping or a pedal the driver was asked not
@@ -773,7 +895,8 @@ namespace AsDriven.Core
                                         + _downshiftArmedThrottle.ToString("0", CultureInfo.InvariantCulture)
                                         + "% (the threshold is 15%)."
                                         + RestingThrottleSummary()
-                                    : "No automatic throttle spike was detected.")
+                                    : "No automatic throttle spike was detected."
+                                        + SlowTelemetrySummary("an automatic blip"))
                                 )
                                 + VehicleClutchSummary());
                     return;
@@ -811,12 +934,14 @@ namespace AsDriven.Core
             _attemptAccepted = accepted;
             _automaticActionObserved = automaticAction;
             _resultReady = true;
+            _resultReadyAtUtc = _lastSample == null ? (DateTime?)null : _lastSample.TimestampUtc;
             _result = message;
         }
 
         private void AcceptResultAndAdvance()
         {
             RememberVehicleClutchTelemetry();
+            KeepAttemptTrace();
             if (_attemptNotTested)
             {
                 // Nothing was measured, so every downstream flag stays as it
@@ -833,6 +958,13 @@ namespace AsDriven.Core
                 case Phase.GearCount:
                     _results.ForwardGears = _maximumGear > 0 ? (int?)_maximumGear : null;
                     _results.DirectGearSelection = "not-tested";
+                    // Whatever free driving already showed needs no scripted
+                    // test. The rest is asked for one test at a time, as before.
+                    if (ApplyFreeDrive(_freeDrive.GetSummary()))
+                    {
+                        MoveTo(AfterUpshiftTests());
+                        break;
+                    }
                     // GTR 2 exposes no usable throttle-input channel through
                     // SimHub. Skip the comparison it cannot measure and retain
                     // the lifted attempt only as clutchless-shift evidence;
@@ -849,7 +981,7 @@ namespace AsDriven.Core
                         _results.FullThrottleUpshift = "yes";
                         _results.AutomaticCut = _automaticActionObserved ? "yes" : "unknown";
                         _results.AutomaticCutMethod = _result;
-                        MoveTo(Phase.CoastDownshift);
+                        MoveTo(AfterUpshiftTests());
                     }
                     else
                     {
@@ -862,7 +994,7 @@ namespace AsDriven.Core
                     _results.ClutchlessUpshift = _attemptAccepted ? "yes" : "no";
                     _results.AutomaticCut = _fullThrottleTestFailed ? "no" : "not-tested";
                     _results.AutomaticCutMethod = _result;
-                    MoveTo(Phase.CoastDownshift);
+                    MoveTo(AfterUpshiftTests());
                     break;
                 case Phase.CoastDownshift:
                     if (_attemptAccepted)
@@ -879,9 +1011,15 @@ namespace AsDriven.Core
                         // unknown rather than no when nothing could be measured.
                         _results.AutomaticBlip = !AutomaticBlipIsMeasurable()
                             ? "unknown"
-                            : ThrottleChannelFollowsPedal()
-                            ? (_automaticActionObserved ? "yes" : "no")
-                            : "unknown";
+                            : !ThrottleChannelFollowsPedal()
+                            ? "unknown"
+                            : _automaticActionObserved
+                            ? "yes"
+                            // A spike that was never sampled looks the same as
+                            // one that never happened. The message already says
+                            // the telemetry was too slow to tell, and the value
+                            // has to agree with it.
+                            : (TelemetryTooSlowForNegative() ? "unknown" : "no");
                         _results.AutomaticBlipMethod = _result;
                         MoveTo(Phase.Complete);
                     }
@@ -965,9 +1103,14 @@ namespace AsDriven.Core
         /// <summary>
         /// The guided tests are about the driver's pedal. Some readers retain
         /// a small idle offset even with the pedal fully released. PMR has
-        /// consistently reported 15%, including when a drive begins after the
-        /// stationary move-off sample was missed. Preserve a captured offset
-        /// when available, otherwise apply PMR's established value. A
+        /// reported 15% on the drives that established this, including when a
+        /// drive begins after the stationary move-off sample was missed. A
+        /// reading taken with the car stopped always wins over that figure:
+        /// PMR 2.3.0.3 read 0% at rest in a TS050, and subtracting 15% anyway
+        /// made full throttle read 85% and marked a channel that plainly
+        /// followed the pedal as one that did not, so a blip seen on every
+        /// downshift was recorded as unknown. PMR's established value is only
+        /// the fallback for a drive that never saw the car at rest. A
         /// non-pedal channel remains ineligible to establish an automatic blip
         /// through <see cref="ThrottleChannelFollowsPedal"/>.
         /// </summary>
@@ -978,9 +1121,9 @@ namespace AsDriven.Core
 
         private double ThrottleOffset()
         {
-            if (_restingThrottleSeen && _restingThrottle > 5.0)
+            if (_restingThrottleSeen)
             {
-                return _restingThrottle;
+                return _restingThrottle > 5.0 ? _restingThrottle : 0.0;
             }
             return string.Equals(_simulator, "pmr", StringComparison.Ordinal)
                 ? 15.0
@@ -1137,7 +1280,7 @@ namespace AsDriven.Core
                 case Phase.MoveOff: MoveTo(Phase.GearCount); break;
                 case Phase.GearCount: MoveTo(Phase.FullThrottleUpshift); break;
                 case Phase.FullThrottleUpshift: MoveTo(Phase.LiftedUpshift); break;
-                case Phase.LiftedUpshift: MoveTo(Phase.CoastDownshift); break;
+                case Phase.LiftedUpshift: MoveTo(AfterUpshiftTests()); break;
                 case Phase.CoastDownshift: MoveTo(Phase.ManualBlipDownshift); break;
                 case Phase.ManualBlipDownshift: MoveTo(Phase.Complete); break;
             }
@@ -1213,8 +1356,316 @@ namespace AsDriven.Core
             return sample.Rpm / Math.Max(sample.SpeedKmh, 1.0);
         }
 
+        private void RecordInterval(GuidedTelemetrySample sample)
+        {
+            if (_previousSampleUtc.HasValue)
+            {
+                double milliseconds = (sample.TimestampUtc - _previousSampleUtc.Value).TotalMilliseconds;
+                // A repeated or backward timestamp is not an interval.
+                if (milliseconds > 0.0)
+                {
+                    int bucket = (int)Math.Min(Math.Round(milliseconds), _sessionIntervals.Length - 1);
+                    _sessionIntervals[bucket]++;
+                    _sessionIntervalCount++;
+                }
+            }
+            _previousSampleUtc = sample.TimestampUtc;
+        }
+
+        private void RecordAttemptSample(GuidedTelemetrySample sample)
+        {
+            // The gear count is ended by the driver and decided from the
+            // highest gear alone, so there is nothing in its samples to
+            // re-examine later.
+            if (_phase == Phase.GearCount)
+            {
+                return;
+            }
+            _attemptSamples.Enqueue(sample);
+            while (_attemptSamples.Count > TraceMaximumSamples
+                || sample.TimestampUtc - _attemptSamples.Peek().TimestampUtc > TraceWindow)
+            {
+                _attemptSamples.Dequeue();
+            }
+        }
+
+        /// <summary>
+        /// Median sample rate over the current attempt, or null when too few
+        /// samples arrived to measure one.
+        /// </summary>
+        private double? AttemptSampleRateHz()
+        {
+            return MedianSampleRateHz(_attemptSamples);
+        }
+
+        private static double? MedianSampleRateHz(IEnumerable<GuidedTelemetrySample> samples)
+        {
+            var intervals = new List<double>();
+            DateTime? previous = null;
+            foreach (GuidedTelemetrySample sample in samples)
+            {
+                if (previous.HasValue)
+                {
+                    double milliseconds = (sample.TimestampUtc - previous.Value).TotalMilliseconds;
+                    if (milliseconds > 0.0)
+                    {
+                        intervals.Add(milliseconds);
+                    }
+                }
+                previous = sample.TimestampUtc;
+            }
+            if (intervals.Count < RateMinimumIntervals)
+            {
+                return null;
+            }
+            intervals.Sort();
+            return 1000.0 / intervals[intervals.Count / 2];
+        }
+
+        private double? SessionSampleRateHz()
+        {
+            if (_sessionIntervalCount < RateMinimumIntervals)
+            {
+                return null;
+            }
+            int seen = 0;
+            for (int milliseconds = 0; milliseconds < _sessionIntervals.Length; milliseconds++)
+            {
+                seen += _sessionIntervals[milliseconds];
+                if (seen * 2 > _sessionIntervalCount)
+                {
+                    return 1000.0 / Math.Max(milliseconds, 1);
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Whether this attempt was sampled too slowly for the absence of a
+        /// brief event to mean anything. An unmeasured rate disqualifies
+        /// nothing, the same way an unseen resting throttle does not.
+        /// </summary>
+        private bool TelemetryTooSlowForNegative()
+        {
+            double? rate = AttemptSampleRateHz();
+            return rate.HasValue && rate.Value < MinimumRateForNegativeHz;
+        }
+
+        private string SlowTelemetrySummary(string what)
+        {
+            return SlowTelemetrySummary(what, AttemptSampleRateHz());
+        }
+
+        private static string SlowTelemetrySummary(string what, double? rate)
+        {
+            if (!rate.HasValue || rate.Value >= MinimumRateForNegativeHz)
+            {
+                return string.Empty;
+            }
+            return " Telemetry arrived at about "
+                + rate.Value.ToString("0", CultureInfo.InvariantCulture)
+                + " samples a second, which is too slow to rule out " + what
+                + ": one can pass between two samples. This stays unknown rather than no.";
+        }
+
+        private static string TraceName(Phase phase)
+        {
+            switch (phase)
+            {
+                case Phase.MoveOff: return "move_off";
+                case Phase.FullThrottleUpshift: return "full_throttle_upshift";
+                case Phase.LiftedUpshift: return "lifted_upshift";
+                case Phase.CoastDownshift: return "coast_downshift";
+                case Phase.ManualBlipDownshift: return "manual_blip_downshift";
+                default: return null;
+            }
+        }
+
+        /// <summary>
+        /// Keeps the samples behind a result the driver has just accepted.
+        /// Retry and Skip discard theirs: only an attempt that was written
+        /// into the results has anything to be checked against later.
+        /// </summary>
+        private void KeepAttemptTrace()
+        {
+            string name = TraceName(_phase);
+            if (name == null || _attemptNotTested || _attemptSamples.Count == 0)
+            {
+                return;
+            }
+            _traces.RemoveAll(trace => string.Equals(trace.Test, name, StringComparison.Ordinal));
+            _traces.Add(new GuidedTestTrace
+            {
+                Test = name,
+                Outcome = _attemptAccepted ? "accepted" : "rejected",
+                SampleRateHz = AttemptSampleRateHz(),
+                Samples = _attemptSamples.ToArray()
+            });
+        }
+
+        private Phase AfterUpshiftTests()
+        {
+            return _downshiftSettledByFreeDrive ? Phase.Complete : Phase.CoastDownshift;
+        }
+
+        private bool FreeDriveSettlesUpshift(FreeDriveSummary summary)
+        {
+            return VerificationReviewRules.UpshiftThrottleIsMeasurable(_simulator)
+                && summary.FullThrottleUpshifts >= FreeDriveShiftsToSettle;
+        }
+
+        /// <summary>
+        /// Free driving settles the downshift only when its downshifts agree.
+        /// Some with a throttle spike and some without is a driver who blipped
+        /// on some of them, and the scripted test - where the pedal is asked to
+        /// stay closed - is what tells that from the car.
+        /// </summary>
+        private bool FreeDriveSettlesDownshift(FreeDriveSummary summary)
+        {
+            return VerificationReviewRules.UpshiftThrottleIsMeasurable(_simulator)
+                && summary.CoastDownshifts >= FreeDriveShiftsToSettle
+                && (summary.WithThrottleSpike == 0
+                    || summary.WithThrottleSpike == summary.CoastDownshifts);
+        }
+
+        private static string FreeDriveCountSummary(FreeDriveSummary summary)
+        {
+            if (!summary.HasEvents)
+            {
+                return string.Empty;
+            }
+            return " Free driving saw " + summary.FullThrottleUpshifts
+                + " full-throttle and " + summary.LiftedUpshifts
+                + " lifted clutchless upshifts, " + summary.CoastDownshifts
+                + " off-throttle clutchless downshifts, " + summary.ShiftsWithClutch
+                + " shifts with clutch input, which were set aside, and " + summary.OtherShifts
+                + " that were none of these.";
+        }
+
+        /// <summary>
+        /// Writes what free driving established into the results. Returns
+        /// whether the upshift tests are settled; the downshift's answer is
+        /// kept in <see cref="_downshiftSettledByFreeDrive"/> because it is
+        /// consulted later, after any scripted upshift test.
+        /// </summary>
+        private bool ApplyFreeDrive(FreeDriveSummary summary)
+        {
+            _freeDriveAccepted = summary.HasEvents ? summary : null;
+            double? rate = SessionSampleRateHz();
+            bool tooSlow = rate.HasValue && rate.Value < MinimumRateForNegativeHz;
+            bool upshiftSettled = FreeDriveSettlesUpshift(summary);
+            if (upshiftSettled)
+            {
+                bool cut = summary.CutMeasured >= FreeDriveShiftsToSettle
+                    && summary.WithTorqueCut == summary.CutMeasured;
+                _results.ClutchlessUpshift = "yes";
+                _results.FullThrottleUpshift = "yes";
+                _results.AutomaticCut = cut ? "yes" : "unknown";
+                _results.AutomaticCutMethod = "Free driving: " + summary.FullThrottleUpshifts
+                    + " full-throttle clutchless upshifts were accepted. "
+                    + (cut
+                        ? "Engine torque collapsed on all " + summary.CutMeasured
+                            + " measured while throttle demand stayed high."
+                        : summary.CutMeasured == 0 && summary.EngineRanFree > 0
+                        ? "Engine torque fell on " + summary.EngineRanFree
+                            + " while engine speed climbed with no gear driving it, which is"
+                            + " an unloaded engine and not a cut, so nothing was measured"
+                            + " about a cut."
+                        : summary.CutMeasured == 0
+                        ? "None published engine torque with the throttle held through the"
+                            + " change, so nothing was measured about a cut."
+                        : summary.CutMeasured < FreeDriveShiftsToSettle
+                        ? "Only " + summary.CutMeasured + " could be measured for a cut, of which "
+                            + summary.WithTorqueCut + " showed a torque collapse; "
+                            + FreeDriveShiftsToSettle + " are needed to establish one."
+                            + SlowTelemetrySummary("an automatic cut", rate)
+                        : "Engine torque collapsed on " + summary.WithTorqueCut + " of "
+                            + summary.CutMeasured + " measured, which does not establish a cut."
+                            + SlowTelemetrySummary("an automatic cut", rate))
+                    + FreeDriveClutchSummary(summary);
+                KeepFreeDriveTrace("full_throttle_upshift", summary.UpshiftExample);
+            }
+            _downshiftSettledByFreeDrive = FreeDriveSettlesDownshift(summary);
+            if (_downshiftSettledByFreeDrive)
+            {
+                bool spike = summary.WithThrottleSpike > 0;
+                _results.ClutchlessDownshift = "yes";
+                _results.CoastDownshift = "yes";
+                _results.AutomaticBlip = !AutomaticBlipIsMeasurable() || !ThrottleChannelFollowsPedal()
+                    ? "unknown"
+                    : spike
+                    ? "yes"
+                    : (tooSlow ? "unknown" : "no");
+                _results.AutomaticBlipMethod = "Free driving: " + summary.CoastDownshifts
+                    + " off-throttle clutchless downshifts were accepted. "
+                    + (!AutomaticBlipIsMeasurable()
+                        ? UnmeasurableAutomaticBlipSummary(false)
+                        : spike
+                        ? "A throttle spike followed every one, peaking at "
+                            + summary.PeakThrottleSpike.ToString("0", CultureInfo.InvariantCulture)
+                            + "% (the threshold is 15%)." + RestingThrottleSummary()
+                        : "No throttle spike followed any of them."
+                            + SlowTelemetrySummary("an automatic blip", rate))
+                    + FreeDriveClutchSummary(summary);
+                KeepFreeDriveTrace("coast_downshift", summary.DownshiftExample);
+            }
+            return upshiftSettled;
+        }
+
+        /// <summary>
+        /// The same caution the scripted tests attach, for the same reason:
+        /// on a channel that reports the car's clutch, a driver's foot on the
+        /// pedal cannot be told from the car working it.
+        /// </summary>
+        private string FreeDriveClutchSummary(FreeDriveSummary summary)
+        {
+            if (summary.CountedWithVehicleClutch == 0)
+            {
+                return string.Empty;
+            }
+            return " The clutch channel moved during " + summary.CountedWithVehicleClutch
+                + " of the counted shifts. It already read " + Math.Round(_restingClutch)
+                + "% with the car stopped before any test began, so this simulator reports the"
+                + " car's own clutch here; confirm the pedal was untouched.";
+        }
+
+        private void KeepFreeDriveTrace(string name, GuidedTelemetrySample[] samples)
+        {
+            if (samples == null || samples.Length == 0)
+            {
+                return;
+            }
+            _traces.RemoveAll(trace => string.Equals(trace.Test, name, StringComparison.Ordinal));
+            _traces.Add(new GuidedTestTrace
+            {
+                Test = name,
+                Outcome = "accepted",
+                SampleRateHz = MedianSampleRateHz(samples),
+                Samples = samples
+            });
+        }
+
+        private GuidedDriveTelemetry BuildTelemetry()
+        {
+            if (_traces.Count == 0 && _freeDriveAccepted == null)
+            {
+                return null;
+            }
+            return new GuidedDriveTelemetry
+            {
+                SampleRateHz = SessionSampleRateHz(),
+                RestingThrottle = _restingThrottleSeen ? (double?)_restingThrottle : null,
+                RestingClutch = _restingClutchSeen ? (double?)_restingClutch : null,
+                FreeDrive = _freeDriveAccepted,
+                Traces = _traces.ToArray()
+            };
+        }
+
         private void ResetTrace()
         {
+            _attemptSamples.Clear();
+            _resultReadyAtUtc = null;
+            _freeDrive.Reset();
             _baselineGear = 0;
             _downshiftCandidateGear = 0;
             _downshiftCandidateAtUtc = DateTime.MinValue;
@@ -1314,7 +1765,7 @@ namespace AsDriven.Core
             {
                 case Phase.Intro: return "Before you begin";
                 case Phase.MoveOff: return "Move-off clutch test";
-                case Phase.GearCount: return "Forward gears";
+                case Phase.GearCount: return "Free driving";
                 case Phase.FullThrottleUpshift: return "Full-throttle upshift";
                 case Phase.LiftedUpshift: return "Lifted-throttle upshift";
                 case Phase.CoastDownshift: return "Downshift without pedal input";
@@ -1330,7 +1781,7 @@ namespace AsDriven.Core
             {
                 case Phase.Intro: return "Prepare to drive";
                 case Phase.MoveOff: return "Release the clutch";
-                case Phase.GearCount: return "Find the top gear";
+                case Phase.GearCount: return "Drive normally up to top gear";
                 case Phase.FullThrottleUpshift: return "Upshift without clutch input";
                 case Phase.LiftedUpshift: return "Upshift without clutch input";
                 case Phase.CoastDownshift: return "Downshift without clutch input";
@@ -1365,7 +1816,12 @@ namespace AsDriven.Core
                 // off without one. Held against the brake there is nowhere for
                 // that creep to go, so the engine either stalls or it does not.
                 case Phase.MoveOff: return "Stopped in 1st, brake on. Release the clutch fully.";
-                case Phase.GearCount: return "Shift up until the gearbox will not go higher.";
+                // Every flat upshift and every off-throttle downshift here is
+                // one of the tests that follow, taken without being asked, so
+                // a car that accepts them is finished after this step. The
+                // clutch is not forbidden: a shift made with it is set aside
+                // and the scripted test asks again.
+                case Phase.GearCount: return "Shift up at full throttle and down off-throttle. Skip the clutch if the car allows.";
                 case Phase.FullThrottleUpshift: return "Keep throttle above 70% while moving, then shift up.";
                 case Phase.LiftedUpshift: return "While moving, lift off the throttle, then shift up.";
                 case Phase.CoastDownshift: return "At safe RPM, lift and downshift. Stay off the throttle.";
@@ -1381,7 +1837,7 @@ namespace AsDriven.Core
             {
                 case Phase.Intro: return "Next accepts; use Retry or Skip when needed.";
                 case Phase.MoveOff: return "If it does not stall, release the brake and add light throttle.";
-                case Phase.GearCount: return "Then press NEXT. Only you can see the top gear.";
+                case Phase.GearCount: return "Reach top gear, then press NEXT. A lap of normal driving is plenty.";
                 case Phase.FullThrottleUpshift: return "Keep the clutch fully released throughout the test.";
                 case Phase.LiftedUpshift: return "Keep the clutch fully released throughout the test.";
                 case Phase.CoastDownshift: return "Stay off the throttle and keep the clutch fully released until CAPTURED.";
@@ -1404,9 +1860,18 @@ namespace AsDriven.Core
                         ? "Moved off without the clutch"
                         : "No movement without the clutch; this car needs it";
                 case Phase.GearCount:
-                    return _maximumGear > 0
-                        ? "Forward gears recorded: " + _maximumGear
-                        : "No forward gears recorded";
+                    if (_maximumGear <= 0)
+                    {
+                        return "No forward gears recorded";
+                    }
+                    FreeDriveSummary seen = _freeDrive.GetSummary();
+                    bool up = FreeDriveSettlesUpshift(seen);
+                    bool down = FreeDriveSettlesDownshift(seen);
+                    return _maximumGear + " gears. "
+                        + (up && down ? "Upshifts and downshifts covered"
+                            : up ? "Upshifts covered; downshift test next"
+                            : down ? "Downshifts covered; upshift test next"
+                            : "Upshift and downshift tests next");
                 case Phase.FullThrottleUpshift:
                     return _attemptAccepted
                         ? "Full-throttle upshift detected"
@@ -1421,8 +1886,12 @@ namespace AsDriven.Core
                     {
                         return "Downshift detected; automatic blip unavailable in telemetry";
                     }
-                    return _automaticActionObserved
-                        ? "Downshift and automatic blip detected"
+                    if (_automaticActionObserved)
+                    {
+                        return "Downshift and automatic blip detected";
+                    }
+                    return TelemetryTooSlowForNegative()
+                        ? "Downshift detected; telemetry too slow to rule out a blip"
                         : "Downshift detected; no automatic blip";
                 case Phase.ManualBlipDownshift:
                     return _attemptAccepted
@@ -1438,6 +1907,15 @@ namespace AsDriven.Core
             if (sample == null)
             {
                 return "Waiting for live telemetry";
+            }
+            if (_phase == Phase.GearCount)
+            {
+                // What this step is collecting, so the driver can see a shift
+                // register and knows when there are enough.
+                FreeDriveSummary seen = _freeDrive.GetSummary();
+                return "Top gear " + (_maximumGear > 0 ? _maximumGear.ToString() : "-")
+                    + "  |  Up " + seen.FullThrottleUpshifts
+                    + "  |  Down " + seen.CoastDownshifts;
             }
             return "G " + (sample.Gear == 0 ? "N" : sample.Gear.ToString())
                 + "  |  C " + Math.Round(sample.Clutch) + "%"

@@ -1547,6 +1547,485 @@ namespace AsDriven.Core.Tests
                     Equal("yes", guidedResults.ClutchlessDownshift, "prefills accepted clutchless downshift");
                     Equal("yes", guidedResults.AutomaticBlip, "prefills telemetry-supported automatic blip");
 
+                    // The drive keeps the samples each accepted result was
+                    // decided from. A draft that holds only verdicts cannot be
+                    // re-examined when a detector fault is found later, which
+                    // is what left 84 records waiting on a second drive after
+                    // the automatic-blip fault.
+                    True(guidedResults.Telemetry != null, "keeps the samples behind the guided results");
+                    Equal(
+                        "move_off,full_throttle_upshift,coast_downshift",
+                        string.Join(",", guidedResults.Telemetry.Traces.Select(trace => trace.Test)),
+                        "keeps one trace per accepted test and none for the driver-ended gear count");
+                    True(
+                        guidedResults.Telemetry.Traces.All(trace => trace.Outcome == "accepted"),
+                        "records that each kept attempt was accepted");
+                    True(
+                        guidedResults.Telemetry.Traces.All(trace => !trace.SampleRateHz.HasValue),
+                        "reports no sample rate from a handful of samples");
+                    {
+                        // Sixty samples a second with no blip is a measured no.
+                        GuidedVerificationDrive fast = CoastDownshiftDrive(now, 16, 1000, false);
+                        Equal("no", fast.GetResults().AutomaticBlip,
+                            "a blip that never appeared at a fast sample rate is recorded as no");
+                        GuidedTestTrace fastTrace = fast.GetResults().Telemetry.Traces
+                            .Single(trace => trace.Test == "coast_downshift");
+                        True(fastTrace.SampleRateHz.HasValue
+                                && Math.Abs(fastTrace.SampleRateHz.Value - 62.5) < 0.01,
+                            "measures the attempt's median sample rate");
+                        True(fast.GetResults().Telemetry.SampleRateHz.HasValue,
+                            "measures a sample rate for the drive as a whole");
+
+                        // Ten a second can step straight over one, so the same
+                        // absence proves nothing and the answer stays unknown.
+                        GuidedVerificationDrive slow = CoastDownshiftDrive(now, 100, 1000, false);
+                        Equal("yes", slow.GetResults().ClutchlessDownshift,
+                            "slow telemetry still establishes that the downshift was accepted");
+                        Equal("unknown", slow.GetResults().AutomaticBlip,
+                            "an unseen blip at a slow sample rate stays unknown rather than no");
+                        True(slow.GetResults().AutomaticBlipMethod.Contains("too slow to rule out an automatic blip"),
+                            "says why the slow-rate blip answer is unknown");
+
+                        // A spike that was sampled is a spike at any rate.
+                        GuidedVerificationDrive slowBlip = CoastDownshiftDrive(now, 100, 1000, true);
+                        Equal("yes", slowBlip.GetResults().AutomaticBlip,
+                            "a blip seen at a slow sample rate is still recorded");
+
+                        // A long run-up must not grow the draft without bound.
+                        GuidedVerificationDrive longCoast = CoastDownshiftDrive(now, 16, 20000, false);
+                        GuidedTestTrace longTrace = longCoast.GetResults().Telemetry.Traces
+                            .Single(trace => trace.Test == "coast_downshift");
+                        True(longTrace.Samples.Length <= 300, "caps the samples kept for one attempt");
+                        True(longTrace.Samples.Any(sample => sample.Gear == 3)
+                                && longTrace.Samples.Any(sample => sample.Gear == 4),
+                            "keeps the end of the attempt, where the shift happened");
+
+                        // The same holds for the torque cut on the upshift.
+                        GuidedVerificationDrive slowUpshift = new GuidedVerificationDrive();
+                        slowUpshift.Start(6);
+                        for (int guard = 0; guard < 40
+                            && slowUpshift.GetSnapshot().Title != "Full-throttle upshift"; guard++)
+                        {
+                            slowUpshift.AddSample(GuidedSample(now, 3, 0, 0, 4000, 80, 100, true));
+                            slowUpshift.Next();
+                        }
+                        for (int tick = 1; tick <= 12; tick++)
+                        {
+                            slowUpshift.AddSample(GuidedSample(
+                                now.AddMilliseconds(tick * 100), tick < 12 ? 3 : 4, 0, 95, 6000, 120, 300, true));
+                        }
+                        True(slowUpshift.GetSnapshot().ResultReady, "accepts the slow-rate full-throttle upshift");
+                        True(slowUpshift.GetSnapshot().Result.Contains("too slow to rule out an automatic cut"),
+                            "does not present held torque at a slow sample rate as the absence of a cut");
+
+                        // The draft stores the trace one sample to a line, and
+                        // a corrected detector can be run over it later.
+                        GuidedDriveTelemetry recorded = slow.GetResults().Telemetry;
+                        GuidedTestTrace recordedCoast = recorded.Traces
+                            .Single(trace => trace.Test == "coast_downshift");
+                        recordedCoast.Samples[0].EngineTorque = double.NaN;
+                        verificationDraft.Telemetry = recorded;
+                        string traceDirectory = Path.Combine(
+                            Path.GetTempPath(), "as-driven-trace-" + Guid.NewGuid().ToString("N"));
+                        try
+                        {
+                            string tracePath = VerificationObservationWriter.WriteDraft(
+                                traceDirectory, verificationDraft);
+                            string traceText = File.ReadAllText(tracePath);
+                            True(traceText.Contains("[0,4,0,0,0,4500,80,null,1]"),
+                                "writes each sample on one line and a missing torque value as null");
+                            JObject traceJson = JObject.Parse(traceText);
+                            JToken storedCoast = traceJson["telemetry"]["traces"]
+                                .Single(trace => (string)trace["test"] == "coast_downshift");
+                            Equal(9, ((JArray)storedCoast["columns"]).Count, "names every stored channel");
+                            Equal(recordedCoast.Samples.Length, ((JArray)storedCoast["samples"]).Count,
+                                "stores every kept sample");
+                            Equal(10.0, (double)storedCoast["sample_rate_hz"], "stores the attempt's sample rate");
+
+                            GuidedVerificationDrive replay = new GuidedVerificationDrive();
+                            replay.Start(6);
+                            for (int guard = 0; guard < 40
+                                && replay.GetSnapshot().Title != "Downshift without pedal input"; guard++)
+                            {
+                                replay.AddSample(GuidedSample(now, 4, 0, 0, 4000, 80, 100, true));
+                                replay.Next();
+                            }
+                            foreach (JToken row in (JArray)storedCoast["samples"])
+                            {
+                                replay.AddSample(GuidedSample(
+                                    now.AddMilliseconds((double)row[0]),
+                                    (int)row[1],
+                                    (double)row[2],
+                                    (double)row[3],
+                                    (double)row[5],
+                                    (double)row[6],
+                                    row[7].Type == JTokenType.Null ? double.NaN : (double)row[7],
+                                    (int)row[8] == 1,
+                                    (double)row[4]));
+                            }
+                            True(replay.GetSnapshot().ResultReady, "a stored trace settles the same test when replayed");
+                            replay.Next();
+                            Equal(slow.GetResults().AutomaticBlip, replay.GetResults().AutomaticBlip,
+                                "replaying a stored trace reproduces the recorded answer");
+
+                            string redactedTracePath = VerificationObservationWriter.WriteRedactedCopy(tracePath);
+                            True(File.ReadAllText(redactedTracePath).Contains("[0,4,0,0,0,4500,80,null,1]"),
+                                "the redacted copy keeps the trace and its one-line samples");
+                        }
+                        finally
+                        {
+                            verificationDraft.Telemetry = null;
+                            if (Directory.Exists(traceDirectory))
+                            {
+                                Directory.Delete(traceDirectory, true);
+                            }
+                        }
+                    }
+
+                    // Ordinary driving already contains the scripted tests:
+                    // every flat upshift and every off-throttle downshift is
+                    // one. A car that takes them needs no scripted test, and
+                    // several shifts are better evidence than one.
+                    {
+                        int clock = 0;
+                        GuidedVerificationDrive lap = FreeDrivingDrive(now);
+                        for (int gear = 1; gear < 6; gear++)
+                        {
+                            FreeUpshift(lap, now, ref clock, 16, gear, 0, 95, true);
+                        }
+                        for (int gear = 6; gear > 3; gear--)
+                        {
+                            FreeDownshift(lap, now, ref clock, 16, gear, 0, false, true);
+                        }
+                        True(lap.GetSnapshot().LiveValues.Contains("Up 5")
+                                && lap.GetSnapshot().LiveValues.Contains("Down 3"),
+                            "shows the driver each free-driving shift as it registers");
+                        lap.Next();
+                        True(lap.GetSnapshot().Result.Contains("Highest gear reached: 6"),
+                            "free driving still records the highest gear reached");
+                        True(lap.GetSnapshot().ResultSummary.Contains("Upshifts and downshifts covered"),
+                            "tells the driver that no scripted shift test remains");
+                        lap.Next();
+                        True(lap.GetSnapshot().Completed,
+                            "finishes the drive when free driving settled both shift tests");
+                        GuidedDriveResults lapResults = lap.GetResults();
+                        Equal(6, lapResults.ForwardGears.Value, "free driving prefills the gear count");
+                        Equal("yes", lapResults.FullThrottleUpshift, "free driving establishes full-throttle upshifts");
+                        Equal("yes", lapResults.ClutchlessUpshift, "free driving establishes clutchless upshifts");
+                        Equal("yes", lapResults.AutomaticCut, "a torque collapse on every flat upshift is an automatic cut");
+                        Equal("yes", lapResults.CoastDownshift, "free driving establishes off-throttle downshifts");
+                        Equal("yes", lapResults.ClutchlessDownshift, "free driving establishes clutchless downshifts");
+                        Equal("no", lapResults.AutomaticBlip, "no spike on any free-driving downshift is no automatic blip");
+                        True(lapResults.AutomaticCutMethod.Contains("5 full-throttle clutchless upshifts"),
+                            "says how many upshifts the answer rests on");
+                        Equal(5, lapResults.Telemetry.FreeDrive.FullThrottleUpshifts, "counts the flat upshifts");
+                        Equal(5, lapResults.Telemetry.FreeDrive.WithTorqueCut, "counts the torque cuts");
+                        Equal(3, lapResults.Telemetry.FreeDrive.CoastDownshifts, "counts the off-throttle downshifts");
+                        Equal(
+                            "full_throttle_upshift,coast_downshift",
+                            string.Join(",", lapResults.Telemetry.Traces.Select(trace => trace.Test)),
+                            "keeps an example of each kind of shift free driving settled");
+                        verificationDraft.Telemetry = lapResults.Telemetry;
+                        Equal(3, (int)VerificationObservationWriter.CreatePayload(verificationDraft)
+                                ["telemetry"]["free_drive"]["coast_downshifts"],
+                            "stores the free-driving counts in the draft");
+                        verificationDraft.Telemetry = null;
+
+                        // A car that blips itself does so on every downshift.
+                        clock = 0;
+                        GuidedVerificationDrive blipping = FreeDrivingDrive(now);
+                        for (int gear = 6; gear > 2; gear--)
+                        {
+                            FreeDownshift(blipping, now, ref clock, 16, gear, 0, true, true);
+                        }
+                        blipping.Next();
+                        blipping.Next();
+                        Equal("yes", blipping.GetResults().AutomaticBlip,
+                            "a spike after every free-driving downshift is recorded as an automatic blip");
+                        Equal("Full-throttle upshift", blipping.GetSnapshot().Title,
+                            "still asks for the upshift test free driving did not cover");
+                        blipping.AddSample(GuidedSample(now.AddMilliseconds(clock + 16), 3, 0, 90, 5000, 80, 220, true));
+                        blipping.AddSample(GuidedSample(now.AddMilliseconds(clock + 32), 4, 0, 90, 4300, 82, 30, true));
+                        blipping.Next();
+                        True(blipping.GetSnapshot().Completed,
+                            "does not repeat a downshift test free driving already settled");
+
+                        // Some with a spike and some without is a driver who
+                        // blipped on some of them. Only the scripted test,
+                        // where the pedal stays closed, tells that from the car.
+                        clock = 0;
+                        GuidedVerificationDrive mixedLap = FreeDrivingDrive(now);
+                        for (int gear = 1; gear < 6; gear++)
+                        {
+                            FreeUpshift(mixedLap, now, ref clock, 16, gear, 0, 95, false);
+                        }
+                        for (int gear = 6; gear > 2; gear--)
+                        {
+                            FreeDownshift(mixedLap, now, ref clock, 16, gear, 0, gear % 2 == 0, true);
+                        }
+                        mixedLap.Next();
+                        mixedLap.Next();
+                        Equal("Downshift without pedal input", mixedLap.GetSnapshot().Title,
+                            "asks for the scripted downshift when free-driving downshifts disagree");
+                        Equal("unknown", mixedLap.GetResults().AutomaticCut,
+                            "flat upshifts with no torque collapse leave the cut unknown, never no");
+                        Equal("not-tested", mixedLap.GetResults().AutomaticBlip,
+                            "disagreeing downshifts record nothing about the blip");
+
+                        // A shift made with the clutch says nothing about
+                        // shifting without it, and a lifted upshift alone does
+                        // not show the lift was needed.
+                        clock = 0;
+                        GuidedVerificationDrive clutched = FreeDrivingDrive(now);
+                        for (int gear = 1; gear < 6; gear++)
+                        {
+                            FreeUpshift(clutched, now, ref clock, 16, gear, gear < 4 ? 80 : 0, gear < 4 ? 95 : 20, false);
+                        }
+                        for (int gear = 6; gear > 2; gear--)
+                        {
+                            FreeDownshift(clutched, now, ref clock, 16, gear, 80, false, true);
+                        }
+                        clutched.Next();
+                        clutched.Next();
+                        Equal("Full-throttle upshift", clutched.GetSnapshot().Title,
+                            "clutched and lifted shifts settle nothing, so the scripted tests follow");
+                        Equal("not-tested", clutched.GetResults().ClutchlessUpshift,
+                            "records nothing about clutchless shifting from shifts made with the clutch");
+                        Equal(7, clutched.GetResults().Telemetry.FreeDrive.ShiftsWithClutch,
+                            "counts the shifts it set aside");
+                        Equal(2, clutched.GetResults().Telemetry.FreeDrive.LiftedUpshifts,
+                            "counts lifted upshifts without treating them as a required lift");
+
+                        // The gear index reports what was selected. A lower
+                        // gear that never took drive is not an accepted shift.
+                        clock = 0;
+                        GuidedVerificationDrive slipping = FreeDrivingDrive(now);
+                        for (int gear = 6; gear > 2; gear--)
+                        {
+                            FreeDownshift(slipping, now, ref clock, 16, gear, 0, false, false);
+                        }
+                        slipping.Next();
+                        slipping.Next();
+                        Equal("not-tested", slipping.GetResults().ClutchlessDownshift,
+                            "a selected gear that never took drive is not counted as a downshift");
+
+                        // Project Motor Racing reports the car's own clutch on
+                        // the clutch channel: 100% with the car stopped, and
+                        // 100% again through every downshift, together with
+                        // the car's blip. Its published throttle also dips to
+                        // 80% just before an upshift. The first live drive of
+                        // free driving, in a TS050, set every downshift aside
+                        // as the driver's clutch and matched no upshift at all,
+                        // so nothing was settled. These are that drive's shapes.
+                        clock = 0;
+                        GuidedVerificationDrive pmrLap = new GuidedVerificationDrive();
+                        pmrLap.Start(7, "pmr");
+                        pmrLap.AddSample(GuidedSample(now, 0, 100, 0, 1500, 0, -0.4, true, 50));
+                        for (int guard = 0; guard < 40
+                            && pmrLap.GetSnapshot().Title != "Free driving"; guard++)
+                        {
+                            pmrLap.Next();
+                        }
+                        for (int gear = 1; gear < 7; gear++)
+                        {
+                            double speed = 100 + gear * 20;
+                            FreeSteady(pmrLap, now, ref clock, 16, 1000, gear, 0, 100, 8200, speed, 410);
+                            FreeSteady(pmrLap, now, ref clock, 16, 100, gear, 0, 100, 8200, speed, 300);
+                            FreeSteady(pmrLap, now, ref clock, 16, 100, gear, 0, 100, 8200, speed, 190);
+                            FreeSteady(pmrLap, now, ref clock, 16, 64, gear, 0, 80, 8200, speed, 140);
+                            FreeSteady(pmrLap, now, ref clock, 16, 800, gear + 1, 0, 100, 8000, speed, 300);
+                        }
+                        for (int gear = 7; gear > 3; gear--)
+                        {
+                            FreeSteady(pmrLap, now, ref clock, 16, 1000, gear, 0, 0, 5700, 155, -95);
+                            FreeSteady(pmrLap, now, ref clock, 16, 100, gear, 100, 100, 5800, 153, -80);
+                            FreeSteady(pmrLap, now, ref clock, 16, 32, gear - 1, 80, 0, 6100, 152, -57);
+                            FreeSteady(pmrLap, now, ref clock, 16, 700, gear - 1, 0, 0, 6750, 149, -90);
+                        }
+                        pmrLap.Next();
+                        pmrLap.Next();
+                        GuidedDriveResults pmrResults = pmrLap.GetResults();
+                        Equal(6, pmrResults.Telemetry.FreeDrive.FullThrottleUpshifts,
+                            "counts a flat upshift whose published throttle dips as the car cuts");
+                        Equal(4, pmrResults.Telemetry.FreeDrive.CoastDownshifts,
+                            "counts a downshift where the channel shows the car's own clutch");
+                        Equal(0, pmrResults.Telemetry.FreeDrive.ShiftsWithClutch,
+                            "sets no shift aside as the driver's clutch on a channel that reads 100% at rest");
+                        Equal(4, pmrResults.Telemetry.FreeDrive.CountedWithVehicleClutch,
+                            "records how many counted shifts moved the clutch channel");
+                        True(pmrLap.GetSnapshot().Completed,
+                            "free driving settles both tests on a car that works its own clutch");
+                        Equal("yes", pmrResults.FullThrottleUpshift, "the live drive's upshifts are settled");
+                        Equal("yes", pmrResults.AutomaticCut, "the live drive's torque collapse is read as a cut");
+                        Equal("yes", pmrResults.CoastDownshift, "the live drive's downshifts are settled");
+                        // That drive read 0% throttle with the car stopped, so
+                        // the channel follows the pedal and PMR's older 15%
+                        // idle figure does not apply to it. A spike after every
+                        // downshift is then a blip, not an unknown.
+                        Equal("yes", pmrResults.AutomaticBlip,
+                            "a measured zero resting throttle overrides PMR's fallback offset");
+                        True(pmrResults.AutomaticBlipMethod.Contains("peaking at 100%"),
+                            "reports the spike without subtracting an offset the drive did not measure");
+                        True(pmrResults.AutomaticBlipMethod.Contains("car's own clutch"),
+                            "attaches the scripted test's clutch caution to the free-driving result");
+
+                        // The scripted trace used to end on the sample that
+                        // settled it, which for an upshift is the gear change
+                        // itself, leaving nothing after the shift to look at.
+                        GuidedVerificationDrive tail = new GuidedVerificationDrive();
+                        tail.Start(6);
+                        for (int guard = 0; guard < 40
+                            && tail.GetSnapshot().Title != "Full-throttle upshift"; guard++)
+                        {
+                            tail.AddSample(GuidedSample(now, 3, 0, 0, 4000, 80, 100, true));
+                            tail.Next();
+                        }
+                        for (int tick = 1; tick <= 120; tick++)
+                        {
+                            tail.AddSample(GuidedSample(
+                                now.AddMilliseconds(tick * 16), tick < 30 ? 3 : 4, 0, 95, 6000, 120, 300, true));
+                        }
+                        tail.Next();
+                        GuidedTelemetrySample[] tailSamples = tail.GetResults().Telemetry.Traces
+                            .Single(trace => trace.Test == "full_throttle_upshift").Samples;
+                        int afterShift = tailSamples.Count(sample => sample.Gear == 4);
+                        True(afterShift > 20 && afterShift < 45,
+                            "keeps about half a second of samples after the result, and no more");
+
+                        // Going down the gears for a corner, a driver takes
+                        // the next gear well inside the time one is normally
+                        // confirmed over. A live drive lost most of its quick
+                        // downshifts that way. Each gear here is held 350 ms,
+                        // with the car's blip on every one.
+                        clock = 0;
+                        GuidedVerificationDrive quick = FreeDrivingDrive(now);
+                        FreeSteady(quick, now, ref clock, 16, 1000, 6, 0, 0, 4500, 220, 0);
+                        for (int gear = 5; gear >= 2; gear--)
+                        {
+                            double quickSpeed = 100 + gear * 20;
+                            FreeSteady(quick, now, ref clock, 16, 100, gear, 0, 60, 6000, quickSpeed, 0);
+                            FreeSteady(quick, now, ref clock, 16, 250, gear, 0, 0, 6500, quickSpeed, 0);
+                        }
+                        FreeSteady(quick, now, ref clock, 16, 700, 2, 0, 0, 6500, 140, 0);
+                        Equal(4, QuickCount(quick, false),
+                            "counts each of a run of quick downshifts");
+                        Equal(4, QuickCount(quick, true),
+                            "attributes one blip to each quick downshift, not its neighbour's");
+
+                        // Short gears on the way up are taken just as fast.
+                        clock = 0;
+                        GuidedVerificationDrive quickUp = FreeDrivingDrive(now);
+                        FreeSteady(quickUp, now, ref clock, 16, 1000, 1, 0, 100, 7000, 60, 300);
+                        for (int gear = 2; gear <= 5; gear++)
+                        {
+                            FreeSteady(quickUp, now, ref clock, 16, 400, gear, 0, 100, 7000, 40 + gear * 25, 300);
+                        }
+                        FreeSteady(quickUp, now, ref clock, 16, 700, 6, 0, 100, 7000, 200, 300);
+                        quickUp.Next();
+                        quickUp.Next();
+                        Equal(5, quickUp.GetResults().Telemetry.FreeDrive.FullThrottleUpshifts,
+                            "counts each of a run of quick full-throttle upshifts");
+
+                        // The driver arrives at the coast test off the
+                        // throttle, shifts up to set it up, and the engine is
+                        // still coming down when the higher gear first shows.
+                        // That first sample must not become the ratio the
+                        // downshift is judged against.
+                        GuidedVerificationDrive setUp = new GuidedVerificationDrive();
+                        setUp.Start(6);
+                        for (int guard = 0; guard < 40
+                            && setUp.GetSnapshot().Title != "Downshift without pedal input"; guard++)
+                        {
+                            setUp.AddSample(GuidedSample(now, 4, 0, 0, 4000, 80, 100, true));
+                            setUp.Next();
+                        }
+                        clock = 0;
+                        FreeSteady(setUp, now, ref clock, 16, 100, 5, 0, 0, 4000, 80, 0);
+                        FreeSteady(setUp, now, ref clock, 16, 1000, 5, 0, 80, 3200, 80, 100);
+                        FreeSteady(setUp, now, ref clock, 16, 500, 5, 0, 0, 3200, 80, 0);
+                        FreeSteady(setUp, now, ref clock, 16, 1000, 4, 0, 0, 4000, 80, 0);
+                        True(setUp.GetSnapshot().ResultReady,
+                            "confirms a downshift after an upshift made to set it up");
+                        setUp.Next();
+                        Equal("yes", setUp.GetResults().CoastDownshift,
+                            "judges the downshift against the settled ratio of the gear left");
+
+                        // An H-pattern box taken flat without the clutch
+                        // leaves the engine unloaded between gears: it runs
+                        // up to the limiter and its torque falls away, then
+                        // returns once the next gear takes drive. A live
+                        // drive of such a car recorded a cut on every one.
+                        clock = 0;
+                        GuidedVerificationDrive hPattern = FreeDrivingDrive(now);
+                        FreeSteady(hPattern, now, ref clock, 16, 1000, 2, 0, 100, 8600, 150, 600);
+                        for (int gear = 3; gear <= 6; gear++)
+                        {
+                            double hSpeed = 60 + gear * 30;
+                            FreeSteady(hPattern, now, ref clock, 16, 64, 0, 0, 100, 8800, hSpeed, 520);
+                            FreeSteady(hPattern, now, ref clock, 16, 150, gear, 0, 100, 9450, hSpeed, 180);
+                            FreeSteady(hPattern, now, ref clock, 16, 800, gear, 0, 100, 8600, hSpeed + 5, 600);
+                        }
+                        hPattern.Next();
+                        hPattern.Next();
+                        GuidedDriveResults hResults = hPattern.GetResults();
+                        Equal(4, hResults.Telemetry.FreeDrive.FullThrottleUpshifts,
+                            "counts flat upshifts through neutral on an H-pattern box");
+                        Equal(4, hResults.Telemetry.FreeDrive.EngineRanFree,
+                            "sees the engine running free between gears");
+                        Equal(0, hResults.Telemetry.FreeDrive.WithTorqueCut,
+                            "does not read an unloaded engine's falling torque as a cut");
+                        Equal("unknown", hResults.AutomaticCut,
+                            "leaves the cut unknown when the engine only ran free");
+
+                        // The same box shifted at the limiter: the engine
+                        // cannot climb any further, and holds its speed
+                        // through neutral while the torque falls away.
+                        clock = 0;
+                        GuidedVerificationDrive limiter = FreeDrivingDrive(now);
+                        FreeSteady(limiter, now, ref clock, 16, 1000, 2, 0, 100, 9450, 150, 600);
+                        for (int gear = 3; gear <= 6; gear++)
+                        {
+                            double limitSpeed = 60 + gear * 30;
+                            FreeSteady(limiter, now, ref clock, 16, 96, 0, 0, 100, 9450, limitSpeed, 100);
+                            FreeSteady(limiter, now, ref clock, 16, 100, gear, 0, 100, 9450, limitSpeed, 100);
+                            FreeSteady(limiter, now, ref clock, 16, 800, gear, 0, 100, 9450, limitSpeed + 5, 600);
+                        }
+                        limiter.Next();
+                        limiter.Next();
+                        Equal(0, limiter.GetResults().Telemetry.FreeDrive.WithTorqueCut,
+                            "does not read the limiter in neutral as a cut");
+                        Equal("unknown", limiter.GetResults().AutomaticCut,
+                            "leaves the cut unknown for shifts taken at the limiter through neutral");
+
+                        // A gear touched for an instant on the way past is
+                        // still not an accepted shift.
+                        clock = 0;
+                        GuidedVerificationDrive passing = FreeDrivingDrive(now);
+                        FreeSteady(passing, now, ref clock, 16, 1000, 6, 0, 0, 4500, 220, 0);
+                        for (int gear = 5; gear >= 2; gear--)
+                        {
+                            FreeSteady(passing, now, ref clock, 16, 120, gear, 0, 0, 6500, 100 + gear * 20, 0);
+                        }
+                        FreeSteady(passing, now, ref clock, 16, 700, 2, 0, 0, 6500, 140, 0);
+                        Equal(1, QuickCount(passing, false),
+                            "does not count gears passed through in an instant, only the one that held");
+
+                        // At ten samples a second a blip can pass unseen, so
+                        // its absence is unknown here too.
+                        clock = 0;
+                        GuidedVerificationDrive slowLap = FreeDrivingDrive(now);
+                        for (int gear = 6; gear > 2; gear--)
+                        {
+                            FreeDownshift(slowLap, now, ref clock, 100, gear, 0, false, true);
+                        }
+                        slowLap.Next();
+                        slowLap.Next();
+                        Equal("yes", slowLap.GetResults().ClutchlessDownshift,
+                            "slow telemetry still establishes the free-driving downshifts");
+                        Equal("unknown", slowLap.GetResults().AutomaticBlip,
+                            "an unseen blip in slow free-driving telemetry stays unknown");
+                    }
+
                     // A result-ready phase still receives live telemetry while
                     // it waits for Next. Preserve that current gear when the
                     // coast test opens, or a first-attempt downshift whose blip
@@ -1949,12 +2428,12 @@ namespace AsDriven.Core.Tests
 
                         // And the gear count concludes instead of hanging when
                         // no gear was ever engaged.
-                        Equal("Forward gears", waiting.GetSnapshot().Title, "reaches the gear count");
+                        Equal("Free driving", waiting.GetSnapshot().Title, "reaches the gear count");
                         waiting.Next();
                         True(waiting.GetSnapshot().Result.Contains("no gear was ever engaged"),
                             "the gear count concludes rather than refusing to advance");
                         waiting.Next();
-                        True(waiting.GetSnapshot().Title != "Forward gears", "the gear count advances");
+                        True(waiting.GetSnapshot().Title != "Free driving", "the gear count advances");
                     }
 
                     // A shift taken at full throttle is not a lifted-throttle
@@ -2907,6 +3386,132 @@ namespace AsDriven.Core.Tests
                     + "\"released_at\":\"2026-08-13\",\"records\":[\"cars/" + recordId + ".json\"]}");
             AsDrivenDatabase database = AsDrivenDatabase.Load(directory);
             return database.Match("Automobilista2", telemetryName);
+        }
+
+        /// <summary>
+        /// Drives a fresh guided session to the coast-downshift test, coasts in
+        /// 4th for <paramref name="coastMilliseconds"/>, takes 3rd, and accepts
+        /// the result. Samples arrive every <paramref name="intervalMilliseconds"/>.
+        /// </summary>
+        private static GuidedVerificationDrive CoastDownshiftDrive(
+            DateTime now,
+            int intervalMilliseconds,
+            int coastMilliseconds,
+            bool blip)
+        {
+            GuidedVerificationDrive drive = new GuidedVerificationDrive();
+            drive.Start(6);
+            for (int guard = 0; guard < 40
+                && drive.GetSnapshot().Title != "Downshift without pedal input"; guard++)
+            {
+                drive.AddSample(GuidedSample(now, 4, 0, 0, 4000, 80, 100, true));
+                drive.Next();
+            }
+            for (int elapsed = 0;
+                elapsed <= coastMilliseconds + 3000 && !drive.GetSnapshot().ResultReady;
+                elapsed += intervalMilliseconds)
+            {
+                bool shifted = elapsed >= coastMilliseconds;
+                bool blipping = blip && shifted && elapsed < coastMilliseconds + 150;
+                drive.AddSample(GuidedSample(
+                    now.AddMilliseconds(elapsed),
+                    shifted ? 3 : 4,
+                    0,
+                    blipping ? 60 : 0,
+                    shifted ? 6000 : 4500,
+                    shifted ? 78 : 80,
+                    100,
+                    true));
+            }
+            True(drive.GetSnapshot().ResultReady, "the simulated coast downshift settles");
+            drive.Next();
+            return drive;
+        }
+
+        /// <summary>
+        /// Ends the free-driving step and returns how many coast downshifts it
+        /// counted, or how many of them carried a throttle spike.
+        /// </summary>
+        private static int QuickCount(GuidedVerificationDrive drive, bool withSpike)
+        {
+            if (!drive.GetSnapshot().ResultReady)
+            {
+                drive.Next();
+                drive.Next();
+            }
+            FreeDriveSummary counted = drive.GetResults().Telemetry.FreeDrive;
+            return withSpike ? counted.WithThrottleSpike : counted.CoastDownshifts;
+        }
+
+        /// <summary>A fresh guided session advanced to the free-driving step.</summary>
+        private static GuidedVerificationDrive FreeDrivingDrive(DateTime now)
+        {
+            GuidedVerificationDrive drive = new GuidedVerificationDrive();
+            drive.Start(6);
+            for (int guard = 0; guard < 40
+                && drive.GetSnapshot().Title != "Free driving"; guard++)
+            {
+                drive.AddSample(GuidedSample(now, 1, 0, 0, 1200, 0, 40, true));
+                drive.Next();
+            }
+            Equal("Free driving", drive.GetSnapshot().Title, "reaches the free-driving step");
+            return drive;
+        }
+
+        private static void FreeSteady(
+            GuidedVerificationDrive drive,
+            DateTime now,
+            ref int clock,
+            int interval,
+            int duration,
+            int gear,
+            double clutch,
+            double throttle,
+            double rpm,
+            double speedKmh,
+            double torque)
+        {
+            for (int elapsed = 0; elapsed < duration; elapsed += interval)
+            {
+                clock += interval;
+                drive.AddSample(GuidedSample(
+                    now.AddMilliseconds(clock), gear, clutch, throttle, rpm, speedKmh, torque, true));
+            }
+        }
+
+        /// <summary>A second in <paramref name="gear"/>, then the next gear up.</summary>
+        private static void FreeUpshift(
+            GuidedVerificationDrive drive,
+            DateTime now,
+            ref int clock,
+            int interval,
+            int gear,
+            double clutch,
+            double throttle,
+            bool torqueCut)
+        {
+            double speed = 60 + gear * 20;
+            FreeSteady(drive, now, ref clock, interval, 1000, gear, 0, throttle, 7000, speed, 300);
+            FreeSteady(drive, now, ref clock, interval, 64, gear, clutch, throttle, 7000, speed, torqueCut ? 40 : 300);
+            FreeSteady(drive, now, ref clock, interval, 800, gear + 1, 0, throttle, 6000, speed, 300);
+        }
+
+        /// <summary>A second coasting in <paramref name="gear"/>, then the next gear down.</summary>
+        private static void FreeDownshift(
+            GuidedVerificationDrive drive,
+            DateTime now,
+            ref int clock,
+            int interval,
+            int gear,
+            double clutch,
+            bool blip,
+            bool takesDrive)
+        {
+            FreeSteady(drive, now, ref clock, interval, 1000, gear, 0, 0, 4500, 150, 0);
+            FreeSteady(drive, now, ref clock, interval, 100, gear - 1, clutch, blip ? 60 : 0,
+                takesDrive ? 6000 : 4400, 148, 0);
+            FreeSteady(drive, now, ref clock, interval, 700, gear - 1, 0, 0,
+                takesDrive ? 6000 : 4400, 148, 0);
         }
 
         private static GuidedTelemetrySample GuidedSample(

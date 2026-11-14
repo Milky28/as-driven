@@ -27,6 +27,7 @@ namespace AsDriven.Plugin
         private string _guidedAutomaticCutMethod = string.Empty;
         private string _guidedAutomaticBlipMethod = string.Empty;
         private string _guidedEvidenceNotes = string.Empty;
+        private GuidedDriveTelemetry _guidedTelemetry;
         private string _savedDraftPath = string.Empty;
         // No form control: these are the first stage of a two-stage test, which
         // the drive either ran or did not. A reviewer editing the second stage
@@ -318,6 +319,7 @@ namespace AsDriven.Plugin
             _guidedAutomaticCutMethod = string.Empty;
             _guidedAutomaticBlipMethod = string.Empty;
             _guidedEvidenceNotes = string.Empty;
+            _guidedTelemetry = null;
             _guidedFullThrottleUpshift = "not-tested";
             _guidedCoastDownshift = "not-tested";
             _evidenceNotes.BorderThickness = new Thickness(1);
@@ -441,7 +443,8 @@ namespace AsDriven.Plugin
                     WheelNotes = _wheelNotes.Text,
                     EvidenceNotes = string.IsNullOrWhiteSpace(_evidenceNotes.Text)
                         ? new string[0]
-                        : new[] { _evidenceNotes.Text.Trim() }
+                        : new[] { _evidenceNotes.Text.Trim() },
+                    Telemetry = _guidedTelemetry
                 };
                 string path = _plugin.SaveVerificationDraft(draft, _observer.Text);
                 _savedDraftPath = path;
@@ -582,6 +585,7 @@ namespace AsDriven.Plugin
                 ApplyGuidedChoice(_automaticBlip, results.AutomaticBlip);
                 _guidedFullThrottleUpshift = results.FullThrottleUpshift;
                 _guidedCoastDownshift = results.CoastDownshift;
+                _guidedTelemetry = results.Telemetry;
                 if (results.ForwardGears.HasValue)
                 {
                     _forwardGears.Text = results.ForwardGears.Value.ToString(CultureInfo.InvariantCulture);

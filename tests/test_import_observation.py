@@ -99,6 +99,56 @@ class ImportObservationTests(unittest.TestCase):
         self.assertIn("no declared version", note)
         self.assertIn("not the real car", note)
 
+    def test_recorded_telemetry_is_evidence_and_changes_nothing_staged(self) -> None:
+        """A trace lets a later detector re-read a drive; it is not a result.
+
+        The importer stages from the answers the contributor reviewed. If the
+        samples beside them could change what is staged, attaching evidence
+        would alter the claim it is evidence for.
+        """
+        observation = _clean_observation()
+        expected = import_observation(observation, imported_at="2026-11-13")
+        observation["telemetry"] = {
+            "sample_rate_hz": 10.0,
+            "resting_throttle": 0.0,
+            "resting_clutch": None,
+            "free_drive": {
+                "full_throttle_upshifts": 5,
+                "cut_measured": 5,
+                "with_torque_cut": 5,
+                "lifted_upshifts": 0,
+                "coast_downshifts": 3,
+                "with_throttle_spike": 0,
+                "shifts_with_clutch": 1,
+                "counted_with_vehicle_clutch": 0,
+                "other_shifts": 2,
+                "engine_ran_free": 1,
+            },
+            "traces": [
+                {
+                    "test": "coast_downshift",
+                    "outcome": "accepted",
+                    "sample_rate_hz": None,
+                    "columns": [
+                        "t_ms", "gear", "clutch", "throttle", "brake", "rpm",
+                        "speed_kmh", "engine_torque", "engine_started",
+                    ],
+                    "samples": [
+                        [0, 4, 0, 0, 0, 4500, 80, None, 1],
+                        [100, 3, 0, 0, 0, 6000, 78, 100.5, 1],
+                    ],
+                }
+            ],
+        }
+        schema = json.loads(
+            (ROOT / "schema" / "v1" / "verification-observation.schema.json")
+            .read_text(encoding="utf-8")
+        )
+        self.assertEqual([], validate_instance(observation, schema, "observation"))
+        self.assertEqual(
+            expected, import_observation(observation, imported_at="2026-11-13")
+        )
+
     def test_gtr2_physics_fingerprint_scope_is_registered(self) -> None:
         observation = _clean_observation()
         observation["simulator"] = "gtr2"
